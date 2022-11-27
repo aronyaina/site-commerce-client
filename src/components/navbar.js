@@ -5,9 +5,9 @@ const Navbar = () => {
     <header>
       <div className="container">
         <Link to="/">
-          <h1>M-SHOP</h1>
-        </Link>
-      </div>
+          <h1> M - SHOP </h1>{" "}
+        </Link>{" "}
+      </div>{" "}
     </header>
   );
 };
