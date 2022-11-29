@@ -1,9 +1,8 @@
 import { React, useState } from "react";
-import axios from "axios";
-import addProduct from "../fetchers/addProduct";
 import productFetcher from "../fetchers/productFetcher";
-// import addProduct from "../fetchers/addProduct";
+
 function ProductForm() {
+  //==================== STATE DECLARATION====================//
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -13,7 +12,7 @@ function ProductForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    //==================== VARIABLE DECLARATION====================//
     const product = {
       name,
       description,
@@ -31,6 +30,7 @@ function ProductForm() {
         },
       },
     };
+    //==================== POST DATA WITH AXIOS EXTERIOR====================//
     const postProduct = async () => {
       return productFetcher.post(config.url, config.stringify, config.headers);
     };
@@ -46,42 +46,9 @@ function ProductForm() {
       .finally(() => {
         setSuccess(true);
       });
-    //==================== POST DATA WITH AXIOS EXTERIOR====================//
-    // addProduct(stringify)
-    //   .then((response) => {
-    //     console.log(response);
-    //     setError(null);
-    //     setName("");
-    //     setDescription("");
-    //     setPrice("");
-    //     setQuantity("");
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //     setError(error);
-    //   });
-    //==================== POST DATA WITH AXIOS INTERIOR====================//
-    // axios
-    //   .post(url, stringify, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "content-type": "application/json;charset=utf-8",
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //     setError(null);
-    //     setName("");
-    //     setDescription("");
-    //     setPrice("");
-    //     setQuantity("");
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //     setError(error);
-    //   });
   };
 
+  //==================== RENDERING====================//
   return (
     <form className="create" onSubmit={handleSubmit}>
       <h3>Ajouter un nouveau produit</h3>

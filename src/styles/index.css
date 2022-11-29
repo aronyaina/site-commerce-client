@@ -38,7 +38,7 @@ header a {
 }
 
 /* homepage */
-.home {
+.dashboard {
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 100px;
@@ -85,7 +85,7 @@ input {
 input {
     padding: 10px;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     width: 100%;
     border: 1px solid #ddd;
     border-radius: 4px;
