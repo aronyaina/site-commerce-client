@@ -9,9 +9,11 @@ function ProductForm() {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const product = {
       name,
       description,
@@ -19,24 +21,45 @@ function ProductForm() {
       quantity,
     };
     const stringify = JSON.stringify(product);
-    console.log(typeof stringify);
-    console.log(stringify);
-    const url = "/api/products";
+    const config = {
+      url: "",
+      stringify,
+      headers: {
+        headers: {
+          "Content-Type": "application/json",
+          "content-type": "application/json;charset=utf-8",
+        },
+      },
+    };
+    const postProduct = async () => {
+      return productFetcher.post(config.url, config.stringify, config.headers);
+    };
 
-    //==================== POST DATA WITH AXIOS EXTERIOR====================//
-    addProduct(stringify)
+    postProduct()
       .then((response) => {
+        console.log("Product inserted successfully !!");
         console.log(response);
-        setError(null);
-        setName("");
-        setDescription("");
-        setPrice("");
-        setQuantity("");
       })
       .catch((error) => {
-        console.error("Error:", error);
         setError(error);
+      })
+      .finally(() => {
+        setSuccess(true);
       });
+    //==================== POST DATA WITH AXIOS EXTERIOR====================//
+    // addProduct(stringify)
+    //   .then((response) => {
+    //     console.log(response);
+    //     setError(null);
+    //     setName("");
+    //     setDescription("");
+    //     setPrice("");
+    //     setQuantity("");
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //     setError(error);
+    //   });
     //==================== POST DATA WITH AXIOS INTERIOR====================//
     // axios
     //   .post(url, stringify, {
@@ -99,7 +122,12 @@ function ProductForm() {
       />
       <br />
       <button>Ajouter le produit</button>
-
+      {success && (
+        <div className="success">
+          Inserted successfully
+          <br />
+        </div>
+      )}
       {error && (
         <div className="error">
           {error}
