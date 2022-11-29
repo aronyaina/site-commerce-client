@@ -1,5 +1,8 @@
 import { React, useState } from "react";
 import axios from "axios";
+import addProduct from "../fetchers/addProduct";
+import productFetcher from "../fetchers/productFetcher";
+// import addProduct from "../fetchers/addProduct";
 function ProductForm() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -19,15 +22,11 @@ function ProductForm() {
     console.log(typeof stringify);
     console.log(stringify);
     const url = "/api/products";
-    axios
-      .post(url, stringify, {
-        headers: {
-          "Content-Type": "application/json",
-          "content-type": "application/json;charset=utf-8",
-        },
-      })
-      .then(({ stringify }) => {
-        console.log(stringify);
+
+    //==================== POST DATA WITH AXIOS EXTERIOR====================//
+    addProduct(stringify)
+      .then((response) => {
+        console.log(response);
         setError(null);
         setName("");
         setDescription("");
@@ -38,48 +37,26 @@ function ProductForm() {
         console.error("Error:", error);
         setError(error);
       });
-    // const response = await fetch("/api/products", {
-    //   method: "post",
-    //   accept: "application/json",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json;charset=UTF-8",
-    //   },
-    //   body: JSON.stringify({
-    //     name: "Souris",
-    //     description: "Bonne souris",
-    //     price: "3200",
-    //     quantity: "3",
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((product) => {
+    //==================== POST DATA WITH AXIOS INTERIOR====================//
+    // axios
+    //   .post(url, stringify, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "content-type": "application/json;charset=utf-8",
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
     //     setError(null);
     //     setName("");
     //     setDescription("");
     //     setPrice("");
     //     setQuantity("");
-    //     console.log("Success:", product);
     //   })
     //   .catch((error) => {
     //     console.error("Error:", error);
+    //     setError(error);
     //   });
-
-    // // const json = await response.json();
-
-    // // if (!response.ok) {
-    // //   setError(json.error);
-    // //   console.log(error);
-    // // }
-
-    // // if (response.ok) {
-    // //   setError(null);
-    // //   setName("");
-    // //   setDescription("");
-    // //   setPrice("");
-    // //   setQuantity("");
-    // //   console.log("Product added !", json);
-    // // }
   };
 
   return (
