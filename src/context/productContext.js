@@ -11,7 +11,7 @@ const productReducer = (state, action) => {
 
     case "CREATE_PRODUCT":
       return {
-        products: [action.payload, ...state.product],
+        products: [action.payload, ...state.products],
       };
     default:
       return state;

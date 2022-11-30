@@ -1,6 +1,7 @@
 import React from "react";
 
 export const ProductDetails = ({ product }) => {
+  console.log(product.createdAt);
   return (
     <div className="product-details">
       <div key={product._id}>

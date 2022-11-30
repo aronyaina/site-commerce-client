@@ -1,8 +1,10 @@
 import { React, useState } from "react";
 import productFetcher from "../fetchers/productFetcher";
+import { useProductContext } from "../hooks/useProductContext";
 
 function ProductForm() {
   //==================== STATE DECLARATION====================//
+  const { dispatch } = useProductContext();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -38,7 +40,12 @@ function ProductForm() {
     postProduct()
       .then((response) => {
         console.log("Product inserted successfully !!");
-        console.log(response);
+        const data = response.data;
+        console.log(JSON.stringify(data));
+        dispatch({
+          type: "CREATE_PRODUCT",
+          payload: data,
+        });
       })
       .catch((error) => {
         setError(error);

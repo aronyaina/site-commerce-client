@@ -33,7 +33,7 @@ export const UseProductDetail = () => {
     <div className="products">
       {load ? (
         products &&
-        products.product.map((product) => (
+        products.map((product) => (
           <div key={product._id}>
             <ProductDetails product={product} />
           </div>
