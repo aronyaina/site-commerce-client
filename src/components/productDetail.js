@@ -1,7 +1,18 @@
 import React from "react";
 
 export const ProductDetails = ({ product }) => {
-  console.log(product.createdAt);
+  const year = product.createdAt.slice(0, 10);
+
+  const hourConverter = () => {
+    if (parseInt(product.createdAt.slice(11, 12)) === 0) {
+      return parseInt(product.createdAt.slice(12, 13)) + 3;
+    } else {
+      return parseInt(product.createdAt.slice(11, 13)) + 3;
+    }
+  };
+  const hour = hourConverter();
+
+  const time = product.createdAt.slice(13, 19);
   return (
     <div className="product-details">
       <div key={product._id}>
@@ -17,7 +28,7 @@ export const ProductDetails = ({ product }) => {
           <strong> stock :</strong> {product.quantity}
         </p>
         <p>
-          <strong>Creer le : </strong> {product.createdAt}
+          <strong>Creer le : </strong> {year + " vers " + hour + time}
         </p>
         <hr />
       </div>
