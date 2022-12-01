@@ -49,6 +49,7 @@ function ProductForm() {
       })
       .catch((error) => {
         setError(error);
+        console.log(error.message);
       })
       .finally(() => {
         setSuccess(true);

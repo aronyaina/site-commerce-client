@@ -112,5 +112,11 @@ div.error {
 }
 
 input.error {
+
     border: 1px solid var(--error);
+}
+
+.deleteButton {
+    padding: 5px;
+    border: 1px solid #e7195a;
 }
