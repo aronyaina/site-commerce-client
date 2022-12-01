@@ -23,11 +23,19 @@ const productReducer = (state, action) => {
 };
 
 export const ProductContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(productReducer, { products: null });
+  const [state, dispatch] = useReducer(productReducer, {
+    products: null,
+  });
 
   return (
-    <ProductContext.Provider value={{ ...state, dispatch }}>
-      {children}
+    <ProductContext.Provider
+      value={{
+        ...state,
+        dispatch,
+      }}
+    >
+      {" "}
+      {children}{" "}
     </ProductContext.Provider>
   );
 };

@@ -12,6 +12,8 @@ function ProductForm() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
+  const [emptyField, setEmptyField] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     //==================== VARIABLE DECLARATION====================//
@@ -39,20 +41,24 @@ function ProductForm() {
 
     postProduct()
       .then((response) => {
-        console.log("Product inserted successfully !!");
         const data = response.data;
-        console.log(JSON.stringify(data));
+        setName("");
+        setDescription("");
+        setPrice("");
+        setQuantity("");
+        setSuccess(true);
+        setError(null);
+        setEmptyField([]);
         dispatch({
           type: "CREATE_PRODUCT",
           payload: data,
         });
       })
       .catch((error) => {
-        setError(error);
-        console.log(error.message);
-      })
-      .finally(() => {
-        setSuccess(true);
+        setSuccess(false);
+        setError(error.response.data.error);
+        setEmptyField(error.response.data.emptyField);
+        console.log(error.response.data.emptyField);
       });
   };
 
@@ -64,15 +70,20 @@ function ProductForm() {
       <input
         type="text"
         value={name}
+        className={emptyField.includes("name") ? "error" : ""}
         onChange={(e) => {
           setName(e.target.value);
         }}
+        placeholder={
+          emptyField.includes("name") ? "Veuiller saisir le nom du produit" : ""
+        }
       />
       <br />
       <label>Description :</label>
       <input
         type="text"
         value={description}
+        className={emptyField.includes("title") ? "error" : ""}
         onChange={(e) => {
           setDescription(e.target.value);
         }}
@@ -82,6 +93,12 @@ function ProductForm() {
       <input
         value={price}
         type="number"
+        className={emptyField.includes("price") ? "error" : ""}
+        placeholder={
+          emptyField.includes("name")
+            ? "Veuiller saisir le prix du produit"
+            : ""
+        }
         onChange={(e) => {
           setPrice(e.target.value);
         }}
@@ -90,6 +107,12 @@ function ProductForm() {
       <label>Stock :</label>
       <input
         value={quantity}
+        className={emptyField.includes("quantity") ? "error" : ""}
+        placeholder={
+          emptyField.includes("name")
+            ? "Veuiller saisir la quantite du produit"
+            : ""
+        }
         type="number"
         onChange={(e) => {
           setQuantity(e.target.value);

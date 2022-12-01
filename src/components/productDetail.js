@@ -65,7 +65,7 @@ export const ProductDetails = ({ product }) => {
         <p>
           <strong>Creer le : </strong> {year + " vers " + hour + time}
         </p>
-        <span onClick={handleClick} className="deleteButton">
+        <span onClick={handleClick} className="material-symbols-outlined">
           Delete
         </span>
         <hr />

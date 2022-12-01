@@ -118,5 +118,7 @@ input.error {
 
 .deleteButton {
     padding: 5px;
-    border: 1px solid #e7195a;
+    border: 2px solid rgb(202, 82, 82);
+    background-color: #d4d4d4;
+    border-radius: 40%;
 }
