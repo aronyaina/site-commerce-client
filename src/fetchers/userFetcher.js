@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.interceptors.request.use(
     function(config) {
-        config.baseURL = "api/products/";
+        config.baseURL = "api/user/";
         return config;
     },
     (error) => {
