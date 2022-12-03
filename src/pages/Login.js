@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 const Login = () => {
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, error, isLoading } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await login(name, password);
+    await login(email, password);
   };
   const onHandleChange = (e) => {
     switch (e.target.name) {
-      case "name":
-        setName(e.target.value);
+      case "email":
+        setEmail(e.target.value);
         break;
       case "password":
         setPassword(e.target.value);
@@ -26,12 +26,12 @@ const Login = () => {
   return (
     <form action="" className="login" onSubmit={handleSubmit}>
       <h3> Se connecter </h3>
-      <label> Nom: </label>
+      <label> email: </label>
       <input
         type="text"
         onChange={onHandleChange}
-        name="name"
-        value={name}
+        name="email"
+        value={email}
       />{" "}
       <label> Password: </label>{" "}
       <input

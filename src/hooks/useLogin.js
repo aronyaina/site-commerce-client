@@ -6,10 +6,10 @@ export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(null);
   const { dispatch } = useAuthContext();
-  const login = async (name, password) => {
+  const login = async (email, password) => {
     setLoading(true);
     setError(null);
-    const userData = JSON.stringify({ name, password });
+    const userData = JSON.stringify({ email, password });
 
     //==================== CONFIG FOR POSTING USERDATA WITH AXIOS EXTERIOR====================//
     const config = {
