@@ -3,30 +3,46 @@ import { useState, useEffect } from "react";
 import { ProductDetails } from "../components/productDetail";
 import productFetcher from "./productFetcher";
 import { useProductContext } from "../hooks/useProductContext";
+import {useAuthContext} from "../hooks/useAuthContext";
+
 export const UseProductDetail = () => {
   //==================== STATE DECLARATION====================//
 
   const [load, setLoading] = useState(false);
   const { products, dispatch } = useProductContext();
+  const {user} = useAuthContext();
   //==================== GET DATA WITH AXIOS INTERIOR====================//
-  useEffect(() => {
-    const getAllProduct = async () => {
-      return productFetcher.get();
-    };
 
-    getAllProduct()
+
+  useEffect(() => {
+    console.log(user);
+    const config ={
+      url:"product",
+      header:{
+        headers:{
+        "Content-Type": "application/json",
+        "content-type": "application/json;charset=utf-8",
+        "Authorization":`Bearer ${user.token}`,
+      }}
+      
+    }
+    
+      const getAllProduct = async () => {
+          return productFetcher.get(config.url,config.header);
+      };
+      if(user){
+      getAllProduct()
       .then((response) => {
         const data = response.data;
         dispatch({ type: "SET_PRODUCT", payload: data });
-        console.log(products);
       })
       .catch((error) => {
         console.log("Error fetching product ", error);
       })
       .finally(() => {
         setLoading(true);
-      });
-  }, [dispatch]);
+      });}
+  }, [dispatch,user]);
 
   //==================== RENDERING ====================//
   return (

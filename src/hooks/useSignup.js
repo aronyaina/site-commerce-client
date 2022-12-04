@@ -13,7 +13,7 @@ export const useSignup = () => {
 
     //==================== CONFIG FOR POSTING USERDATA WITH AXIOS EXTERIOR====================//
     const config = {
-      url: "signup",
+      url: "user/login",
       userData,
       headers: {
         headers: {

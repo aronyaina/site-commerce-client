@@ -13,19 +13,22 @@ export const useLogin = () => {
 
     //==================== CONFIG FOR POSTING USERDATA WITH AXIOS EXTERIOR====================//
     const config = {
-      url: "login",
+      url: "user/login",
       userData,
-      headers: {
+      header:{
         headers: {
           "Content-Type": "application/json",
           "content-type": "application/json;charset=utf-8",
-        },
-      },
+      }
+      }
+      ,
+      
     };
     //==================== POST USERDATA WITH AXIOS EXTERIOR====================//
     const postUser = async () => {
-      return userFetcher.post(config.url, config.userData, config.headers);
+      return userFetcher.post(config.url, config.userData, config.header);
     };
+
     postUser()
       .then((response) => {
         const data = response.data;

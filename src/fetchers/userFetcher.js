@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.interceptors.request.use(
     function(config) {
-        config.baseURL = "api/user/";
+        config.baseURL = "api/";
         return config;
     },
     (error) => {
@@ -16,4 +16,5 @@ const action = {
     delete: axios.delete,
     patch: axios.patch,
 }
+
 export default action;

@@ -2,6 +2,7 @@ import React from "react";
 import productFetcher from "../fetchers/productFetcher";
 import { useState } from "react";
 import { useProductContext } from "../hooks/useProductContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export const ProductDetails = ({ product }) => {
   const year = product.createdAt.slice(0, 10);
@@ -9,6 +10,7 @@ export const ProductDetails = ({ product }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const { dispatch } = useProductContext();
+  const {user} = useAuthContext();
   //==================== SET TIME ====================//
   const hourConverter = () => {
     if (parseInt(product.createdAt.slice(11, 12)) === 0) {
@@ -21,14 +23,22 @@ export const ProductDetails = ({ product }) => {
   const hour = hourConverter();
   const time = product.createdAt.slice(13, 19);
   //==================== DELETE DATA WITH AXIOS EXTERIOR====================//
-  const config = {
-    url: product._id,
-  };
+  
   const handleClick = async (e) => {
+
     e.preventDefault();
+    if(!user){
+      setError("Vous devrier vous connecter !")
+      return
+    }
     const deleteProduct = async () => {
-      return productFetcher.delete(config.url);
+      const config = {
+        url: product._id,
+        headers:{"Authorization":`Bearer ${user.token}`}
+      };
+      return productFetcher.delete(config.url,config.headers);
     };
+
     deleteProduct()
       .then((response) => {
         console.log("Product deleted successfully !!");
@@ -70,9 +80,9 @@ export const ProductDetails = ({ product }) => {
         </span>
         <hr />
         {error && (
-          <div className="error">"Can't be deleted because :" {error}</div>
+          <div className="error">"Ne peu pas etre supprime a cause de :" {error}</div>
         )}
-        {success && <div className="success">"Deleted successfully !"</div>}
+        {success && <div className="success">"Supprime avec succes!"</div>}
       </div>
     </div>
   );

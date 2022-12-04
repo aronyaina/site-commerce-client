@@ -1,10 +1,12 @@
 import { React, useState } from "react";
 import productFetcher from "../fetchers/productFetcher";
 import { useProductContext } from "../hooks/useProductContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
-function ProductForm() {
+
+export default function ProductForm() {
   //==================== STATE DECLARATION====================//
-  const { dispatch } = useProductContext();
+  
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -12,10 +14,16 @@ function ProductForm() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
+  const { dispatch } = useProductContext();
+  const {user}=useAuthContext()
   const [emptyField, setEmptyField] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!user){
+      setError("Vous devrez vous connecter")
+      return
+    }
     //==================== VARIABLE DECLARATION====================//
     const product = {
       name,
@@ -24,18 +32,18 @@ function ProductForm() {
       quantity,
     };
     const stringify = JSON.stringify(product);
-    const config = {
-      url: "",
-      stringify,
-      headers: {
-        headers: {
-          "Content-Type": "application/json",
-          "content-type": "application/json;charset=utf-8",
-        },
-      },
-    };
+    
     //==================== POST DATA WITH AXIOS EXTERIOR====================//
     const postProduct = async () => {
+      const config = {
+        url: "",
+        stringify,
+        headers: {
+            "Content-Type": "application/json",
+            "content-type": "application/json;charset=utf-8",
+            "Authorization":`Bearer ${user.token}`
+          },
+      };
       return productFetcher.post(config.url, config.stringify, config.headers);
     };
 
@@ -49,6 +57,7 @@ function ProductForm() {
         setSuccess(true);
         setError(null);
         setEmptyField([]);
+        console.log(response.data);
         dispatch({
           type: "CREATE_PRODUCT",
           payload: data,
@@ -63,6 +72,24 @@ function ProductForm() {
   };
 
   //==================== RENDERING====================//
+  const onHandleChange = (e) => {
+    switch (e.target.name) {
+      case "name":
+        setName(e.target.value);
+        break;
+      case "description":
+        setDescription(e.target.value);
+        break;
+      case "price":
+        setPrice(e.target.value);
+        break;
+      case "quantity":
+        setQuantity(e.target.value);
+        break;
+      default:
+        break;
+    }}
+
   return (
     <form className="create" onSubmit={handleSubmit}>
       <h3>Ajouter un nouveau produit</h3>
@@ -70,10 +97,9 @@ function ProductForm() {
       <input
         type="text"
         value={name}
+        name="name"
         className={emptyField.includes("name") ? "error" : ""}
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
+        onChange={onHandleChange}
         placeholder={
           emptyField.includes("name") ? "Veuiller saisir le nom du produit" : ""
         }
@@ -82,31 +108,30 @@ function ProductForm() {
       <label>Description :</label>
       <input
         type="text"
+        name= "description"
         value={description}
         className={emptyField.includes("title") ? "error" : ""}
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
+        onChange={onHandleChange}
       />
       <br />
       <label>Prix :</label>
       <input
         value={price}
         type="number"
+        name="price"
         className={emptyField.includes("price") ? "error" : ""}
         placeholder={
           emptyField.includes("name")
             ? "Veuiller saisir le prix du produit"
             : ""
         }
-        onChange={(e) => {
-          setPrice(e.target.value);
-        }}
+        onChange={onHandleChange}
       />
       <br />
       <label>Stock :</label>
       <input
         value={quantity}
+        name="quantity"
         className={emptyField.includes("quantity") ? "error" : ""}
         placeholder={
           emptyField.includes("name")
@@ -114,9 +139,7 @@ function ProductForm() {
             : ""
         }
         type="number"
-        onChange={(e) => {
-          setQuantity(e.target.value);
-        }}
+        onChange={onHandleChange}
       />
       <br />
       <button>Ajouter le produit</button>
@@ -134,6 +157,4 @@ function ProductForm() {
       )}
     </form>
   );
-}
-
-export default ProductForm;
+ }

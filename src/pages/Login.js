@@ -26,12 +26,12 @@ const Login = () => {
   return (
     <form action="" className="login" onSubmit={handleSubmit}>
       <h3> Se connecter </h3>
-      <label> email: </label>
+      <label> Email: </label>
       <input
-        type="text"
-        onChange={onHandleChange}
+        type="email"
         name="email"
         value={email}
+        onChange={onHandleChange}
       />{" "}
       <label> Password: </label>{" "}
       <input
