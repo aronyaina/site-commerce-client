@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSignup } from "../../hooks/Auth/useSignup";
+import { useSignup } from "../../hooks/authentication/useSignup";
 
 const Signup = () => {
   const [name, setName] = useState("");

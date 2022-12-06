@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { ProductDetails } from "../components/admin/productDetail";
-import productFetcher from "../lib/apiFetcher";
+import { ProductDetails } from "../../components/admin/productDetail";
+import productFetcher from "../../lib/apiFetcher";
 import { useProductContext } from "./useProductContext";
-import { useAuthContext } from "./useAuthContext";
+import { useAuthContext } from "../authentication/useAuthContext";
 
 export const UseProductDetail = () => {
   //==================== STATE DECLARATION====================//

@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useAuthContext } from "./hooks/useAuthContext";
+import { useAuthContext } from "./hooks/authentication/useAuthContext";
 import { useState } from "react";
 import { useEffect } from "react";
-// Pages and components
+// Pages
 import Signup from "./pages/users/Signup";
 import Login from "./pages/users/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import Home from "./pages/users/Home";
 import { Buying } from "./pages/users/Buying";
-
-import Navbar from "./components/admin/layout/navbar";
+// Components
+import Navbar from "./components/layout/navbar";
 
 function App() {
   const { user } = useAuthContext();

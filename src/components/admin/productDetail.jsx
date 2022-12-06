@@ -1,8 +1,8 @@
 import React from "react";
 import productFetcher from "../../lib/apiFetcher";
 import { useState } from "react";
-import { useProductContext } from "../../hooks/useProductContext";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useProductContext } from "../../hooks/products/useProductContext";
+import { useAuthContext } from "../../hooks/authentication/useAuthContext";
 
 export const ProductDetails = ({ product }) => {
   const year = product.createdAt.slice(0, 10);

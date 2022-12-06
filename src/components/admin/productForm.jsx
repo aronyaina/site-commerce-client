@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import productFetcher from "../../lib/apiFetcher";
 import { useProductContext } from "../../hooks/products/useProductContext";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/authentication/useAuthContext";
 
 export default function ProductForm() {
   //==================== STATE DECLARATION====================//

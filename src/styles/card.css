@@ -1,0 +1,19 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+/* layout */
+:root {
+    --primary: #1aac83;
+    --error: #e7195a;
+}
+
+
+.productCard {
+    background-color: #a1e4d1;
+    margin-top: 25px;
+    margin-right: 80%;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+
+}
