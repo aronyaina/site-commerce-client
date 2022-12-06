@@ -10,7 +10,10 @@ export const useLogin = () => {
   const login = async (email, password) => {
     setLoading(true);
     setError(null);
-    const userData = JSON.stringify({ email, password });
+    const userData = JSON.stringify({
+      email,
+      password,
+    });
 
     //==================== CONFIG FOR POSTING USERDATA WITH AXIOS EXTERIOR====================//
     const config = {
@@ -31,12 +34,16 @@ export const useLogin = () => {
     postUser()
       .then((response) => {
         const data = response.data;
+
         setError(null);
         // Saving user to local storage
         localStorage.setItem("user", JSON.stringify(data));
 
         // Update the auth context
-        dispatch({ type: "LOGIN", payload: data });
+        dispatch({
+          type: "LOGIN",
+          payload: data,
+        });
 
         setLoading(false);
       })
@@ -46,5 +53,9 @@ export const useLogin = () => {
       });
   };
 
-  return { login, isLoading, error };
+  return {
+    login,
+    isLoading,
+    error,
+  };
 };
