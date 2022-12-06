@@ -1,7 +1,7 @@
 import { React, useState } from "react";
-import productFetcher from "../fetchers/apiFetcher";
-import { useProductContext } from "../hooks/useProductContext";
-import { useAuthContext } from "../hooks/useAuthContext";
+import productFetcher from "../../lib/apiFetcher";
+import { useProductContext } from "../../hooks/products/useProductContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 export default function ProductForm() {
   //==================== STATE DECLARATION====================//
@@ -94,8 +94,7 @@ export default function ProductForm() {
 
   return (
     <form className="create" onSubmit={handleSubmit}>
-      <h3>Ajouter un nouveau produit</h3>
-      <label>Nom :</label>
+      <h3> Ajouter un nouveau produit </h3> <label> Nom: </label>{" "}
       <input
         type="text"
         value={name}
@@ -105,18 +104,18 @@ export default function ProductForm() {
         placeholder={
           emptyField.includes("name") ? "Veuiller saisir le nom du produit" : ""
         }
-      />
+      />{" "}
       <br />
-      <label>Description :</label>
+      <label> Description: </label>{" "}
       <input
         type="text"
         name="description"
         value={description}
         className={emptyField.includes("title") ? "error" : ""}
         onChange={onHandleChange}
-      />
+      />{" "}
       <br />
-      <label>Prix :</label>
+      <label> Prix: </label>{" "}
       <input
         value={price}
         type="number"
@@ -128,9 +127,9 @@ export default function ProductForm() {
             : ""
         }
         onChange={onHandleChange}
-      />
+      />{" "}
       <br />
-      <label>Stock :</label>
+      <label> Stock: </label>{" "}
       <input
         value={quantity}
         name="quantity"
@@ -142,21 +141,20 @@ export default function ProductForm() {
         }
         type="number"
         onChange={onHandleChange}
-      />
+      />{" "}
       <br />
-      <button>Ajouter le produit</button>
+      <button> Ajouter le produit </button>{" "}
       {success && (
         <div className="success">
-          Inserted successfully
-          <br />
+          Inserted successfully <br />
         </div>
-      )}
+      )}{" "}
       {error && (
         <div className="error">
-          {error}
-          <br />
+          {" "}
+          {error} <br />
         </div>
-      )}
+      )}{" "}
     </form>
   );
 }

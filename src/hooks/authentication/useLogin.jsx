@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
-import userFetcher from "../fetchers/apiFetcher";
+import userFetcher from "../lib/apiFetcher";
 
 export const useLogin = () => {
   const [error, setError] = useState(null);

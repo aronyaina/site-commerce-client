@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLogin } from "../hooks/useLogin";
+import { useLogin } from "../../hooks/useLogin";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +10,7 @@ const Login = () => {
 
     await login(email, password);
   };
-  
+
   const onHandleChange = (e) => {
     switch (e.target.name) {
       case "email":
@@ -26,8 +26,7 @@ const Login = () => {
 
   return (
     <form action="" className="login" onSubmit={handleSubmit}>
-      <h3> Se connecter </h3>
-      <label> Email: </label>
+      <h3> Se connecter </h3> <label> Email: </label>{" "}
       <input
         type="email"
         name="email"
@@ -41,8 +40,8 @@ const Login = () => {
         value={password}
         onChange={onHandleChange}
       />{" "}
-      <button disabled={isLoading}> Se connecter </button>
-      {error && <div className="error">{error}</div>}
+      <button disabled={isLoading}> Se connecter </button>{" "}
+      {error && <div className="error"> {error} </div>}{" "}
     </form>
   );
 };

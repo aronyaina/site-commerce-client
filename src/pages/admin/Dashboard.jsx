@@ -1,5 +1,5 @@
-import { UseProductDetail } from "../hooks/useProductDetail";
-import ProductForm from "../components/productForm";
+import { UseProductDetail } from "../../hooks/useProductDetail";
+import ProductForm from "../../components/admin/productForm";
 
 const Dashboard = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
-import productFetcher from "../fetchers/apiFetcher";
+import productFetcher from "../../lib/apiFetcher";
 import { useState } from "react";
-import { useProductContext } from "../hooks/useProductContext";
+import { useProductContext } from "../../hooks/useProductContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 export const ProductDetails = ({ product }) => {
@@ -66,27 +66,26 @@ export const ProductDetails = ({ product }) => {
   return (
     <div className="product-details">
       <div key={product._id}>
-        <h4>{product.name}</h4>
+        <h4> {product.name} </h4>{" "}
         <p>
-          <strong>Prix :</strong>
-          {product.price} Ar
-        </p>
+          <strong> Prix: </strong> {product.price}
+          Ar{" "}
+        </p>{" "}
         <p>
-          <strong> Description :</strong> {product.description}
-        </p>
+          <strong> Description: </strong> {product.description}{" "}
+        </p>{" "}
         <p>
-          <strong> stock :</strong> {product.quantity}
-        </p>
+          <strong> stock: </strong> {product.quantity}{" "}
+        </p>{" "}
         <p>
-          <strong>Creer le : </strong> {year + " vers " + hour + time}
-        </p>
+          <strong> Creer le: </strong> {year + " vers " + hour + time}{" "}
+        </p>{" "}
         <span onClick={handleClick} className="material-symbols-outlined">
-          Delete
-        </span>
-        <hr />
-        {error && <div className="error">{error}</div>}
-        {success && <div className="success">"Supprime avec succes!"</div>}
-      </div>
+          Delete{" "}
+        </span>{" "}
+        <hr /> {error && <div className="error"> {error} </div>}{" "}
+        {success && <div className="success"> "Supprime avec succes!" </div>}{" "}
+      </div>{" "}
     </div>
   );
 };

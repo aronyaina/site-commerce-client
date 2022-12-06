@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSignup } from "../hooks/useSignup";
+import { useSignup } from "../../hooks/Auth/useSignup";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -57,7 +57,7 @@ const Signup = () => {
         value={password}
         onChange={onHandleChange}
       />{" "}
-      <button disabled={isLoading}> S 'inscrire</button>
+      <button disabled={isLoading}> S 'inscrire</button>{" "}
       {error && <div className="error"> {error} </div>}{" "}
     </form>
   );

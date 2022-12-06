@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { ProductDetails } from "../components/productDetail";
-import productFetcher from "../fetchers/apiFetcher";
+import { ProductDetails } from "../components/admin/productDetail";
+import productFetcher from "../lib/apiFetcher";
 import { useProductContext } from "./useProductContext";
 import { useAuthContext } from "./useAuthContext";
 
@@ -37,7 +37,10 @@ export const UseProductDetail = () => {
       getAllProduct()
         .then((response) => {
           const data = response.data;
-          dispatch({ type: "SET_PRODUCT", payload: data });
+          dispatch({
+            type: "SET_PRODUCT",
+            payload: data,
+          });
         })
         .catch((error) => {
           console.log("Error fetching product ", error);
@@ -51,16 +54,17 @@ export const UseProductDetail = () => {
   //==================== RENDERING ====================//
   return (
     <div className="products">
+      {" "}
       {load ? (
         products &&
         products.map((product) => (
           <div key={product._id}>
-            <ProductDetails product={product} />
+            <ProductDetails product={product} />{" "}
           </div>
         ))
       ) : (
-        <div className="loading">Loading...</div>
-      )}
+        <div className="loading"> Loading... </div>
+      )}{" "}
     </div>
   );
 };
