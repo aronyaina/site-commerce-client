@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
-import userFetcher from "../fetchers/userFetcher";
+import userFetcher from "../fetchers/apiFetcher";
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(null);
   const { dispatch } = useAuthContext();
+
   const login = async (email, password) => {
     setLoading(true);
     setError(null);
@@ -15,14 +16,12 @@ export const useLogin = () => {
     const config = {
       url: "user/login",
       userData,
-      header:{
+      header: {
         headers: {
           "Content-Type": "application/json",
           "content-type": "application/json;charset=utf-8",
-      }
-      }
-      ,
-      
+        },
+      },
     };
     //==================== POST USERDATA WITH AXIOS EXTERIOR====================//
     const postUser = async () => {

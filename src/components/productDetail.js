@@ -1,5 +1,5 @@
 import React from "react";
-import productFetcher from "../fetchers/productFetcher";
+import productFetcher from "../fetchers/apiFetcher";
 import { useState } from "react";
 import { useProductContext } from "../hooks/useProductContext";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -10,7 +10,7 @@ export const ProductDetails = ({ product }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const { dispatch } = useProductContext();
-  const {user} = useAuthContext();
+  const { user } = useAuthContext();
   //==================== SET TIME ====================//
   const hourConverter = () => {
     if (parseInt(product.createdAt.slice(11, 12)) === 0) {
@@ -23,20 +23,25 @@ export const ProductDetails = ({ product }) => {
   const hour = hourConverter();
   const time = product.createdAt.slice(13, 19);
   //==================== DELETE DATA WITH AXIOS EXTERIOR====================//
-  
-  const handleClick = async (e) => {
 
+  const handleClick = async (e) => {
     e.preventDefault();
-    if(!user){
-      setError("Vous devrier vous connecter !")
-      return
+    if (!user) {
+      console.log("Vous devrez vous connecter");
+      setError("Vous devrier vous connecter !");
+      return;
     }
     const deleteProduct = async () => {
       const config = {
-        url: product._id,
-        headers:{"Authorization":`Bearer ${user.token}`}
+        url: `/product/${product._id}`,
+        header: {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        },
       };
-      return productFetcher.delete(config.url,config.headers);
+      return productFetcher.delete(config.url, config.header);
     };
 
     deleteProduct()
@@ -79,9 +84,7 @@ export const ProductDetails = ({ product }) => {
           Delete
         </span>
         <hr />
-        {error && (
-          <div className="error">"Ne peu pas etre supprime a cause de :" {error}</div>
-        )}
+        {error && <div className="error">{error}</div>}
         {success && <div className="success">"Supprime avec succes!"</div>}
       </div>
     </div>

@@ -10,6 +10,7 @@ const Login = () => {
 
     await login(email, password);
   };
+  
   const onHandleChange = (e) => {
     switch (e.target.name) {
       case "email":

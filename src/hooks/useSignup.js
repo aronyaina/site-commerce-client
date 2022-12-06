@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
-import userFetcher from "../fetchers/userFetcher";
+import userFetcher from "../fetchers/apiFetcher";
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ export const useSignup = () => {
 
     //==================== CONFIG FOR POSTING USERDATA WITH AXIOS EXTERIOR====================//
     const config = {
-      url: "user/login",
+      url: "user/signup",
       userData,
       headers: {
         headers: {

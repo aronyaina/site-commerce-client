@@ -1,12 +1,11 @@
 import { React, useState } from "react";
-import productFetcher from "../fetchers/productFetcher";
+import productFetcher from "../fetchers/apiFetcher";
 import { useProductContext } from "../hooks/useProductContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-
 export default function ProductForm() {
   //==================== STATE DECLARATION====================//
-  
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -15,14 +14,15 @@ export default function ProductForm() {
   const [success, setSuccess] = useState(false);
 
   const { dispatch } = useProductContext();
-  const {user}=useAuthContext()
+  const { user } = useAuthContext();
   const [emptyField, setEmptyField] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!user){
-      setError("Vous devrez vous connecter")
-      return
+    if (!user) {
+      console.log("Vous devrez vous connecter");
+      setError("Vous devrez vous connecter");
+      return;
     }
     //==================== VARIABLE DECLARATION====================//
     const product = {
@@ -32,19 +32,20 @@ export default function ProductForm() {
       quantity,
     };
     const stringify = JSON.stringify(product);
-    
+
     //==================== POST DATA WITH AXIOS EXTERIOR====================//
     const postProduct = async () => {
       const config = {
-        url: "",
+        url: "/product",
         stringify,
-        headers: {
+        header: {
+          headers: {
             "Content-Type": "application/json",
-            "content-type": "application/json;charset=utf-8",
-            "Authorization":`Bearer ${user.token}`
+            Authorization: `Bearer ${user.token}`,
           },
+        },
       };
-      return productFetcher.post(config.url, config.stringify, config.headers);
+      return productFetcher.post(config.url, config.stringify, config.header);
     };
 
     postProduct()
@@ -88,7 +89,8 @@ export default function ProductForm() {
         break;
       default:
         break;
-    }}
+    }
+  };
 
   return (
     <form className="create" onSubmit={handleSubmit}>
@@ -108,7 +110,7 @@ export default function ProductForm() {
       <label>Description :</label>
       <input
         type="text"
-        name= "description"
+        name="description"
         value={description}
         className={emptyField.includes("title") ? "error" : ""}
         onChange={onHandleChange}
@@ -157,4 +159,4 @@ export default function ProductForm() {
       )}
     </form>
   );
- }
+}
