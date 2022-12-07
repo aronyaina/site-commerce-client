@@ -19,7 +19,7 @@ const Navbar = () => {
           {" "}
           {user ? (
             <div>
-              <span> {user.email} </span>{" "}
+              <Link to="/buying"> Explorer </Link> <span> {user.email} </span>{" "}
               <button onClick={handleClick}> Se deconnecter </button>{" "}
             </div>
           ) : (

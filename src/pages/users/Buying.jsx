@@ -1,10 +1,10 @@
 import React from "react";
-import { ProductCard } from "../../components/users/productCard";
+import { UseProductDetail } from "../../hooks/products/useProductDetail";
 export const Buying = () => {
   return (
     <div>
       <h2>Buying Page</h2>
-      <ProductCard />
+      <UseProductDetail />
     </div>
   );
 };

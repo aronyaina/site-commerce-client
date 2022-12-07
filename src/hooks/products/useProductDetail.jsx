@@ -14,41 +14,49 @@ export const UseProductDetail = () => {
   //==================== GET DATA WITH AXIOS INTERIOR====================//
 
   useEffect(() => {
+    let config = "";
     console.log(user);
     if (!user) {
-      return;
-    }
-    const config = {
-      url: "product",
-      header: {
-        headers: {
-          "Content-Type": "application/json",
-          "content-type": "application/json;charset=utf-8",
-          Authorization: `Bearer ${user.token}`,
+      config = {
+        url: "product",
+        header: {
+          headers: {
+            "Content-Type": "application/json",
+            "content-type": "application/json;charset=utf-8",
+          },
         },
-      },
-    };
+      };
+    } else {
+      config = {
+        url: "product",
+        header: {
+          headers: {
+            "Content-Type": "application/json",
+            "content-type": "application/json;charset=utf-8",
+            Authorization: `Bearer ${user.token}`,
+          },
+        },
+      };
+    }
 
     const getAllProduct = async () => {
       return productFetcher.get(config.url, config.header);
     };
 
-    if (user) {
-      getAllProduct()
-        .then((response) => {
-          const data = response.data;
-          dispatch({
-            type: "SET_PRODUCT",
-            payload: data,
-          });
-        })
-        .catch((error) => {
-          console.log("Error fetching product ", error);
-        })
-        .finally(() => {
-          setLoading(true);
+    getAllProduct()
+      .then((response) => {
+        const data = response.data;
+        dispatch({
+          type: "SET_PRODUCT",
+          payload: data,
         });
-    }
+      })
+      .catch((error) => {
+        console.log("Error fetching product ", error);
+      })
+      .finally(() => {
+        setLoading(true);
+      });
   }, [dispatch, user]);
 
   //==================== RENDERING ====================//
@@ -59,7 +67,7 @@ export const UseProductDetail = () => {
         products &&
         products.map((product) => (
           <div key={product._id}>
-            <ProductDetails product={product} />{" "}
+            <ProductDetails product={product} />
           </div>
         ))
       ) : (

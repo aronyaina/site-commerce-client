@@ -44,28 +44,25 @@ header a {
     gap: 100px;
 }
 
-.workout-details {
-    background: #fff;
-    border-radius: 4px;
-    margin: 20px auto;
-    padding: 20px;
-    position: relative;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+.product-details {
+
+    flex-wrap: wrap;
+    flex: content;
 }
 
-.workout-details h4 {
+.product-details h4 {
     margin: 0 0 10px 0;
     font-size: 1.2em;
     color: var(--primary);
 }
 
-.workout-details p {
+.product-details p {
     margin: 0;
     font-size: 0.9em;
     color: #555;
 }
 
-.workout-details span {
+.product-details span {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -153,4 +150,12 @@ form.login {
     padding: 20px;
     background: #fff;
     border-radius: 4px;
+}
+
+.articleCard {
+    margin-bottom: 20px;
+}
+
+.buttonDouble {
+    padding-top: 8px;
 }

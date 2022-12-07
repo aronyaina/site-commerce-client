@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { ButtonChange } from "./buttonChange";
-import { UseProductDetail } from "../../hooks/products/useProductDetail";
-export const ProductCard = () => {
+
+export const CartCard = () => {
   const [count, setProductCount] = useState(0);
+  const [price, setPrice] = useState(0);
+
   const onClick = (e) => {
     const name = e.target.name;
     switch (name) {
@@ -21,10 +23,12 @@ export const ProductCard = () => {
         break;
     }
   };
-
   return (
-    <div className="productCard">
-      <UseProductDetail />
+    <div>
+      <h1>Title</h1>
+      <h2>Description</h2>
+      <p>Total :{count}</p>
+      <p>Prix Total :{price}</p>
       <ButtonChange onHandleClick={onClick} />
     </div>
   );

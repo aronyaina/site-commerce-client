@@ -13,13 +13,13 @@ import Navbar from "./components/layout/navbar";
 
 function App() {
   const { user } = useAuthContext();
-  const [isAdmin, setRoles] = useState(false);
+  const [isAdmin, setRoles] = useState(true);
 
   useEffect(() => {
     if (user) {
-      const { email, roles, id, token } = user;
-      if (roles === "admin") {
-        setRoles(true);
+      if (user.roles !== "admin") {
+        setRoles(false);
+        console.log(isAdmin);
       } else {
         setRoles(false);
       }
