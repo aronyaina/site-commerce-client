@@ -8,6 +8,8 @@ import Login from "./pages/users/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import Home from "./pages/users/Home";
 import { Buying } from "./pages/users/Buying";
+import Cart from "./pages/users/Cart";
+
 // Components
 import Navbar from "./components/layout/navbar";
 
@@ -17,14 +19,15 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      if (user.roles == "admin") {
+      if (user.roles === "admin") {
         setRoles(true);
         console.log(isAdmin);
       } else {
         setRoles(false);
       }
     }
-  }, [user]);
+    console.log("is admin ", isAdmin);
+  }, [user, isAdmin]);
 
   return (
     <div className="App">
@@ -33,11 +36,10 @@ function App() {
         <Navbar />
         <div className="pages">
           <Routes>
+            <Route path="/cart" element=<Cart /> />
             <Route
               path="/dashboard"
-              element={
-                user && isAdmin ? <Dashboard /> : <Navigate to="/home" />
-              }
+              element={!isAdmin ? <Navigate to="/home" /> : <Dashboard />}
             />
             <Route path="/buying" element=<Buying /> />{" "}
             <Route path="/home" element=<Home /> />

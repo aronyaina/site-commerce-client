@@ -1,8 +1,10 @@
+import { Button } from "react-bootstrap";
+
 import { React, useState } from "react";
 import productFetcher from "../../lib/apiFetcher";
 import { useProductContext } from "../../hooks/products/useProductContext";
 import { useAuthContext } from "../../hooks/authentication/useAuthContext";
-
+import { ACTIONPRODUCT } from "../../reducer/productReducer";
 export default function ProductForm() {
   //==================== STATE DECLARATION====================//
 
@@ -60,7 +62,7 @@ export default function ProductForm() {
         setEmptyField([]);
         console.log(response.data);
         dispatch({
-          type: "CREATE_PRODUCT",
+          type: ACTIONPRODUCT.CREATE_PRODUCT,
           payload: data,
         });
       })
@@ -94,7 +96,7 @@ export default function ProductForm() {
 
   return (
     <form className="create" onSubmit={handleSubmit}>
-      <h3> Ajouter un nouveau produit </h3> <label> Nom: </label>{" "}
+      <h3> Ajouter un nouveau produit </h3>
       <input
         type="text"
         value={name}
@@ -102,20 +104,21 @@ export default function ProductForm() {
         className={emptyField.includes("name") ? "error" : ""}
         onChange={onHandleChange}
         placeholder={
-          emptyField.includes("name") ? "Veuiller saisir le nom du produit" : ""
+          emptyField.includes("name")
+            ? "Veuiller saisir le nom du produit"
+            : "Nom"
         }
       />{" "}
       <br />
-      <label> Description: </label>{" "}
       <input
         type="text"
         name="description"
         value={description}
         className={emptyField.includes("title") ? "error" : ""}
         onChange={onHandleChange}
+        placeholder="Description"
       />{" "}
       <br />
-      <label> Prix: </label>{" "}
       <input
         value={price}
         type="number"
@@ -124,12 +127,11 @@ export default function ProductForm() {
         placeholder={
           emptyField.includes("name")
             ? "Veuiller saisir le prix du produit"
-            : ""
+            : "Prix"
         }
         onChange={onHandleChange}
       />{" "}
       <br />
-      <label> Stock: </label>{" "}
       <input
         value={quantity}
         name="quantity"
@@ -137,13 +139,13 @@ export default function ProductForm() {
         placeholder={
           emptyField.includes("name")
             ? "Veuiller saisir la quantite du produit"
-            : ""
+            : "Stock"
         }
         type="number"
         onChange={onHandleChange}
       />{" "}
       <br />
-      <button> Ajouter le produit </button>{" "}
+      <Button variant="outline-success"> Ajouter</Button>{" "}
       {success && (
         <div className="success">
           Inserted successfully <br />

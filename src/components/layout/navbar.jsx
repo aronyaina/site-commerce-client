@@ -1,14 +1,12 @@
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-
+import { Badge, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useLogout } from "../../hooks/authentication/useLogout";
 import { useAuthContext } from "../../hooks/authentication/useAuthContext";
+import { useCartContext } from "../../hooks/products/useCartContext";
 
 const NavbarHead = () => {
   const { logout } = useLogout();
@@ -16,59 +14,67 @@ const NavbarHead = () => {
   const handleClick = () => {
     logout();
   };
-  const large = "lg";
+  const { state } = useCartContext();
+  console.log(state.cart);
+  const { cart } = state;
 
   return (
     <header>
-      <Navbar key={large} bg="light" expand={large} className="mb-3">
+      <Navbar bg="light" className="mb-3" expand="lg" sticky="top">
         {!user ? (
           <Container fluid>
-            <Navbar.Brand href="#">M - Shop</Navbar.Brand>
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${large}`} />
-            <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-${large}`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-${large}`}
-              placement="end"
-            >
+            <Navbar.Brand>
+              {" "}
+              <Link to="/home">M - Shop</Link>{" "}
+            </Navbar.Brand>
+            <Navbar.Toggle />
+            <Navbar.Offcanvas placement="end">
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${large}`}>
-                  Offcanvas
-                </Offcanvas.Title>
+                <Offcanvas.Title>Naviguer</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav>
+                  <Nav.Link>
                     {" "}
                     <Link to="/buying"> Explorer </Link>
-                  </Nav>
-                  <Nav>
+                  </Nav.Link>
+                  <Nav.Link>
                     <Link to="/login"> Se connecter </Link>
-                  </Nav>
-                  <Nav>
+                  </Nav.Link>
+                  <Nav.Link>
                     <Link to="/signup"> S 'inscrire</Link>
-                  </Nav>
+                  </Nav.Link>
+                  <Nav.Link>
+                    <Link to="/cart"> Cart</Link>
+                    {cart.cartItems.length > 0 && (
+                      <Badge pill bg="danger">
+                        {cart.cartItems.length}
+                      </Badge>
+                    )}
+                    <span className="material-symbols-outlined">
+                      shopping_cart
+                    </span>
+                  </Nav.Link>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
         ) : (
           <Container fluid>
-            <Navbar.Brand href="#">M - Shop</Navbar.Brand>
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${large}`} />
-            <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-${large}`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-${large}`}
-              placement="end"
-            >
+            <Navbar.Brand>
+              <Link to="/home">M - Shop</Link>{" "}
+            </Navbar.Brand>
+            <Navbar.Toggle />
+            <Navbar.Offcanvas placement="end">
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${large}`}>
-                  Offcanvas
-                </Offcanvas.Title>
+                <Offcanvas.Title>Naviguer</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link to="/buying">Explorer</Nav.Link>
-                  <span>{user.email}</span>
+                  <Nav.Link style={{ "textDecoration ": "None" }}>
+                    <Link to="/buying">Explorer</Link>
+                  </Nav.Link>
+                  <span className="emailSpan">{user.email}</span>
                 </Nav>
                 <Button variant="outline-danger" onClick={handleClick}>
                   {" "}
@@ -79,27 +85,6 @@ const NavbarHead = () => {
           </Container>
         )}
       </Navbar>
-
-      {/* <div className="container">
-        <Link to="/home">
-          <h1> M - SHOP </h1>{" "}
-        </Link>{" "}
-        <nav>
-          {" "}
-          {user ? (
-            <div>
-              <Link to="/buying"> Explorer </Link> <span> {user.email} </span>{" "}
-              <button onClick={handleClick}> Se deconnecter </button>{" "}
-            </div>
-          ) : (
-            <div>
-              <Link to="/buying"> Explorer </Link>{" "}
-              <Link to="/login"> Se connecter </Link>{" "}
-              <Link to="/signup"> S 'inscrire</Link>{" "}
-            </div>
-          )}{" "}
-        </nav>{" "}
-      </div>{" "} */}
     </header>
   );
 };

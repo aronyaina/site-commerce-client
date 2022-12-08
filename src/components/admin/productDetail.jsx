@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import DeleteButton from "./deleteButton";
 import Card from "react-bootstrap/Card";
 import testImage from "../../assets/image/chaussure_nike.jpg";
@@ -38,7 +38,7 @@ export const ProductDetails = ({ product }) => {
               <strong> Ajouter le: </strong> {year + " vers " + hour + time}{" "}
             </Card.Text>
 
-            <DeleteButton id={product._id} />
+            <DeleteButton id={product._id} product={product} />
           </Card.Body>
         </Card>
       </div>{" "}

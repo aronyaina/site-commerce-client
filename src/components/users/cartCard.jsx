@@ -1,35 +1,39 @@
+import { Row, Col } from "react-bootstrap";
 import React from "react";
-import { useState } from "react";
-import { ButtonChange } from "./buttonChange";
+import { useCartContext } from "../../hooks/products/useCartContext";
 
-export const CartCard = () => {
-  const [count, setProductCount] = useState(0);
-  const [price, setPrice] = useState(0);
+function cartCard() {
+  const { state, dispatch: ctxDispatch } = useCartContext();
 
-  const onClick = (e) => {
-    const name = e.target.name;
-    switch (name) {
-      case "add":
-        setProductCount((prevValue) => {
-          return (prevValue = prevValue + 1);
-        });
-        break;
-      case "substract":
-        setProductCount((prevValue) => {
-          return (prevValue = prevValue - 1);
-        });
-        break;
-      default:
-        break;
-    }
-  };
+  const {
+    cart: { cartItems },
+  } = state;
+
   return (
     <div>
-      <h1>Title</h1>
-      <h2>Description</h2>
-      <p>Total :{count}</p>
-      <p>Prix Total :{price}</p>
-      <ButtonChange onHandleClick={onClick} />
+      <h1>Shopping cart</h1>
+      <Row>
+        <Col md={8}>
+          {cartItems.length === 0 ? (
+            <div>
+              Le panier est vide. <Link to="/buying">Acheter des articles</Link>
+            </div>
+          ) : (
+            <div key={cartItems.id}>
+              {cartItems.map((item) => (
+                <div key={item._id}>
+                  <Row className="align-items-center"></Row>
+                </div>
+              ))}
+            </div>
+          )}
+        </Col>
+        <Col md={4}>
+          <Link to={`/product/${product.name}`}> </Link>
+        </Col>
+      </Row>
     </div>
   );
-};
+}
+
+export default cartCard;

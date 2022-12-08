@@ -1,31 +1,34 @@
-import React from "react";
-import { useState } from "react";
-import { ButtonChange } from "./buttonChange";
-import { UseProductDetail } from "../../hooks/products/useProductDetail";
+import React, { useEffect, useReducer } from "react";
+import { getAllProducts } from "../../lib/productFetcher";
+import { useProductContext } from "../../hooks/products/useProductContext";
+import { ProductDetails } from "../admin/productDetail";
+import loadingReducer from "../../reducer/loadingReducer";
+import LoadingBox from "../layout/loadingBox";
+
 export const ProductCard = () => {
-  const [count, setProductCount] = useState(0);
-  const onClick = (e) => {
-    const name = e.target.name;
-    switch (name) {
-      case "add":
-        setProductCount((prevValue) => {
-          return (prevValue = prevValue + 1);
-        });
-        break;
-      case "substract":
-        setProductCount((prevValue) => {
-          return (prevValue = prevValue - 1);
-        });
-        break;
-      default:
-        break;
-    }
-  };
+  const { products } = useProductContext();
+  const { loading } = useReducer(loadingReducer, {
+    loading: true,
+  });
+
+  getAllProducts();
 
   return (
-    <div className="productCard">
-      <UseProductDetail />
-      <ButtonChange onHandleClick={onClick} />
+    <div>
+      {loading ? (
+        <div>
+          <LoadingBox />
+        </div>
+      ) : (
+        <div className="productCard">
+          {products &&
+            products.map((product) => (
+              <div key={product._id}>
+                <ProductDetails product={product} />
+              </div>
+            ))}
+        </div>
+      )}
     </div>
   );
 };

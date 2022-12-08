@@ -1,5 +1,8 @@
 import { useAuthContext } from "./useAuthContext";
 import { useProductContext } from "../products/useProductContext";
+import { ACTIONAUTH } from "../../reducer/authReducer";
+import { ACTIONPRODUCT } from "../../reducer/productReducer";
+
 export const useLogout = () => {
   const { dispatch } = useAuthContext();
   const { dispatch: workoutDispatch } = useProductContext();
@@ -10,11 +13,11 @@ export const useLogout = () => {
 
     //   dispatch logout action
     dispatch({
-      type: "LOGOUT",
+      type: ACTIONAUTH.LOGOUT,
     });
     // dispatch setProduct
     workoutDispatch({
-      type: "SET_PRODUCT",
+      type: ACTIONPRODUCT.SET_PRODUCT,
       payload: null,
     });
   };

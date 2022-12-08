@@ -5,8 +5,9 @@ import { useProductContext } from "../../hooks/products/useProductContext";
 import { useAuthContext } from "../../hooks/authentication/useAuthContext";
 import { useEffect } from "react";
 import ButtonStyle from "../layout/buttonStyle";
+import BuyButton from "../layout/buyButton";
 
-export default function deleteButton(id) {
+export default function deleteButton({ id, product }) {
   //==================== VARIABLE DECLARATION ====================//
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
@@ -15,16 +16,19 @@ export default function deleteButton(id) {
   const [isUser, setUser] = useState(false);
   const [isAdmin, setAdmin] = useState(false);
 
+  //==================== CHEKING ROLE====================//
   useEffect(() => {
-    if (!user) {
-      setUser(false);
-    } else if (user && user.roles === "admin") {
-      setUser(true);
-      setAdmin(true);
-    } else if (user && user.roles === "user") {
-      setUser(true);
-    }
-  }, [user]);
+    const checkRoles = async () => {
+      if (user && user.roles === "admin") {
+        setUser(true);
+        setAdmin(true);
+      } else if (user && user.roles === "user") {
+        setUser(true);
+        setAdmin(false);
+      }
+    };
+    checkRoles();
+  }, [user, isUser, isAdmin]);
 
   //==================== DELETE DATA WITH AXIOS EXTERIOR====================//
   const handleClick = async (e) => {
@@ -34,6 +38,7 @@ export default function deleteButton(id) {
       setError("Vous devrier vous connecter !");
       return;
     }
+
     const deleteProduct = async () => {
       const config = {
         url: `/product/${id.id}`,
@@ -66,21 +71,15 @@ export default function deleteButton(id) {
   };
   return (
     <div className="buttonDouble">
-      {isUser ? (
-        isAdmin && (
-          <div className="delete">
-            <span onClick={handleClick} className="material-symbols-outlined">
-              Delete{" "}
-            </span>{" "}
-            {error && <div className="error"> {error} </div>}{" "}
-            {success && (
-              <div className="success"> "Supprime avec succes!" </div>
-            )}{" "}
-          </div>
-        )
+      {!isAdmin ? (
+        <BuyButton product={product} />
       ) : (
-        <div>
-          <ButtonStyle buttonName="Acheter" />
+        <div className="delete">
+          <span onClick={handleClick} className="material-symbols-outlined">
+            Delete{" "}
+          </span>{" "}
+          {error && <div className="error"> {error} </div>}{" "}
+          {success && <div className="success"> "Supprime avec succes!" </div>}{" "}
         </div>
       )}
     </div>

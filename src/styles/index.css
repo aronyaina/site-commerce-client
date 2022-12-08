@@ -159,3 +159,28 @@ form.login {
 .buttonDouble {
     padding-top: 8px;
 }
+
+.emailSpan {
+    padding-left: 5px;
+    padding-top: 8px;
+}
+
+.addButton,
+.subButton {
+    border-radius: 50%;
+
+}
+
+.addButton {
+    margin: 50px 0px 0px 0px
+}
+
+.subButton {
+    margin: 100px 0px 0px 0px;
+    background-color: rgb(211, 92, 92);
+
+}
+
+.buyButton {
+    margin-left: 25%;
+}

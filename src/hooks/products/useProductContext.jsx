@@ -6,7 +6,7 @@ export const useProductContext = () => {
 
   if (!context) {
     throw Error(
-      "useProductContext must be used inside an ProductContextProvider"
+      "Use Product Context must be used inside an ProductContextProvider"
     );
   }
 

@@ -7,7 +7,6 @@ import { useAuthContext } from "../authentication/useAuthContext";
 
 export const UseProductDetail = () => {
   //==================== STATE DECLARATION====================//
-
   const [load, setLoading] = useState(false);
   const { products, dispatch } = useProductContext();
   const { user } = useAuthContext();

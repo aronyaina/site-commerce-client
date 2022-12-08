@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
+import { ACTIONAUTH } from "../../reducer/authReducer";
 import userFetcher from "../../lib/apiFetcher";
 
 export const useLogin = () => {
@@ -41,7 +42,7 @@ export const useLogin = () => {
 
         // Update the auth context
         dispatch({
-          type: "LOGIN",
+          type: ACTIONAUTH.LOGIN,
           payload: data,
         });
 
