@@ -1,13 +1,12 @@
-import React from "react";
-import { useState } from "react";
 import productFetcher from "../../lib/apiFetcher";
-import { useProductContext } from "../../hooks/products/useProductContext";
-import { useAuthContext } from "../../hooks/authentication/useAuthContext";
-import { useEffect } from "react";
-import ButtonStyle from "../layout/buttonStyle";
+import { useProductContext } from "../../features/stocking/hooks/useProductContext";
+import { useAuthContext } from "../../features/authentication/hooks/useAuthContext";
+import { useCartContext } from "../../features/shopping/hooks/useCartContext";
+import React, { useState, useEffect } from "react";
 import BuyButton from "../layout/buyButton";
 
 export default function deleteButton({ id, product }) {
+  const { productCarts, addCart, removeCart } = useCartContext();
   //==================== VARIABLE DECLARATION ====================//
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
@@ -41,7 +40,7 @@ export default function deleteButton({ id, product }) {
 
     const deleteProduct = async () => {
       const config = {
-        url: `/product/${id.id}`,
+        url: `/product/${id}`,
         header: {
           headers: {
             "Content-Type": "application/json",

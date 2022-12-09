@@ -1,7 +1,7 @@
 import { useAuthContext } from "./useAuthContext";
-import { useProductContext } from "../products/useProductContext";
-import { ACTIONAUTH } from "../../reducer/authReducer";
-import { ACTIONPRODUCT } from "../../reducer/productReducer";
+import { useProductContext } from "../../stocking/hooks/useProductContext";
+import { ACTIONAUTH } from "../reducers/authReducer";
+import { ACTIONPRODUCT } from "../../stocking/reducers/productReducer";
 
 export const useLogout = () => {
   const { dispatch } = useAuthContext();

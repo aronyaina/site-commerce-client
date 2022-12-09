@@ -1,11 +1,13 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import { useCartContext } from "../../hooks/products/useCartContext";
-import { ACTIONCART } from "../../reducer/cartReducer";
+import { useCartContext } from "../../features/shopping/hooks/useCartContext";
+import { ACTIONCART } from "../../features/shopping/reducers/cartReducer";
 
 function buyButton({ product }) {
   const { state, dispatch } = useCartContext();
   const [handleBuy, setHandle] = useState(false);
+  const { cart } = state;
 
   //==================== HANDLE CHECK====================//
   const onHandleBuy = (e) => {
@@ -21,7 +23,7 @@ function buyButton({ product }) {
     console.log(handleBuy);
   };
   //==================== BUY CHECK====================//
-  const onHandleCart = (e) => {
+  const onHandleCart = async (e) => {
     e.preventDefault();
     const operationName = e.target.id;
     switch (operationName) {
@@ -29,14 +31,18 @@ function buyButton({ product }) {
         const existItem = cart.cartItems.find((x) => x._id === product._id);
         const quantity = existItem ? existItem.quantity + 1 : 1;
 
+        const { data } = await axios.get(`/product/${product._id}`);
+        if (data.quantity < quantity) {
+          window.alert("Stock epuise !");
+          return;
+        }
+
         dispatch({
           type: ACTIONCART.ADD_TO_CART,
           payload: { ...product, quantity: quantity },
         });
+
         break;
-      //   case "substract":
-      //     removeFromCart(product);
-      //     break;
       default:
         break;
     }
@@ -52,20 +58,24 @@ function buyButton({ product }) {
         </div>
       ) : (
         <div>
-          <span
-            onClick={onHandleCart}
-            className="material-symbols-outlined addButton"
-            id="add"
-          >
-            add
-          </span>
-          {/* <span
-            onClick={onHandleCart}
-            className="material-symbols-outlined subButton"
-            id="substract"
-          >
-            remove
-          </span> */}
+          {product.quantity === 1 ? (
+            <span
+              onClick={onHandleCart}
+              className="material-symbols-outlined addButton"
+              id="add"
+            >
+              remove_shopping_cart
+            </span>
+          ) : (
+            <span
+              onClick={onHandleCart}
+              className="material-symbols-outlined addButton"
+              id="add"
+            >
+              add
+            </span>
+          )}
+
           <span className="material-symbols-outlined" onClick={onHandleBuy}>
             arrow_back_ios
           </span>

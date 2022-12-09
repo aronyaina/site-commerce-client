@@ -3,6 +3,12 @@ export const ACTIONAUTH = {
   LOGOUT: "logout",
 };
 
+export const initialState = {
+  user: localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null,
+};
+
 export const authReducer = (state, action) => {
   switch (action.type) {
     case ACTIONAUTH.LOGIN:

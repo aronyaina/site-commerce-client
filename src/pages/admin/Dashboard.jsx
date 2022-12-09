@@ -1,5 +1,5 @@
-import { ProductCard } from "../../components/users/productCard";
-import ProductForm from "../../components/admin/productForm";
+import { ProductCard } from "../../features/shopping/components/productCard";
+import ProductForm from "../../features/stocking/components/productForm";
 
 const Dashboard = () => {
   return (

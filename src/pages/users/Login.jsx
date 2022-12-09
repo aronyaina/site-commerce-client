@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useLogin } from "../../hooks/authentication/useLogin";
+import { useLogin } from "../../features/authentication/hooks/useLogin";
+import { Link } from "react-router-dom";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,6 +42,10 @@ const Login = () => {
         value={password}
         onChange={onHandleChange}
       />{" "}
+      <p>
+        Si vous n'avez pas de compte vous pouvez vous inscrire{" "}
+        <Link to="/signup">ici</Link>
+      </p>
       <button disabled={isLoading}> Se connecter </button>{" "}
       {error && <div className="error"> {error} </div>}{" "}
     </form>

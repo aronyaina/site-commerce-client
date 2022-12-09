@@ -3,21 +3,21 @@ import "./styles/index.css";
 import "./styles/card.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ProductContextProvider } from "./context/products/ProductContext";
-import { AuthContextProvider } from "./context/users/AuthContext";
-import { CartProvider } from "./context/products/CartContext";
+import { ProductContextProvider } from "./features/stocking/context/ProductContext";
+import { AuthContextProvider } from "./features/authentication/contexts/AuthContext";
+import { CartProvider } from "./features/shopping/context/CartContext";
 
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <CartProvider>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <CartProvider>
         <ProductContextProvider>
           <App />
         </ProductContextProvider>
-      </AuthContextProvider>
-    </CartProvider>
+      </CartProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );

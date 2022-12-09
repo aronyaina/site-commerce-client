@@ -2,6 +2,7 @@ import { React, useEffect } from "react";
 import DeleteButton from "./deleteButton";
 import Card from "react-bootstrap/Card";
 import testImage from "../../assets/image/chaussure_nike.jpg";
+
 export const ProductDetails = ({ product }) => {
   const year = product.createdAt.slice(0, 10);
 
@@ -18,6 +19,7 @@ export const ProductDetails = ({ product }) => {
   const time = product.createdAt.slice(13, 19);
 
   //==================== RENDER DATA ====================//
+
   return (
     <div className="product-details">
       <div key={product._id}>

@@ -1,10 +1,10 @@
 import { Button } from "react-bootstrap";
 
 import { React, useState } from "react";
-import productFetcher from "../../lib/apiFetcher";
-import { useProductContext } from "../../hooks/products/useProductContext";
-import { useAuthContext } from "../../hooks/authentication/useAuthContext";
-import { ACTIONPRODUCT } from "../../reducer/productReducer";
+import productFetcher from "../../../lib/apiFetcher";
+import { useProductContext } from "../hooks/useProductContext";
+import { useAuthContext } from "../../authentication/hooks/useAuthContext";
+import { ACTIONPRODUCT } from "../reducers/productReducer";
 export default function ProductForm() {
   //==================== STATE DECLARATION====================//
 
@@ -47,6 +47,7 @@ export default function ProductForm() {
           },
         },
       };
+
       return productFetcher.post(config.url, config.stringify, config.header);
     };
 
@@ -95,7 +96,7 @@ export default function ProductForm() {
   };
 
   return (
-    <form className="create" onSubmit={handleSubmit}>
+    <form className="create">
       <h3> Ajouter un nouveau produit </h3>
       <input
         type="text"
@@ -145,7 +146,10 @@ export default function ProductForm() {
         onChange={onHandleChange}
       />{" "}
       <br />
-      <Button variant="outline-success"> Ajouter</Button>{" "}
+      <Button variant="outline-success" onClick={handleSubmit}>
+        {" "}
+        Ajouter
+      </Button>{" "}
       {success && (
         <div className="success">
           Inserted successfully <br />

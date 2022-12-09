@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useAuthContext } from "./hooks/authentication/useAuthContext";
+import { useAuthContext } from "./features/authentication/hooks/useAuthContext";
 import { useState } from "react";
 import { useEffect } from "react";
 // Pages
@@ -7,9 +7,9 @@ import Signup from "./pages/users/Signup";
 import Login from "./pages/users/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import Home from "./pages/users/Home";
-import { Buying } from "./pages/users/Buying";
+import { Shopping } from "./pages/users/Shopping";
 import Cart from "./pages/users/Cart";
-
+import Chipping from "./pages/users/Chipping";
 // Components
 import Navbar from "./components/layout/navbar";
 
@@ -25,6 +25,8 @@ function App() {
       } else {
         setRoles(false);
       }
+    } else if (!user) {
+      setRoles(false);
     }
     console.log("is admin ", isAdmin);
   }, [user, isAdmin]);
@@ -41,8 +43,13 @@ function App() {
               path="/dashboard"
               element={!isAdmin ? <Navigate to="/home" /> : <Dashboard />}
             />
-            <Route path="/buying" element=<Buying /> />{" "}
+            <Route path="/buying" element=<Shopping /> />{" "}
             <Route path="/home" element=<Home /> />
+            <Route
+              path="/shipping"
+              element={!user ? <Signup /> : <Navigate to="/shipping" />}
+            />
+            <Route path="/shipping" element={<Dashboard />} />
             <Route
               path="/signup"
               element={!user ? <Signup /> : <Navigate to="/dashboard" />}

@@ -1,9 +1,9 @@
 import React, { useEffect, useReducer } from "react";
-import { getAllProducts } from "../../lib/productFetcher";
-import { useProductContext } from "../../hooks/products/useProductContext";
-import { ProductDetails } from "../admin/productDetail";
-import loadingReducer from "../../reducer/loadingReducer";
-import LoadingBox from "../layout/loadingBox";
+import { getAllProducts } from "../../../lib/productFetcher";
+import { useProductContext } from "../../stocking/hooks/useProductContext";
+import { ProductDetails } from "../../../components/admin/productDetail";
+import loadingReducer from "../../projects/reducers/loadingReducer";
+import LoadingBox from "../../../components/layout/loadingBox";
 
 export const ProductCard = () => {
   const { products } = useProductContext();

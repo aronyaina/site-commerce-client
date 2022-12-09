@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-import productReducer from "../../reducer/productReducer";
+import productReducer from "../reducers/productReducer";
 
 export const ProductContext = createContext();
 

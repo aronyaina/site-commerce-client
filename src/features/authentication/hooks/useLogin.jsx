@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
-import { ACTIONAUTH } from "../../reducer/authReducer";
-import userFetcher from "../../lib/apiFetcher";
+import { ACTIONAUTH } from "../reducers/authReducer";
+import userFetcher from "../../../lib/apiFetcher";
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
@@ -35,16 +35,15 @@ export const useLogin = () => {
     postUser()
       .then((response) => {
         const data = response.data;
-
-        setError(null);
-        // Saving user to local storage
-        localStorage.setItem("user", JSON.stringify(data));
-
         // Update the auth context
         dispatch({
           type: ACTIONAUTH.LOGIN,
           payload: data,
         });
+
+        setError(null);
+        // Saving user to local storage
+        localStorage.setItem("user", JSON.stringify(data));
 
         setLoading(false);
       })

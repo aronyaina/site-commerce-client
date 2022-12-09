@@ -1,5 +1,3 @@
-import { useReducer } from "react";
-
 export const ACTIONPRODUCT = {
   SET_PRODUCT: "setProduct",
   CREATE_PRODUCT: "createProduct",

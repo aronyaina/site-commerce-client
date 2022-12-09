@@ -1,18 +1,20 @@
 import { useState } from "react";
-import { useSignup } from "../../hooks/authentication/useSignup";
+import { useSignup } from "../../features/authentication/hooks/useSignup";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const { signup, error, isLoading } = useSignup();
+  const { signupUser, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(name, surname, password, email);
-    await signup(name, surname, password, email);
+    signupUser(name, surname, password, email);
   };
+
   const onHandleChange = (e) => {
     switch (e.target.name) {
       case "email":
@@ -57,6 +59,10 @@ const Signup = () => {
         value={password}
         onChange={onHandleChange}
       />{" "}
+      <p>
+        Si vous avez pas deja un compte vous pouvez vous connectez{" "}
+        <Link to="/login">ici</Link>
+      </p>
       <button disabled={isLoading}> S 'inscrire</button>{" "}
       {error && <div className="error"> {error} </div>}{" "}
     </form>
