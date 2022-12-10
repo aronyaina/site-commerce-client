@@ -4,7 +4,7 @@ export const ACTIONAUTH = {
 };
 
 export const initialState = {
-  user: localStorage.getItem("user")
+  localUser: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : null,
 };

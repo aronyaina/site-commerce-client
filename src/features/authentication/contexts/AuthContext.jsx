@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from "react";
 import { authReducer, initialState } from "../reducers/authReducer";
 
 export const AuthContext = createContext();
-const user = initialState.user;
+const user = initialState.localUser;
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user,
@@ -19,7 +19,7 @@ export const AuthContextProvider = ({ children }) => {
         payload: userStore,
       });
     }
-  }, []);
+  }, [user]);
 
   return (
     <AuthContext.Provider

@@ -1,0 +1,19 @@
+# Version de node utiliser
+FROM node:18
+
+# Creation de App
+WORKDIR /app
+
+#Copie de fichier de local vers le cloud
+COPY ./package.json ./package.json
+COPY ./public ./public
+COPY ./src ./src
+
+# Installe tout les dependance de react
+RUN npm install
+
+#Ouvre le port d'ecoute 3000
+EXPOSE 3000
+
+#Lance l'application react
+CMD ["npm","start"]

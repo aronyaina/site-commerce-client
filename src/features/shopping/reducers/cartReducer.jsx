@@ -1,14 +1,25 @@
 export const ACTIONCART = {
   ADD_TO_CART: "add_to_cart",
+  SAVE_PAYEMENT_METHOD: "save_payement_method",
+  SAVE_SHIPPING_ADDRESS: "save_shipping_address",
   DEL_TO_CART: "delete_to_cart",
+  DEL_SHIPPING_ADDRESS_AND_CART: "del_shipping_address_and_cart",
 };
 
 export const initialState = {
+  shippingAddress: localStorage.getItem("shippingAddress")
+    ? JSON.parse(localStorage.getItem("shippingAddress"))
+    : {},
+
   cart: {
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
   },
+
+  payementMethod: localStorage.getItem("payementMethod")
+    ? JSON.parse(localStorage.getItem("payementMethod"))
+    : "",
 };
 
 const shopReducer = (state, action) => {
@@ -37,6 +48,34 @@ const shopReducer = (state, action) => {
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+
+    case ACTIONCART.SAVE_SHIPPING_ADDRESS:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: action.payload,
+        },
+      };
+
+    case ACTIONCART.DEL_SHIPPING_ADDRESS_AND_CART: {
+      return {
+        cart: { cartItems: [], shippingAddress: {} },
+      };
+    }
+
+    case ACTIONCART.SAVE_PAYEMENT_METHOD: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          payementMethod: action.payload,
+        },
+      };
+    }
+
+    default:
+      return state;
   }
 };
 

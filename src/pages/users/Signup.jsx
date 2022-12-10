@@ -7,12 +7,12 @@ const Signup = () => {
   const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const { signupUser, error, isLoading } = useSignup();
+  const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(name, surname, password, email);
-    signupUser(name, surname, password, email);
+    signup(name, surname, password, email);
   };
 
   const onHandleChange = (e) => {

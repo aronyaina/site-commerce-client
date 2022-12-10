@@ -35,27 +35,19 @@ const NavbarHead = () => {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link>
-                    {" "}
-                    <Link to="/buying"> Explorer </Link>
-                  </Nav.Link>
-                  <Nav.Link>
-                    <Link to="/cart"> Cart</Link>
-                    {cart.cartItems.length > 0 && (
-                      <Badge pill bg="danger">
-                        {cart.cartItems.length}
-                      </Badge>
-                    )}
-                    <span className="material-symbols-outlined">
-                      shopping_cart
-                    </span>
-                  </Nav.Link>
-                  <Nav.Link>
-                    <Link to="/login"> Se connecter </Link>
-                  </Nav.Link>
-                  <Nav.Link>
-                    <Link to="/signup"> S 'inscrire</Link>
-                  </Nav.Link>
+                  {" "}
+                  <Link to="/buying"> Explorer </Link>
+                  <Link to="/cart"> Cart</Link>
+                  {cart.cartItems.length > 0 && (
+                    <Badge pill bg="danger">
+                      {cart.cartItems.length}
+                    </Badge>
+                  )}
+                  <span className="material-symbols-outlined">
+                    shopping_cart
+                  </span>
+                  <Link to="/login"> Se connecter </Link>
+                  <Link to="/signup"> S 'inscrire</Link>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
@@ -72,21 +64,18 @@ const NavbarHead = () => {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link style={{ "textDecoration ": "None" }}>
-                    <Link to="/buying">Explorer</Link>
-                  </Nav.Link>
+                  <Link to="/buying">Explorer</Link>
 
-                  <Nav.Link>
-                    <Link to="/cart"> Cart</Link>
-                    {cart.cartItems.length > 0 && (
-                      <Badge pill bg="danger">
-                        {cart.cartItems.length}
-                      </Badge>
-                    )}
-                    <span className="material-symbols-outlined">
-                      shopping_cart
-                    </span>
-                  </Nav.Link>
+                  <Link to="/cart"> Cart</Link>
+                  {cart.cartItems.length > 0 && (
+                    <Badge pill bg="danger">
+                      {cart.cartItems.length}
+                    </Badge>
+                  )}
+                  <span className="material-symbols-outlined">
+                    shopping_cart
+                  </span>
+
                   <span className="emailSpan">{user.email}</span>
                 </Nav>
                 <Button variant="outline-danger" onClick={handleClick}>

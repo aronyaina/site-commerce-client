@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { ACTIONAUTH } from "../reducers/authReducer";
 import userFetcher from "../../../lib/apiFetcher";
-
+import axios from "axios";
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(null);
@@ -29,28 +29,29 @@ export const useLogin = () => {
     };
     //==================== POST USERDATA WITH AXIOS EXTERIOR====================//
     const postUser = async () => {
-      return userFetcher.post(config.url, config.userData, config.header);
+      return axios
+        .post(config.url, config.userData, config.header)
+        .then((response) => {
+          const data = response.data;
+          // Update the auth context
+          dispatch({
+            type: ACTIONAUTH.LOGIN,
+            payload: data,
+          });
+
+          setError(null);
+          // Saving user to local storage
+          localStorage.setItem("user", JSON.stringify(data));
+
+          setLoading(false);
+        })
+        .catch((error) => {
+          setLoading(false);
+          setError(error.response.data.error);
+        });
     };
 
-    postUser()
-      .then((response) => {
-        const data = response.data;
-        // Update the auth context
-        dispatch({
-          type: ACTIONAUTH.LOGIN,
-          payload: data,
-        });
-
-        setError(null);
-        // Saving user to local storage
-        localStorage.setItem("user", JSON.stringify(data));
-
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(error.response.data.error);
-      });
+    postUser();
   };
 
   return {
