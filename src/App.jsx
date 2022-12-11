@@ -27,14 +27,14 @@ function App() {
   const [isAdmin, setRoles] = useState(false);
 
   useEffect(() => {
-    if (user) {
+    if (user !== null) {
       if (user.roles === "admin") {
         setRoles(true);
         console.log(isAdmin);
       } else {
         setRoles(false);
       }
-    } else if (!user) {
+    } else if (user === null) {
       setRoles(false);
     }
     console.log("is admin ", isAdmin);
@@ -48,12 +48,12 @@ function App() {
         <div className="pages">
           <Routes>
             <Route path="/cart" element=<Cart /> />
-            <Route
-              path="/dashboard"
-              element={!isAdmin ? <Navigate to="/" /> : <Dashboard />}
-            />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/buying" element=<Shopping /> />{" "}
-            <Route path="/" element=<Home /> />
+            <Route
+              path="/"
+              element={isAdmin ? <Navigate to="/dashboard" /> : <Home />}
+            />
             <Route
               path="/shipping"
               element={!user ? <Signup /> : <Shipping />}

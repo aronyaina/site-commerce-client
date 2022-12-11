@@ -1,8 +1,8 @@
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
+
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Badge, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import { useLogout } from "../../features/authentication/hooks/useLogout";
@@ -15,47 +15,39 @@ const NavbarHead = () => {
   const handleClick = () => {
     logout();
   };
-  const { state } = useCartContext();
-  console.log(state.cart);
-  const { cart } = state;
 
   return (
-    <header>
-      <Navbar bg="light" className="mb-3" expand="lg" sticky="top">
+    <header className="NavbarHead">
+      <Navbar className="mb-3" expand="lg">
         {!user ? (
-          <Container fluid>
-            <Navbar.Brand>
-              {" "}
-              <Link to="/home">M - Shop</Link>{" "}
+          <Container>
+            <Navbar.Brand className="brand-heading">
+              <Link to="/home">MI-SHOP</Link>{" "}
             </Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Offcanvas placement="end">
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Naviguer</Offcanvas.Title>
-              </Offcanvas.Header>
+              <Offcanvas.Header>hello world</Offcanvas.Header>
               <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  {" "}
-                  <Link to="/buying"> Explorer </Link>
-                  <Link to="/cart"> Cart</Link>
-                  {cart.cartItems.length > 0 && (
-                    <Badge pill bg="danger">
-                      {cart.cartItems.length}
-                    </Badge>
-                  )}
-                  <span className="material-symbols-outlined">
-                    shopping_cart
-                  </span>
-                  <Link to="/login"> Se connecter </Link>
-                  <Link to="/signup"> S 'inscrire</Link>
-                </Nav>
+                <div className="connectNav">
+                  <Link to="/login" className="item item-1">
+                    {" "}
+                    <span className="material-symbols-outlined">
+                      box-arrow-in-right
+                    </span>
+                    Se connecter{" "}
+                  </Link>
+                  <Link to="/signup" className="item item-2">
+                    {" "}
+                    S 'inscrire
+                  </Link>
+                </div>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
         ) : (
-          <Container fluid>
-            <Navbar.Brand>
-              <Link to="/home">M - Shop</Link>{" "}
+          <Container fluid className="nav-container">
+            <Navbar.Brand className="brand-heading">
+              <Link to="/home">MI-SHOP</Link>{" "}
             </Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Offcanvas placement="end">
@@ -63,21 +55,7 @@ const NavbarHead = () => {
                 <Offcanvas.Title>Naviguer</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Link to="/buying">Explorer</Link>
-
-                  <Link to="/cart"> Cart</Link>
-                  {cart.cartItems.length > 0 && (
-                    <Badge pill bg="danger">
-                      {cart.cartItems.length}
-                    </Badge>
-                  )}
-                  <span className="material-symbols-outlined">
-                    shopping_cart
-                  </span>
-
-                  <span className="emailSpan">{user.email}</span>
-                </Nav>
+                <span className="emailSpan">{user.email}</span>
                 <Button variant="outline-danger" onClick={handleClick}>
                   {" "}
                   Se deconnecter

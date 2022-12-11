@@ -1,0 +1,71 @@
+/* navbar */
+header {
+    background-color: #113c4b;
+
+}
+
+.nav-container a {
+    color: rgb(233, 233, 233);
+
+
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.container.a.connectNav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-container .container-fluid {
+    width: 500px;
+}
+
+.nav-container {
+
+    color: rgb(255, 255, 255);
+
+}
+
+.connectNav {
+    width: 100%;
+    font-size: 30px;
+    font-weight: 500;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.item {
+    padding-left: 25px;
+}
+
+header a {
+    color: rgb(230, 230, 230);
+    text-decoration: none;
+}
+
+
+
+
+
+
+.nav-container {
+    padding-left: 50px;
+    padding-top: 40px;
+    display: flex;
+
+}
+
+
+.brand-heading {
+    color: #fff;
+    font-family: "Poppins";
+    font-weight: 500;
+    font-size: 32px;
+}

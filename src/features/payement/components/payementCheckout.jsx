@@ -6,13 +6,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { ACTIONCART } from "../../shopping/reducers/cartReducer";
 
 export default function payementCheckout() {
-  const navigate = useNavigate();
   const { state, dispatch } = useCartContext();
-
+  const navigate = useNavigate();
   const {
-    cart: { payementMethod },
+    cart: { cart, payementMethod, shippingAddress },
   } = state;
-
+  useEffect(() => {
+    if (shippingAddress.address === "") {
+      navigate("/shipping");
+    }
+  }, [shippingAddress, navigate]);
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch({

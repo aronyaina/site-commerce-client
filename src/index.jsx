@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.css";
+import "./styles/heading.css";
 import "./styles/index.css";
 import "./styles/card.css";
 import React from "react";

@@ -10,15 +10,9 @@ function formShipping() {
     cart: { shippingAddress },
   } = state;
 
-  const [fullName, setFullName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [country, setCountry] = useState("");
-  console.log("shipping address :", shippingAddress);
   useEffect(() => {
     if (shippingAddress) {
-      setFullName(shippingAddress.fullName);
+      setFullName();
       setAddress(shippingAddress.address);
       setCity(shippingAddress.city);
       setPostalCode(shippingAddress.postalCode);
@@ -30,7 +24,12 @@ function formShipping() {
       setPostalCode("");
       setCountry("");
     }
-  }, []);
+  }, [shippingAddress]);
+  const [fullName, setFullName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -67,6 +66,7 @@ function formShipping() {
             <Form.Label>Nom</Form.Label>
             <Form.Control
               value={fullName}
+              name={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
             />
@@ -75,6 +75,7 @@ function formShipping() {
             <Form.Label>Adresse</Form.Label>
             <Form.Control
               value={address}
+              name={address}
               onChange={(e) => setAddress(e.target.value)}
               required
             />
@@ -83,6 +84,7 @@ function formShipping() {
             <Form.Label>Ville</Form.Label>
             <Form.Control
               value={city}
+              name={city}
               onChange={(e) => setCity(e.target.value)}
               required
             />
@@ -91,6 +93,7 @@ function formShipping() {
             <Form.Label>Code Postal</Form.Label>
             <Form.Control
               value={postalCode}
+              name={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
               required
             />
@@ -99,6 +102,7 @@ function formShipping() {
             <Form.Label>Pays</Form.Label>
             <Form.Control
               value={country}
+              name={country}
               onChange={(e) => setCountry(e.target.value)}
               required
             />
