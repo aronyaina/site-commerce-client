@@ -17,7 +17,7 @@ body {
 
 .pages {
     max-width: 1400px;
-    padding: 20px;
+    padding: 40px;
     margin: 0 auto;
 }
 
@@ -106,8 +106,7 @@ input.error {
 
 
 /* auth forms */
-form.signup,
-form.login {
+form.signup {
     max-width: 400px;
     margin: 40px auto;
     padding: 20px;

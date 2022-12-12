@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 
 import { useLogout } from "../../features/authentication/hooks/useLogout";
 import { useAuthContext } from "../../features/authentication/hooks/useAuthContext";
-import { useCartContext } from "../../features/shopping/hooks/useCartContext";
-import Helmet from "./helmet";
 const NavbarHead = () => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
@@ -22,7 +20,7 @@ const NavbarHead = () => {
         {!user ? (
           <Container className="nav-container">
             <Navbar.Brand className="brand-heading">
-              <Link to="/home">MI-SHOP</Link>{" "}
+              <Link to="/">MI-SHOP</Link>{" "}
             </Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Offcanvas placement="end">
@@ -50,15 +48,17 @@ const NavbarHead = () => {
             <Navbar.Toggle />
             <Navbar.Offcanvas placement="end">
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Naviguer</Offcanvas.Title>
+                <Offcanvas.Title>Parametre de connexion</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <span className="emailSpan">{user.email}</span>
-                <Button variant="outline-danger" onClick={handleClick}>
-                  {" "}
-                  <i class="uil uil-signout"></i>
-                  Se deconnecter
-                </Button>
+                <div className="connectNav">
+                  <span className="emailSpan">{user.email}</span>
+                  <Button variant="outline-danger" onClick={handleClick}>
+                    {" "}
+                    <i class="uil uil-signout"></i>
+                    Se deconnecter
+                  </Button>
+                </div>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>

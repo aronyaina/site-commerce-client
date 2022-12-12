@@ -4,6 +4,7 @@ import MessageBox from "../../../components/layout/messageBox";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { ACTIONCART } from "../reducers/cartReducer";
+import Helmet from "../../../components/layout/helmet";
 
 function CartTable() {
   const { state, dispatch } = useCartContext();
@@ -31,8 +32,7 @@ function CartTable() {
 
   return (
     <div>
-      <h1>Shopping Cart</h1>
-
+      <Helmet title={"CART"} />
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
@@ -41,9 +41,9 @@ function CartTable() {
               <Link to="/shopping">Acheter des articles</Link>
             </MessageBox>
           ) : (
-            <ListGroup>
+            <ListGroup className="listGroupCart">
               {cartItems.map((item) => (
-                <ListGroup.Item key={item._id}>
+                <ListGroup.Item key={item._id} className="listItem">
                   <Row className="align-items-center">
                     <Col md={4}>
                       {/* <img
@@ -59,9 +59,7 @@ function CartTable() {
                         disabled={item.quantity === 1}
                         onClick={() => onHandleClick(item, item.quantity - 1)}
                       >
-                        <span className="material-symbols-outlined">
-                          remove
-                        </span>
+                        <i className="uil uil-minus"></i>
                       </Button>
                       <span>{item.quantity}</span>{" "}
                       <Button
@@ -69,20 +67,18 @@ function CartTable() {
                         disabled={item.quantity === item.stock}
                         onClick={() => onHandleClick(item, item.quantity + 1)}
                       >
-                        <span className="material-symbols-outlined">add</span>
+                        <i className="uil uil-plus"></i>
                       </Button>
                     </Col>
-                    <Col md={3}>${item.price}</Col>
+                    <Col md={3}>{item.price} ariary</Col>
                     <Col md={2}>
                       <Button
-                        variant="light"
+                        variant="danger"
                         onClick={() => {
                           onClickRemove(item);
                         }}
                       >
-                        <span className="material-symbols-outlined">
-                          delete
-                        </span>
+                        <i class="uil uil-trash"></i>
                       </Button>
                     </Col>
                   </Row>
@@ -97,9 +93,10 @@ function CartTable() {
             <Card.Body>
               <ListGroup variant="flush">
                 <h3>
-                  Subtotal({cartItems.reduce((a, c) => a + c.quantity, 0)}{" "}
-                  items):$
-                  {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                  Total a payer <br />(
+                  {cartItems.reduce((a, c) => a + c.quantity, 0)} items)
+                  {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}{" "}
+                  ariary
                 </h3>
               </ListGroup>
               <ListGroup.Item>
@@ -107,7 +104,7 @@ function CartTable() {
                   <Link to="/shipping">
                     <Button
                       type="button"
-                      variant="light"
+                      variant="outline-success"
                       disabled={cartItems.length === 0}
                     >
                       Procede au payement.

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSignup } from "../../features/authentication/hooks/useSignup";
 import { Link } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -35,37 +36,40 @@ const Signup = () => {
   };
 
   return (
-    <form action="" className="signup" onSubmit={handleSubmit}>
-      <h3> S 'inscrire. </h3> <label> Name: </label>{" "}
-      <input type="text" name="name" value={name} onChange={onHandleChange} />{" "}
-      <label> Surname: </label>{" "}
-      <input
-        type="text"
-        name="surname"
-        value={surname}
-        onChange={onHandleChange}
-      />{" "}
-      <label> Email: </label>{" "}
-      <input
-        type="email"
-        onChange={onHandleChange}
-        name="email"
-        value={email}
-      />{" "}
-      <label> Password: </label>{" "}
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={onHandleChange}
-      />{" "}
-      <p>
-        Si vous avez pas deja un compte vous pouvez vous connectez{" "}
-        <Link to="/login">ici</Link>
-      </p>
-      <button disabled={isLoading}> S 'inscrire</button>{" "}
-      {error && <div className="error"> {error} </div>}{" "}
-    </form>
+    <Container className="signup">
+      <form action="" className="signup-form" onSubmit={handleSubmit}>
+        <h3> S 'INSCRIRE. </h3>
+        <label> Name: </label>{" "}
+        <input type="text" name="name" value={name} onChange={onHandleChange} />{" "}
+        <label> Surname: </label>{" "}
+        <input
+          type="text"
+          name="surname"
+          value={surname}
+          onChange={onHandleChange}
+        />{" "}
+        <label> Email: </label>{" "}
+        <input
+          type="email"
+          onChange={onHandleChange}
+          name="email"
+          value={email}
+        />{" "}
+        <label> Password: </label>{" "}
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={onHandleChange}
+        />{" "}
+        <p>
+          Si vous avez pas deja un compte ,vous pouvez <br /> vous connectez{" "}
+          <Link to="/login">ici</Link>
+        </p>
+        <button disabled={isLoading}> S 'inscrire</button>{" "}
+        {error && <div className="error"> {error} </div>}{" "}
+      </form>
+    </Container>
   );
 };
 

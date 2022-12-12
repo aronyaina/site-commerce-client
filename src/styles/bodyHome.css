@@ -91,8 +91,6 @@
 }
 
 .promotionCartContainer {
-    margin-top: 140px;
-    margin-bottom: 140px;
     display: flex;
     align-items: center;
     justify-items: center;
@@ -108,11 +106,14 @@
 
 
 
-
 .promotionCart hr {
     border-top: 3px solid rgb(255, 255, 255);
     width: 500px;
     text-align: center;
+}
+
+.promotionCart {
+    padding-bottom: 50px;
 }
 
 .promotionText hr {
@@ -132,7 +133,101 @@
     justify-content: space-around;
 }
 
+.BestOfCard {
+    padding-left: 20px;
+}
+
+.BestOfCard h3 {
+    font-size: 25px;
+    padding-top: 25px;
+}
+
+.BestOfCard p {
+    font-size: 20px;
+}
+
 .BestOfCard img {
-    width: 473px;
-    height: 630px;
+    width: 373px;
+    height: 530px;
+}
+
+.ServiceComponents {
+    color: aliceblue;
+    text-align: center;
+
+
+}
+
+
+
+.SeviceContainer {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-around;
+    color: aliceblue;
+
+}
+
+.SeviceContainer img {
+
+    height: 512px;
+    width: 512px;
+}
+
+.HeaderComponent {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.HeaderComponent h2 {
+    padding-top: 15px;
+    font-size: 35px;
+    color: aliceblue;
+}
+
+.hr-1 {
+    margin-top: 50px;
+    border-top: 1px solid rgb(255, 255, 255);
+    width: 25%;
+}
+
+.hr-2 {
+    margin-top: 5px;
+    margin-bottom: 35px;
+    border-top: 1px solid rgb(255, 255, 255);
+    width: 20%;
+}
+
+.aboutContainer {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-around;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-around;
+    width: 100px;
+    height: 100px;
+}
+
+.listItem {
+    font-size: 20px;
+
+    height: 60px;
+    padding-right: 15px;
+
+}
+
+.listItem i {
+    font-size: 20px;
+
 }

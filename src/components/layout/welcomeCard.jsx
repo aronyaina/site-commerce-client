@@ -22,7 +22,7 @@ function WelcomeCard() {
           </p>
           <Button variant="outline-secondary">
             <i className="uil uil-shopping-bag"></i>
-            <Link to="/shopping">ACHETER ICI</Link>
+            <Link to="/buying">ACHETER ICI</Link>
           </Button>
           <Button variant="outline-secondary" className="button2">
             <i className="uil uil-sign-in-alt"></i>

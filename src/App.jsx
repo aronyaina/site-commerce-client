@@ -38,7 +38,7 @@ function App() {
       setRoles(false);
     }
     console.log("is admin ", isAdmin);
-  }, [user, isAdmin]);
+  }, [isAdmin, setRoles]);
 
   return (
     <div className="App">
@@ -48,12 +48,12 @@ function App() {
         <div className="pages">
           <Routes>
             <Route path="/cart" element={<Cart />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/buying" element={<Shopping />} />{" "}
             <Route
-              path="/"
-              element={isAdmin ? <Navigate to="/dashboard" /> : <Home />}
+              path="/dashboard"
+              element={isAdmin ? <Dashboard /> : <Navigate to="/" />}
             />
+            <Route path="/" element={<Home />} />
             <Route
               path="/shipping"
               element={!user ? <Signup /> : <Shipping />}

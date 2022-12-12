@@ -52,9 +52,7 @@ function buyButton({ product }) {
     <div className="buyButton">
       {handleBuy ? (
         <div>
-          <span className="material-symbols-outlined" onClick={onHandleBuy}>
-            shopping_cart_checkout
-          </span>
+          <i class="uil uil-shopping-cart-alt"></i>
         </div>
       ) : (
         <div>
@@ -64,20 +62,16 @@ function buyButton({ product }) {
               className="material-symbols-outlined addButton"
               id="add"
             >
-              remove_shopping_cart
+              <i class="uil uil-plus"></i>
             </span>
           ) : (
-            <span
-              onClick={onHandleCart}
-              className="material-symbols-outlined addButton"
-              id="add"
-            >
-              add
+            <span onClick={onHandleCart} className="subButton" id="add">
+              <i class="uil uil-minus"></i>
             </span>
           )}
 
           <span className="material-symbols-outlined" onClick={onHandleBuy}>
-            arrow_back_ios
+            <i class="uil uil-previous"></i>
           </span>
         </div>
       )}
