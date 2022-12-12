@@ -47,9 +47,9 @@ function App() {
         <Navbar />
         <div className="pages">
           <Routes>
-            <Route path="/cart" element=<Cart /> />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/buying" element=<Shopping /> />{" "}
+            <Route path="/buying" element={<Shopping />} />{" "}
             <Route
               path="/"
               element={isAdmin ? <Navigate to="/dashboard" /> : <Home />}

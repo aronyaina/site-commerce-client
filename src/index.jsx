@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./styles/heading.css";
 import "./styles/index.css";
 import "./styles/card.css";
+import "./styles/bodyHome.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ProductContextProvider } from "./features/stocking/context/ProductContext";

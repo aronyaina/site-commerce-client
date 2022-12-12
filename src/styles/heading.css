@@ -52,8 +52,27 @@ header a {
 
 
 
+.Helmet {
+    color: aliceblue;
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    align-items: center;
 
+}
 
+.Helmet h2 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.Helmet hr {
+    text-align: center;
+    width: 35%;
+    height: 20px;
+
+}
 
 .nav-container {
     padding-left: 50px;
@@ -63,9 +82,36 @@ header a {
 }
 
 
-.brand-heading {
+.brand-heading a {
     color: #fff;
     font-family: "Poppins";
     font-weight: 500;
     font-size: 32px;
+
+}
+
+.collapseNavHead {
+    padding-right: 25px;
+    color: #fff;
+}
+
+.collapseNavHead a {
+    text-decoration: none;
+}
+
+.helmetHeader {
+    background: #000;
+    width: 75%;
+    border-radius: 30px;
+    font-size: 25px;
+}
+
+.helmetHeader .navbar-brand {
+    font-size: 25px;
+    padding-left: 25px;
+}
+
+.helmetHeader i {
+    padding-left: 20px;
+    color: #FBB32C;
 }
