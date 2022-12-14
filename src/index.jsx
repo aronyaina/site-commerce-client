@@ -1,9 +1,13 @@
 import "bootstrap/dist/css/bootstrap.css";
-import "./styles/heading.css";
+import "./styles/authentication/form.css";
+import "./styles/home/best.css";
+import "./styles/home/cart.css";
+import "./styles/home/general.css";
+import "./styles/home/header.css";
+import "./styles/home/promotion.css";
+import "./styles/home/service.css";
+
 import "./styles/index.css";
-import "./styles/card.css";
-import "./styles/bodyHome.css";
-import "./styles/form.css";
 import "./styles/loading.css";
 import "./styles/product.css";
 import React from "react";

@@ -5,8 +5,8 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import { useLogout } from "../../features/authentication/hooks/useLogout";
-import { useAuthContext } from "../../features/authentication/hooks/useAuthContext";
+import { useLogout } from "../../../features/authentication/hooks/useLogout";
+import { useAuthContext } from "../../../features/authentication/hooks/useAuthContext";
 const NavbarHead = () => {
   const { logout } = useLogout();
   const { user } = useAuthContext();

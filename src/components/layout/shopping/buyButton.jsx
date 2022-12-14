@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import { useCartContext } from "../../features/shopping/hooks/useCartContext";
-import { ACTIONCART } from "../../features/shopping/reducers/cartReducer";
+import { useCartContext } from "../../../features/shopping/hooks/useCartContext";
+import { ACTIONCART } from "../../../features/shopping/reducers/cartReducer";
 
 function buyButton({ product }) {
   const { state, dispatch } = useCartContext();

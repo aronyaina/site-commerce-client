@@ -1,8 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Image1 from "../../assets/image/service1.jpg";
-import Image2 from "../../assets/image/service3.jpg";
-import HeaderComponent from "./headerComponent";
+import Image1 from "../../../assets/image/service1.jpg";
+import Image2 from "../../../assets/image/service3.jpg";
+import HeaderComponent from "../general/HeaderTitle";
 function ServiceComponents() {
   return (
     <div className="ServiceComponents" id="service">

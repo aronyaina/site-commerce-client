@@ -3,7 +3,7 @@ import { useProductContext } from "../../features/stocking/hooks/useProductConte
 import { useAuthContext } from "../../features/authentication/hooks/useAuthContext";
 import { useCartContext } from "../../features/shopping/hooks/useCartContext";
 import React, { useState, useEffect } from "react";
-import BuyButton from "../layout/buyButton";
+import BuyButton from "../layout/shopping/buyButton";
 
 export default function deleteButton({ id, product }) {
   const { productCarts, addCart, removeCart } = useCartContext();

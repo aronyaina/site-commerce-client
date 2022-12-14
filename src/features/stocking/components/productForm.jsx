@@ -5,6 +5,7 @@ import productFetcher from "../../../lib/apiFetcher";
 import { useProductContext } from "../hooks/useProductContext";
 import { useAuthContext } from "../../authentication/hooks/useAuthContext";
 import { ACTIONPRODUCT } from "../reducers/productReducer";
+import axios from "axios";
 export default function ProductForm() {
   //==================== STATE DECLARATION====================//
 
@@ -12,6 +13,8 @@ export default function ProductForm() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [productImage, setImageProduct] = useState("");
+
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
@@ -32,28 +35,37 @@ export default function ProductForm() {
       description,
       price,
       quantity,
+      productImage,
     };
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("quantity", quantity);
+    formData.append("productImage", productImage);
+    console.log(formData);
+
     const stringify = JSON.stringify(product);
 
     //==================== POST DATA WITH AXIOS EXTERIOR====================//
-    const postProduct = async () => {
-      const config = {
-        url: "/product",
-        stringify,
-        header: {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
+
+    const config = {
+      url: "/api/product",
+      formData,
+      header: {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.token}`,
         },
-      };
-
-      return productFetcher.post(config.url, config.stringify, config.header);
+      },
     };
-
-    postProduct()
+    // POSTING DATA
+    axios
+      .post(config.url, config.formData, config.header)
       .then((response) => {
         const data = response.data;
+        setImageProduct("");
         setName("");
         setDescription("");
         setPrice("");
@@ -90,14 +102,29 @@ export default function ProductForm() {
       case "quantity":
         setQuantity(e.target.value);
         break;
+      case "image":
+        setImageProduct(e.target.files[0]);
+        break;
       default:
         break;
     }
   };
 
   return (
-    <form className="create">
+    <form className="create" encType="multipart/form-data">
       <h3> Ajouter un nouveau produit </h3>
+      <div className="form-groupe">
+        <label htmlFor="file">Choississez l'image du produit</label>
+        <input
+          type="file"
+          filename="productImage"
+          className="form-control-file"
+          value={undefined}
+          name="image"
+          onChange={onHandleChange}
+          placeholder="L'image du produit"
+        />
+      </div>
       <input
         type="text"
         value={name}

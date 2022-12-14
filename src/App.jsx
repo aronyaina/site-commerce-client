@@ -14,7 +14,7 @@ import Shipping from "./pages/users/Shipping";
 import Payement from "./pages/users/Payement";
 
 // Components
-import Navbar from "./components/layout/navbar";
+import Navbar from "./components/layout/general/NavbarHead";
 
 function App() {
   const { user } = useAuthContext();
@@ -24,21 +24,16 @@ function App() {
     cart: { shippingAdress, payementMethod },
   } = cartState;
 
-  const [isAdmin, setRoles] = useState(false);
-
+  const [access, setAccess] = useState(true);
   useEffect(() => {
     if (user !== null) {
-      if (user.roles === "admin") {
-        setRoles(true);
-        console.log(isAdmin);
-      } else {
-        setRoles(false);
+      if (user.roles === "user") {
+        setAccess(false);
       }
-    } else if (user === null) {
-      setRoles(false);
+    } else {
+      setAccess(false);
     }
-    console.log("is admin ", isAdmin);
-  }, [isAdmin, setRoles]);
+  }, [user, access, setAccess]);
 
   return (
     <div className="App">
@@ -51,7 +46,7 @@ function App() {
             <Route path="/buying" element={<Shopping />} />{" "}
             <Route
               path="/dashboard"
-              element={isAdmin ? <Dashboard /> : <Navigate to="/" />}
+              element={access ? <Dashboard /> : <Navigate to="/" />}
             />
             <Route path="/" element={<Home />} />
             <Route

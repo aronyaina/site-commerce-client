@@ -1,10 +1,14 @@
-import { useCartContext } from "../hooks/useCartContext";
+import { Link } from "react-router-dom";
+// BOOTSTRAP
 import { Row, Col, ListGroup, Button, Card } from "react-bootstrap";
-import MessageBox from "../../../components/layout/messageBox";
-import { Link, Navigate } from "react-router-dom";
+// CONTEXT
+import { useCartContext } from "../hooks/useCartContext";
+import MessageBox from "../../../components/layout/general/MessageBox";
+// LIB
 import axios from "axios";
+// REDUCER
 import { ACTIONCART } from "../reducers/cartReducer";
-import Helmet from "../../../components/layout/helmet";
+import Helmet from "../../../components/layout/general/Helmet";
 
 function CartTable() {
   const { state, dispatch } = useCartContext();

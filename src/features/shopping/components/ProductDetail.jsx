@@ -1,7 +1,8 @@
-import { React, useEffect } from "react";
-import DeleteButton from "./deleteButton";
+import { React, useEffect, useState } from "react";
+import DeleteButton from "../../../components/admin/deleteButton";
+import { useAuthContext } from "../../authentication/hooks/useAuthContext";
 import Card from "react-bootstrap/Card";
-import testImage from "../../assets/image/chaussure_nike.jpg";
+import axios from "axios";
 
 export const ProductDetails = ({ product }) => {
   const year = product.createdAt.slice(0, 10);
@@ -14,17 +15,41 @@ export const ProductDetails = ({ product }) => {
       return parseInt(product.createdAt.slice(11, 13)) + 3;
     }
   };
-
+  const { user } = useAuthContext();
   const hour = hourConverter();
   const time = product.createdAt.slice(13, 19);
-
+  const [imgUrl, setImage] = useState("");
   //==================== RENDER DATA ====================//
+  const config = {
+    url: `api/upload/${product.image}`,
+    header: {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${user.token}`,
+        responseType: "blob",
+      },
+    },
+  };
+  useEffect(() => {
+    axios
+      .get(config.url, config.header)
+      .then((response) => {
+        const reader = new FileReader();
 
+        reader.onLoad = () => {
+          setState(reader.result);
+        };
+        reader.readAsDataURL(response.data);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, []);
   return (
     <div className="product-details">
       <div key={product._id}>
         <Card style={{ width: "18rem" }} className="articleCard">
-          <Card.Img variant="top" src={testImage} />
+          <Card.Img variant="top" src={`data:base64,${imgUrl}`} />
           <Card.Body>
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>

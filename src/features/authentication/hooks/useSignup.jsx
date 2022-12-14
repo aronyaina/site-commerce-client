@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { ACTIONAUTH } from "../reducers/authReducer";
-import userFetcher from "../../../lib/apiFetcher";
+import axios from "axios";
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ export const useSignup = () => {
 
     //==================== CONFIG FOR POSTING USERDATA WITH AXIOS EXTERIOR====================//
     const config = {
-      url: "user/signup",
+      url: "/api/user/signup",
       userData,
       headers: {
         headers: {
@@ -29,10 +29,9 @@ export const useSignup = () => {
       },
     };
     //==================== POST USERDATA WITH AXIOS EXTERIOR====================//
-    const postUser = async () => {
-      return userFetcher.post(config.url, config.userData, config.headers);
-    };
-    postUser()
+
+    axios
+      .post(config.url, config.userData, config.headers)
       .then((response) => {
         const data = response.data;
 

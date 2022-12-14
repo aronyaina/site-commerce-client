@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CheckoutSteps from "../../../components/layout/checkoutSteps";
+import CheckoutSteps from "../../../components/layout/shopping/CheckoutSteps";
 import { Form, Button } from "react-bootstrap";
 import { useCartContext } from "../../shopping/hooks/useCartContext";
 import { Link, useNavigate } from "react-router-dom";

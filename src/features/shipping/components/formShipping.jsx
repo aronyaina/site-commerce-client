@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { ACTIONCART } from "../../shopping/reducers/cartReducer";
 import { useCartContext } from "../../shopping/hooks/useCartContext";
-import CheckoutSteps from "../../../components/layout/checkoutSteps";
+import CheckoutSteps from "../../../components/layout/shopping/CheckoutSteps";
 function formShipping() {
   const { state, dispatch } = useCartContext();
   const {

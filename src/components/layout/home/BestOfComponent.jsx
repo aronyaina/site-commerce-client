@@ -1,10 +1,14 @@
+// REACT AND BOOSTRAP
 import React from "react";
-import BestOfCard from "./bestOfCard";
 import { Container } from "react-bootstrap";
-import imageVetement from "../../assets/image/vetement1.jpg";
-import imageComputer from "../../assets/image/ordinateur1.jpg";
-import imageChaise from "../../assets/image/chaise1.jpg";
-import HeaderComponent from "./headerComponent";
+// COMPONENT
+import BestOfCard from "./BestOfCard";
+import HeaderComponent from "../general/HeaderTitle";
+// ASSET
+import imageVetement from "../../../assets/image/vetement1.jpg";
+import imageComputer from "../../../assets/image/ordinateur1.jpg";
+import imageChaise from "../../../assets/image/chaise1.jpg";
+
 function BestOfContainer() {
   return (
     <div className="bestOfComponents">

@@ -1,5 +1,5 @@
 import React from "react";
-import CartTable from "../../features/shopping/components/cartTable";
+import CartTable from "../../features/shopping/components/CartTable";
 function Cart() {
   return (
     <div>

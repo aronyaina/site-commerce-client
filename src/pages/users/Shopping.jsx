@@ -1,9 +1,10 @@
 import React from "react";
-import { ProductCard } from "../../features/shopping/components/productCard";
+import { ProductCard } from "../../features/shopping/components/ProductCard";
+import HeaderComponent from "../../components/layout/general/HeaderTitle";
 export const Shopping = () => {
   return (
     <div>
-      <h3>Nos articles disponibles .</h3>
+      <HeaderComponent title={"Nos produits disponibles"} />
       <ProductCard />
     </div>
   );

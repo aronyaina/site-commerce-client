@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderComponent from "./headerComponent";
+import HeaderComponent from "../general/HeaderTitle";
 import { Container } from "react-bootstrap";
 function AboutComponent() {
   return (

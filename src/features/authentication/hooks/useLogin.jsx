@@ -18,7 +18,7 @@ export const useLogin = () => {
 
     //==================== CONFIG FOR POSTING USERDATA WITH AXIOS EXTERIOR====================//
     const config = {
-      url: "user/login",
+      url: "/api/user/login",
       userData,
       header: {
         headers: {

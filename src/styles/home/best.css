@@ -1,0 +1,29 @@
+.bestOfComponents {
+    color: aliceblue;
+    text-align: center;
+}
+
+.bestContainer {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-around;
+}
+
+.BestOfCard {
+    padding-left: 20px;
+}
+
+.BestOfCard h3 {
+    font-size: 25px;
+    padding-top: 25px;
+}
+
+.BestOfCard p {
+    font-size: 20px;
+}
+
+.BestOfCard img {
+    width: 373px;
+    height: 530px;
+}

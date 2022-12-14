@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Badge } from "react-bootstrap";
 
-import { useCartContext } from "../../features/shopping/hooks/useCartContext";
+import { useCartContext } from "../../../features/shopping/hooks/useCartContext";
 function Helmet({ title }) {
   const { state } = useCartContext();
   const { cart } = state;

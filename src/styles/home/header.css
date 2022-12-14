@@ -124,3 +124,30 @@ header a {
     padding-left: 20px;
     color: #FBB32C;
 }
+
+.HeaderComponent {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.HeaderComponent h2 {
+    padding-top: 15px;
+    font-size: 35px;
+    color: aliceblue;
+}
+
+.hr-1 {
+    margin-top: 50px;
+    border-top: 1px solid rgb(255, 255, 255);
+    width: 25%;
+}
+
+.hr-2 {
+    margin-top: 5px;
+    margin-bottom: 35px;
+    border-top: 1px solid rgb(255, 255, 255);
+    width: 20%;
+}
