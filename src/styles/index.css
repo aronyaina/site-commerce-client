@@ -28,34 +28,7 @@ body {
     gap: 100px;
 }
 
-.product-details {
 
-    flex-wrap: wrap;
-    flex: content;
-}
-
-.product-details h4 {
-    margin: 0 0 10px 0;
-    font-size: 1.2em;
-    color: var(--primary);
-}
-
-.product-details p {
-    margin: 0;
-    font-size: 0.9em;
-    color: #555;
-}
-
-.product-details span {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    background: #f1f1f1;
-    padding: 6px;
-    border-radius: 50%;
-    color: #333;
-}
 
 /* new workout form */
 label,
@@ -114,13 +87,9 @@ form.signup {
     border-radius: 4px;
 }
 
-.articleCard {
-    margin-bottom: 20px;
-}
 
-.buttonDouble {
-    padding-top: 8px;
-}
+
+
 
 .emailSpan {
     padding-left: 5px;
@@ -143,16 +112,17 @@ form.signup {
 
 }
 
-.buyButton {
-    margin-left: 25%;
-}
+
 
 .checkout-steps>div {
+    width: 50%;
+    align-items: center;
     border-bottom: 0.2rem solid #a0a0a0;
-    color: #a0a0a0
+    color: #f1f1f1;
+    margin-bottom: 50px;
 }
 
 .checkout-steps>div.active {
     border-bottom: 0.2rem solid #e7195a;
-    color: #f08000
+    color: #00eeff
 }

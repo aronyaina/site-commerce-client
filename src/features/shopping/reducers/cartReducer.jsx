@@ -7,19 +7,17 @@ export const ACTIONCART = {
 };
 
 export const initialState = {
-  shippingAddress: localStorage.getItem("shippingAddress")
-    ? JSON.parse(localStorage.getItem("shippingAddress"))
-    : {},
-
   cart: {
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
+    payementMethod: localStorage.getItem("payementMethod")
+      ? JSON.parse(localStorage.getItem("payementMethod"))
+      : "",
+    shippingAddress: localStorage.getItem("shippingAddress")
+      ? JSON.parse(localStorage.getItem("shippingAddress"))
+      : {},
   },
-
-  payementMethod: localStorage.getItem("payementMethod")
-    ? JSON.parse(localStorage.getItem("payementMethod"))
-    : "",
 };
 
 const shopReducer = (state, action) => {
@@ -60,7 +58,7 @@ const shopReducer = (state, action) => {
 
     case ACTIONCART.DEL_SHIPPING_ADDRESS_AND_CART: {
       return {
-        cart: { cartItems: [], shippingAddress: {} },
+        cart: { cartItems: [], shippingAddress: {}, payementMethod: {} },
       };
     }
 

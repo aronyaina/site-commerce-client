@@ -7,9 +7,12 @@ import "./styles/home/header.css";
 import "./styles/home/promotion.css";
 import "./styles/home/service.css";
 
+import "./styles/shopping/product.css";
+import "./styles/shopping/articleCard.css";
+
 import "./styles/index.css";
 import "./styles/loading.css";
-import "./styles/product.css";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ProductContextProvider } from "./features/stocking/context/ProductContext";

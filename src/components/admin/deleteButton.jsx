@@ -1,9 +1,9 @@
-import productFetcher from "../../lib/apiFetcher";
 import { useProductContext } from "../../features/stocking/hooks/useProductContext";
 import { useAuthContext } from "../../features/authentication/hooks/useAuthContext";
 import { useCartContext } from "../../features/shopping/hooks/useCartContext";
 import React, { useState, useEffect } from "react";
 import BuyButton from "../layout/shopping/buyButton";
+import axios from "axios";
 
 export default function deleteButton({ id, product }) {
   const { productCarts, addCart, removeCart } = useCartContext();
@@ -18,6 +18,9 @@ export default function deleteButton({ id, product }) {
   //==================== CHEKING ROLE====================//
   useEffect(() => {
     const checkRoles = async () => {
+      if (!user) {
+        setAdmin(false);
+      }
       if (user && user.roles === "admin") {
         setUser(true);
         setAdmin(true);
@@ -38,20 +41,18 @@ export default function deleteButton({ id, product }) {
       return;
     }
 
-    const deleteProduct = async () => {
-      const config = {
-        url: `/product/${id}`,
-        header: {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
+    const config = {
+      url: `/api/product/${id}`,
+      header: {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
-      };
-      return productFetcher.delete(config.url, config.header);
+      },
     };
 
-    deleteProduct()
+    axios
+      .delete(config.url, config.header)
       .then((response) => {
         console.log("Product deleted successfully !!");
         const data = response.data;
@@ -74,9 +75,7 @@ export default function deleteButton({ id, product }) {
         <BuyButton product={product} />
       ) : (
         <div className="delete">
-          <span onClick={handleClick} className="material-symbols-outlined">
-            Delete{" "}
-          </span>{" "}
+          <span onClick={handleClick}>Delete </span>{" "}
           {error && <div className="error"> {error} </div>}{" "}
           {success && <div className="success"> "Supprime avec succes!" </div>}{" "}
         </div>

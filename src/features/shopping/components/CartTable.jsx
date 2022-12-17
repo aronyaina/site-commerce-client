@@ -18,7 +18,7 @@ function CartTable() {
   } = state;
 
   const onHandleClick = async (item, quantity) => {
-    const { data } = await axios.get(`/product/${item._id}`);
+    const { data } = await axios.get(`/api/product/${item._id}`);
     if (data.quantity < quantity) {
       window.alert("Stock epuise !");
       return;

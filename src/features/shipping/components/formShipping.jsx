@@ -4,6 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { ACTIONCART } from "../../shopping/reducers/cartReducer";
 import { useCartContext } from "../../shopping/hooks/useCartContext";
 import CheckoutSteps from "../../../components/layout/shopping/CheckoutSteps";
+import HeaderComponent from "../../../components/layout/general/HeaderTitle";
 function formShipping() {
   const { state, dispatch } = useCartContext();
   const {
@@ -56,11 +57,10 @@ function formShipping() {
     );
   };
   return (
-    <div>
-      <h1>Condition de payement</h1>
+    <div className="formShipping">
+      <HeaderComponent title={"CONDITION DE PAYEMENT"} />
       <CheckoutSteps step1 step2 />
       <div className="container small-container">
-        <h1 className="my-3">Adresse de livraison</h1>
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="fullName">
             <Form.Label>Nom</Form.Label>
@@ -109,7 +109,8 @@ function formShipping() {
           </Form.Group>
           <div className="mb-3">
             <Button
-              variant="outline-dark"
+              className="payementButton"
+              variant=""
               type="submit"
               onClick={submitHandler}
             >

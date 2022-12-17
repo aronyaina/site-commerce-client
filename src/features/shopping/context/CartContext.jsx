@@ -1,17 +1,17 @@
 import { createContext, useReducer } from "react";
-import cartReducer, { initialState, ACTIONCART } from "../reducers/cartReducer";
+import cartReducer, { initialState } from "../reducers/cartReducer";
 
 export const CartContext = createContext(initialState);
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  const addtoCart = () => {
-    dispatch({
-      type: ACTIONCART.ADD_TO_CART,
-      payload: { ...product, quantity: 1 },
-    });
-  };
+  // const addtoCart = () => {
+  //   dispatch({
+  //     type: ACTIONCART.ADD_TO_CART,
+  //     payload: { ...product, quantity: 1 },
+  //   });
+  // };
   // const addToCart = (cartProduct) => {
   //   const stock = cartProduct.stock;
   //   const productCart = {

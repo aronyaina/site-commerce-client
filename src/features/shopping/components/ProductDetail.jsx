@@ -1,8 +1,11 @@
 import { React, useEffect, useState } from "react";
+import axios from "axios";
+
 import DeleteButton from "../../../components/admin/deleteButton";
 import { useAuthContext } from "../../authentication/hooks/useAuthContext";
-import Card from "react-bootstrap/Card";
-import axios from "axios";
+
+import imageTest from "../../../assets/image/nike1.jpg";
+import { Row, Col, Container } from "react-bootstrap";
 
 export const ProductDetails = ({ product }) => {
   const year = product.createdAt.slice(0, 10);
@@ -20,54 +23,49 @@ export const ProductDetails = ({ product }) => {
   const time = product.createdAt.slice(13, 19);
   const [imgUrl, setImage] = useState("");
   //==================== RENDER DATA ====================//
-  const config = {
-    url: `api/upload/${product.image}`,
-    header: {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${user.token}`,
-        responseType: "blob",
-      },
-    },
-  };
-  useEffect(() => {
-    axios
-      .get(config.url, config.header)
-      .then((response) => {
-        const reader = new FileReader();
+  // const config = {
+  //   url: `api/upload/${product.image}`,
+  // };
+  // useEffect(() => {
+  //   axios
+  //     .get(config.url, config.header)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       const reader = new FileReader();
 
-        reader.onLoad = () => {
-          setState(reader.result);
-        };
-        reader.readAsDataURL(response.data);
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }, []);
+  //       reader.onLoad = () => {
+  //         setImage(reader.result);
+  //         console.log(reader.result);
+  //       };
+  //       reader.readAsDataURL(imgUrl);
+  //       setImage(response.data);
+  //     })
+  //     .catch((err) => {
+  //       throw err;
+  //     });
+  // }, []);
   return (
     <div className="product-details">
       <div key={product._id}>
-        <Card style={{ width: "18rem" }} className="articleCard">
-          <Card.Img variant="top" src={`data:base64,${imgUrl}`} />
-          <Card.Body>
-            <Card.Title>{product.name}</Card.Title>
-            <Card.Text>
-              <strong> Prix: </strong> {product.price} Ar
-            </Card.Text>
-            <Card.Text>
-              <strong> Description: </strong> {product.description}{" "}
-            </Card.Text>
-            <Card.Text>
-              <strong> stock: </strong> {product.quantity}{" "}
-            </Card.Text>
-            <Card.Text>
-              <strong> Ajouter le: </strong> {year + " vers " + hour + time}{" "}
-            </Card.Text>
+        <Col xs={12} md={8} lg={4}>
+          <Container className="articleCard">
+            <img src={imgUrl} alt="" className="productImage" />
 
-            <DeleteButton id={product._id} product={product} />
-          </Card.Body>
-        </Card>
+            <div className="productItem">
+              <h1>{product.name}</h1>
+              <h3>{product.price} Ar </h3>
+              <br />
+              <strong> Description: </strong> {product.description} <br />
+              <strong>Restant: </strong> {product.quantity} <br />
+              {year}
+              <br />
+              {hour + time}
+            </div>
+            <div className="delete-or-buy">
+              <DeleteButton id={product._id} product={product} />
+            </div>
+          </Container>
+        </Col>
       </div>{" "}
     </div>
   );

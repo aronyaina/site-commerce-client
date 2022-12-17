@@ -12,6 +12,7 @@ import { Shopping } from "./pages/users/Shopping";
 import Cart from "./pages/users/Cart";
 import Shipping from "./pages/users/Shipping";
 import Payement from "./pages/users/Payement";
+import Order from "./pages/users/Order";
 
 // Components
 import Navbar from "./components/layout/general/NavbarHead";
@@ -44,6 +45,7 @@ function App() {
           <Routes>
             <Route path="/cart" element={<Cart />} />
             <Route path="/buying" element={<Shopping />} />{" "}
+            <Route path="/placeorder" element={<Order />}></Route>
             <Route
               path="/dashboard"
               element={access ? <Dashboard /> : <Navigate to="/" />}

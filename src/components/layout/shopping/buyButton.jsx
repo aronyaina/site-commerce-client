@@ -3,10 +3,10 @@ import React from "react";
 import { useState } from "react";
 import { useCartContext } from "../../../features/shopping/hooks/useCartContext";
 import { ACTIONCART } from "../../../features/shopping/reducers/cartReducer";
-
-function buyButton({ product }) {
+import { Button } from "react-bootstrap";
+function BuyButton({ product }) {
   const { state, dispatch } = useCartContext();
-  const [handleBuy, setHandle] = useState(false);
+  const [handleBuy, setHandle] = useState(true);
   const { cart } = state;
 
   //==================== HANDLE CHECK====================//
@@ -31,7 +31,7 @@ function buyButton({ product }) {
         const existItem = cart.cartItems.find((x) => x._id === product._id);
         const quantity = existItem ? existItem.quantity + 1 : 1;
 
-        const { data } = await axios.get(`/product/${product._id}`);
+        const { data } = await axios.get(`api/product/${product._id}`);
         if (data.quantity < quantity) {
           window.alert("Stock epuise !");
           return;
@@ -41,42 +41,51 @@ function buyButton({ product }) {
           type: ACTIONCART.ADD_TO_CART,
           payload: { ...product, quantity: quantity },
         });
-
         break;
+      case "minus": {
+        const existItem = cart.cartItems.find((x) => x._id === product._id);
+        const quantity = existItem ? existItem.quantity - 1 : 1;
+
+        const { data } = await axios.get(`api/product/${product._id}`);
+
+        dispatch({
+          type: ACTIONCART.DEL_TO_CART,
+          payload: { ...product, quantity: quantity },
+        });
+        break;
+      }
       default:
         break;
     }
   };
+  console.log("quantite", product.quantity);
 
   return (
     <div className="buyButton">
-      {handleBuy ? (
-        <div>
-          <i class="uil uil-shopping-cart-alt"></i>
-        </div>
-      ) : (
-        <div>
-          {product.quantity === 1 ? (
-            <span
-              onClick={onHandleCart}
-              className="material-symbols-outlined addButton"
-              id="add"
-            >
-              <i class="uil uil-plus"></i>
-            </span>
-          ) : (
-            <span onClick={onHandleCart} className="subButton" id="add">
-              <i class="uil uil-minus"></i>
-            </span>
-          )}
+      {
+        <div className="divBuy">
+          {product.quantity && (
+            <div className="iconBuy">
+              {/* <i className="uil uil-previous"></i> */}
+              {/* <Button onClick={onHandleBuy}>
+                
+                RETOURNER
+              </Button> */}
 
-          <span className="material-symbols-outlined" onClick={onHandleBuy}>
-            <i class="uil uil-previous"></i>
-          </span>
+              <Button onClick={onHandleCart} className="addButton" id="add">
+                {/* <i className="uil uil-plus"></i> */}
+                AJOUTER LE PRODUIT
+              </Button>
+              <Button onClick={onHandleCart} className="subButton" id="minus">
+                {/* <i className="uil uil-minus"></i> */}
+                ENLEVER LE PRODUIT
+              </Button>
+            </div>
+          )}
         </div>
-      )}
+      }
     </div>
   );
 }
 
-export default buyButton;
+export default BuyButton;

@@ -1,10 +1,9 @@
 import React from "react";
-import PayementCheckout from "../../features/payement/components/payementCheckout";
+import PayementCheckout from "../../features/payement/components/PayementCheckout";
 
 function Payement() {
   return (
     <div>
-      <h2>Payement page!</h2>
       <PayementCheckout />
     </div>
   );
