@@ -1,10 +1,9 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
-
+import { Buffer } from "buffer";
 import DeleteButton from "../../../components/admin/deleteButton";
 import { useAuthContext } from "../../authentication/hooks/useAuthContext";
 
-import imageTest from "../../../assets/image/nike1.jpg";
 import { Row, Col, Container } from "react-bootstrap";
 
 export const ProductDetails = ({ product }) => {
@@ -23,33 +22,34 @@ export const ProductDetails = ({ product }) => {
   const time = product.createdAt.slice(13, 19);
   const [imgUrl, setImage] = useState("");
   //==================== RENDER DATA ====================//
-  // const config = {
-  //   url: `api/upload/${product.image}`,
-  // };
-  // useEffect(() => {
-  //   axios
-  //     .get(config.url, config.header)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       const reader = new FileReader();
+  const config = {
+    url: `api/upload/${product.image}`,
+    header: {
+      responseType: "arraybuffer",
+      headers: { "Content-Type": "image/*" },
+    },
+  };
+  useEffect(() => {
+    axios
+      .get(config.url, config.header)
+      .then((response) => {
+        setImage(Buffer.from(response.data, "binary").toString("base64"));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, []);
 
-  //       reader.onLoad = () => {
-  //         setImage(reader.result);
-  //         console.log(reader.result);
-  //       };
-  //       reader.readAsDataURL(imgUrl);
-  //       setImage(response.data);
-  //     })
-  //     .catch((err) => {
-  //       throw err;
-  //     });
-  // }, []);
   return (
     <div className="product-details">
       <div key={product._id}>
         <Col xs={12} md={8} lg={4}>
           <Container className="articleCard">
-            <img src={imgUrl} alt="" className="productImage" />
+            <img
+              src={`data:image/png;base64,${imgUrl}`}
+              alt=""
+              className="productImage"
+            />
 
             <div className="productItem">
               <h1>{product.name}</h1>

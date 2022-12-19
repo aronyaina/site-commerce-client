@@ -45,26 +45,28 @@ export const ProductCard = () => {
         },
       };
     }
-
-    axios
-      .get(config.url, config.header)
-      .then((response) => {
-        loadDispatch({ type: ACTIONLOAD.FETCH_REQUEST });
-        const data = response.data;
-        dispatch({
-          type: ACTIONPRODUCT.SET_PRODUCT,
-          payload: data,
+    const requestProduct = async function () {
+      await axios
+        .get(config.url, config.header)
+        .then((response) => {
+          loadDispatch({ type: ACTIONLOAD.FETCH_REQUEST });
+          const data = response.data;
+          dispatch({
+            type: ACTIONPRODUCT.SET_PRODUCT,
+            payload: data,
+          });
+          loadDispatch({ type: ACTIONLOAD.FETCH_SUCCESS, payload: data });
+        })
+        .catch((error) => {
+          console.log("Error fetching product ", error);
+          loadDispatch({
+            type: ACTIONLOAD.FETCH_FAILURE,
+            payload: error.message,
+          });
         });
-        loadDispatch({ type: ACTIONLOAD.FETCH_SUCCESS, payload: data });
-      })
-      .catch((error) => {
-        console.log("Error fetching product ", error);
-        loadDispatch({
-          type: ACTIONLOAD.FETCH_FAILURE,
-          payload: error.message,
-        });
-      });
-  }, [dispatch, user]);
+    };
+    requestProduct();
+  }, [dispatch]);
 
   return (
     <div>
