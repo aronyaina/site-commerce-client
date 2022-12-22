@@ -1,11 +1,12 @@
 import { Button } from "react-bootstrap";
 
-import { React, useState } from "react";
-import productFetcher from "../../../lib/apiFetcher";
+import { React, useState, useCallback } from "react";
 import { useProductContext } from "../hooks/useProductContext";
 import { useAuthContext } from "../../authentication/hooks/useAuthContext";
 import { ACTIONPRODUCT } from "../reducers/productReducer";
 import axios from "axios";
+import { useDropzone } from "react-dropzone";
+
 export default function ProductForm() {
   //==================== STATE DECLARATION====================//
 
@@ -45,8 +46,6 @@ export default function ProductForm() {
     formData.append("quantity", quantity);
     formData.append("productImage", productImage);
     console.log(formData);
-
-    const stringify = JSON.stringify(product);
 
     //==================== POST DATA WITH AXIOS EXTERIOR====================//
 
@@ -110,10 +109,20 @@ export default function ProductForm() {
     }
   };
 
+  const onDrop = useCallback(async (acceptedFiles) => {
+    console.log("accepted files", acceptedFiles[0]);
+
+    setImageProduct(acceptedFiles[0]);
+  });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accepts: "image/*",
+    multiple: false,
+  });
   return (
     <form className="create" encType="multipart/form-data">
       <h3> Ajouter un nouveau produit </h3>
-      <div className="form-groupe">
+      {/* <div className="form-groupe">
         <label htmlFor="file">Choississez l'image du produit</label>
         <input
           type="file"
@@ -124,6 +133,22 @@ export default function ProductForm() {
           onChange={onHandleChange}
           placeholder="L'image du produit"
         />
+      </div> */}
+      <div
+        {...getRootProps()}
+        className={`dropzone ${isDragActive ? "active" : ""}`}
+      >
+        <input
+          {...getInputProps()}
+          type="file"
+          filename="productImage"
+          className="form-control-file"
+          value={undefined}
+          name="image"
+          onChange={onHandleChange}
+          placeholder="L'image du produit"
+        />
+        Inserer une image
       </div>
       <input
         type="text"

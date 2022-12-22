@@ -44,3 +44,22 @@
 .formShipping {
     color: aliceblue;
 }
+
+
+.dropzone {
+    height: 256px;
+    width: 256px;
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px dashed rgb(245, 244, 244);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.active {
+    border: 2px solid rgb(180, 68, 68);
+}
