@@ -4,24 +4,14 @@ import { useState } from "react";
 import { useCartContext } from "../../../features/shopping/hooks/useCartContext";
 import { ACTIONCART } from "../../../features/shopping/reducers/cartReducer";
 import { Button } from "react-bootstrap";
+import MessageBox from "../general/MessageBox";
+
 function BuyButton({ product }) {
   const { state, dispatch } = useCartContext();
   const [handleBuy, setHandle] = useState(true);
   const { cart } = state;
+  const [inStock, setInStock] = useState(true);
 
-  //==================== HANDLE CHECK====================//
-  const onHandleBuy = (e) => {
-    e.preventDefault();
-
-    setHandle((prevValue) => {
-      if (prevValue === true) {
-        return false;
-      } else {
-        return true;
-      }
-    });
-    console.log(handleBuy);
-  };
   //==================== BUY CHECK====================//
   const onHandleCart = async (e) => {
     e.preventDefault();
@@ -33,7 +23,7 @@ function BuyButton({ product }) {
 
         const { data } = await axios.get(`api/product/${product._id}`);
         if (data.quantity < quantity) {
-          window.alert("Stock epuise !");
+          setInStock(false);
           return;
         }
 
@@ -45,9 +35,6 @@ function BuyButton({ product }) {
       case "minus": {
         const existItem = cart.cartItems.find((x) => x._id === product._id);
         const quantity = existItem ? existItem.quantity - 1 : 1;
-
-        const { data } = await axios.get(`api/product/${product._id}`);
-
         dispatch({
           type: ACTIONCART.DEL_TO_CART,
           payload: { ...product, quantity: quantity },
@@ -58,7 +45,6 @@ function BuyButton({ product }) {
         break;
     }
   };
-  console.log("quantite", product.quantity);
 
   return (
     <div className="buyButton">
@@ -74,12 +60,17 @@ function BuyButton({ product }) {
 
               <Button onClick={onHandleCart} className="addButton" id="add">
                 {/* <i className="uil uil-plus"></i> */}
-                AJOUTER LE PRODUIT
+                ACHETER
               </Button>
               <Button onClick={onHandleCart} className="subButton" id="minus">
                 {/* <i className="uil uil-minus"></i> */}
-                ENLEVER LE PRODUIT
+                ENLEVER
               </Button>
+              {inStock ? (
+                <></>
+              ) : (
+                <MessageBox variant={"warning"}>Stock epuise !</MessageBox>
+              )}
             </div>
           )}
         </div>

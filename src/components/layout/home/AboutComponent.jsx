@@ -17,11 +17,12 @@ function AboutComponent() {
         </div>
         <div className="parcours">
           <h3>Parcours</h3>
-          <p>
-            Developpeur.maintenance,deployement.
+          <h6>
+            Developpement,maintenance,deployement.
+            <br />
             <br />
             <a href="#">En savoir plus</a>
-          </p>
+          </h6>
         </div>
       </Container>
     </div>

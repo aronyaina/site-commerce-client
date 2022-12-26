@@ -1,64 +1,31 @@
-/* .product-details {
-
-    flex-wrap: wrap;
-    flex: content;
-}
-
-/* .product-details h4 {
-    margin: 0 0 10px 0;
-    font-size: 1.2em;
-    color: var(--primary);
-} */
-
 .articleCard {
     width: 300px;
     height: 600px;
-    background: #ED6145;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    background: #333333;
+
 }
 
 .articleCard .productImage {
     width: 256px;
     height: 256px;
-    margin-bottom: 25px;
+    margin-top: 15px;
+
+}
+
+
+.articleCard h1 {
+    font-size: 30px;
+    margin-top: 15px;
+    text-align: center;
+    color: white;
+}
+
+.articleCard {
+    text-align: center;
 }
 
 
 
-
-.articleCard .productItem {
-    padding-left: -300px;
-}
-
-.articleCard .productItem h3 {
-    padding-bottom: -30px;
-}
-
-.product-details p {
-
-    font-size: 0.9em;
-    color: #555;
-}
-
-.product-details span {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    background: #f1f1f1;
-    padding: 6px;
-    border-radius: 50%;
-    color: #333;
-}
-
-.productCard {
-    padding-top: 5px;
-
-    height: px;
-}
 
 .MessageBox {
     color: white;
@@ -75,24 +42,30 @@
 
 }
 
-.buyButton .iconBuy {
-    color: rgb(255, 255, 255);
-    width: 100px;
-    height: 100px;
-}
-
-.buyButton .iconBuy .uil {
-    color: rgb(255, 255, 255);
-    width: 100px;
-    height: 100px;
-}
-
-
-
-.productCard {
+.modify-button {
     display: flex;
-    align-items: center;
-    justify-items: center;
-
     justify-content: space-around;
+}
+
+.modButton {
+    text-align: center;
+
+}
+
+.deleteButton {
+    text-align: center;
+
+}
+
+.buttonDouble {
+    margin-top: 10px;
+
+}
+
+
+
+.addButton,
+.subButton {
+    text-align: right;
+    margin-right: 10px;
 }

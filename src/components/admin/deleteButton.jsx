@@ -1,6 +1,7 @@
 import { useProductContext } from "../../features/stocking/hooks/useProductContext";
 import { useAuthContext } from "../../features/authentication/hooks/useAuthContext";
 import { useCartContext } from "../../features/shopping/hooks/useCartContext";
+import { Button } from "react-bootstrap";
 
 import { ACTIONPRODUCT } from "../../features/stocking/reducers/productReducer";
 import React, { useState, useEffect } from "react";
@@ -61,6 +62,33 @@ export default function deleteButton({ id, product }) {
       console.log(JSON.stringify(data));
     });
   };
+
+  const onModHandleClick = async (e) => {
+    e.preventDefault();
+
+    if (!user) {
+      setError("Vous devrier vous connecter !");
+      return;
+    }
+    const config = {
+      url: `/api/product/${id}`,
+      header: {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      },
+    };
+    const productMod = axios
+      .get(config.url, config.header)
+      .then((response) => {
+        const productMod = response.data;
+        return productMod;
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
   //==================== CHEKING ROLE====================//
   useEffect(() => {
     const checkRoles = async () => {
@@ -83,8 +111,15 @@ export default function deleteButton({ id, product }) {
       {!isAdmin ? (
         <BuyButton product={product} />
       ) : (
-        <div className="p">
-          <span onClick={handleClick}>Delete </span>{" "}
+        <div className="modify-button">
+          <Button variant="outline-danger" className="deleteButton">
+            <span onClick={handleClick}>Delete </span>{" "}
+          </Button>
+          <Button variant="outline-info">
+            <span onClick={onModHandleClick} className="modButton">
+              Modifier{" "}
+            </span>{" "}
+          </Button>
           {error && <div className="error"> {error} </div>}{" "}
         </div>
       )}

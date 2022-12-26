@@ -11,30 +11,31 @@ body {
     background: #0D2229;
     margin: 0;
     font-family: "Poppins";
+
+    /* Hide scrollbars */
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
 
 
 .pages {
-    max-width: 1400px;
-    padding: 40px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
-/* homepage */
-.dashboard {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 100px;
-}
 
 
 
-/* new workout form */
-label,
-input {
-    display: block;
-}
 
 input {
     padding: 10px;
@@ -70,13 +71,6 @@ input.error {
     border: 1px solid var(--error);
 }
 
-.deleteButton {
-    padding: 5px;
-    border: 2px solid rgb(202, 82, 82);
-    background-color: #d4d4d4;
-    border-radius: 40%;
-}
-
 
 /* auth forms */
 form.signup {
@@ -96,21 +90,7 @@ form.signup {
     padding-top: 8px;
 }
 
-.addButton,
-.subButton {
-    border-radius: 50%;
 
-}
-
-.addButton {
-    margin: 50px 0px 0px 0px
-}
-
-.subButton {
-    margin: 100px 0px 0px 0px;
-    background-color: rgb(211, 92, 92);
-
-}
 
 
 
@@ -125,4 +105,20 @@ form.signup {
 .checkout-steps>div.active {
     border-bottom: 0.2rem solid #e7195a;
     color: #00eeff
+}
+
+.link-to {
+    text-decoration: none;
+    color: black;
+    margin-right: 5px;
+}
+
+.productContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.NavbarHead {
+    z-index: 3;
 }

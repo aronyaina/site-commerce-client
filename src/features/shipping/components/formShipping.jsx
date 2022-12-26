@@ -45,6 +45,7 @@ function formShipping() {
         country,
       },
     });
+
     localStorage.setItem(
       "shippingAddress",
       JSON.stringify({
@@ -58,10 +59,10 @@ function formShipping() {
   };
   return (
     <div className="formShipping">
-      <HeaderComponent title={"CONDITION DE PAYEMENT"} />
+      <HeaderComponent title={"FORMULAIRE DE PAYEMENT"} />
       <CheckoutSteps step1 step2 />
       <div className="container small-container">
-        <Form onSubmit={submitHandler}>
+        <Form>
           <Form.Group className="mb-3" controlId="fullName">
             <Form.Label>Nom</Form.Label>
             <Form.Control
@@ -110,11 +111,16 @@ function formShipping() {
           <div className="mb-3">
             <Button
               className="payementButton"
-              variant=""
+              variant="success"
               type="submit"
               onClick={submitHandler}
             >
-              <Link to="/payement">Continue</Link>
+              <Link
+                to="/payement"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Continue
+              </Link>
             </Button>
           </div>
         </Form>

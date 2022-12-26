@@ -1,18 +1,24 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+
 // BOOTSTRAP
 import { Row, Col, ListGroup, Button, Card } from "react-bootstrap";
+import { UilPlusCircle } from "@iconscout/react-unicons";
+import { UilMinusCircle } from "@iconscout/react-unicons";
+import { UilTrashAlt } from "@iconscout/react-unicons";
+import { UilPrintSlash } from "@iconscout/react-unicons";
 // CONTEXT
 import { useCartContext } from "../hooks/useCartContext";
 import MessageBox from "../../../components/layout/general/MessageBox";
+import HeaderComponent from "../../../components/layout/general/HeaderTitle";
 // LIB
 import axios from "axios";
 // REDUCER
 import { ACTIONCART } from "../reducers/cartReducer";
-import Helmet from "../../../components/layout/general/Helmet";
 
 function CartTable() {
   const { state, dispatch } = useCartContext();
-
+  const [inStock, setInStock] = useState(true);
   const {
     cart: { cartItems },
   } = state;
@@ -20,7 +26,7 @@ function CartTable() {
   const onHandleClick = async (item, quantity) => {
     const { data } = await axios.get(`/api/product/${item._id}`);
     if (data.quantity < quantity) {
-      window.alert("Stock epuise !");
+      setInStock(false);
       return;
     }
 
@@ -36,13 +42,12 @@ function CartTable() {
 
   return (
     <div>
-      <Helmet title={"CART"} />
+      <HeaderComponent title={"PANIER"} />
       <Row>
-        <Col md={8}>
+        <Col md={9}>
           {cartItems.length === 0 ? (
             <MessageBox>
-              Le panier est vide.{" "}
-              <Link to="/shopping">Acheter des articles</Link>
+              Le panier est vide. <Link to="/buying">Acheter des articles</Link>
             </MessageBox>
           ) : (
             <ListGroup className="listGroupCart">
@@ -59,31 +64,43 @@ function CartTable() {
                     </Col>
                     <Col md={3}>
                       <Button
-                        varient="Light"
+                        className="border-0"
+                        variant="outline-danger"
                         disabled={item.quantity === 1}
                         onClick={() => onHandleClick(item, item.quantity - 1)}
                       >
-                        <i className="uil uil-minus"></i>
+                        <UilMinusCircle />
                       </Button>
                       <span>{item.quantity}</span>{" "}
                       <Button
-                        varient="Light"
+                        className="border-0"
+                        variant="outline-success"
                         disabled={item.quantity === item.stock}
                         onClick={() => onHandleClick(item, item.quantity + 1)}
                       >
-                        <i className="uil uil-plus"></i>
+                        <UilPlusCircle />
                       </Button>
                     </Col>
                     <Col md={3}>{item.price} ariary</Col>
-                    <Col md={2}>
+                    <Col md={1}>
                       <Button
-                        variant="danger"
+                        className="border-0"
+                        variant="outline-danger"
                         onClick={() => {
                           onClickRemove(item);
                         }}
                       >
-                        <i class="uil uil-trash"></i>
+                        <UilTrashAlt />
                       </Button>
+                    </Col>
+                    <Col md={1}>
+                      {inStock ? (
+                        <></>
+                      ) : (
+                        <Button variant="warning">
+                          <UilPrintSlash />
+                        </Button>
+                      )}
                     </Col>
                   </Row>
                   <Row className="align-items-center"></Row>
@@ -92,30 +109,34 @@ function CartTable() {
             </ListGroup>
           )}
         </Col>
-        <Col md={4}>
+        <Col md={3}>
           <Card>
             <Card.Body>
-              <ListGroup variant="flush">
-                <h3>
-                  Total a payer <br />(
-                  {cartItems.reduce((a, c) => a + c.quantity, 0)} items)
-                  {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}{" "}
-                  ariary
-                </h3>
+              <ListGroup className="text-center">
+                <ListGroup.Item>
+                  <h3>
+                    Total a payer : <br />(
+                    {cartItems.reduce((a, c) => a + c.quantity, 0)} items)
+                    <br />
+                    {cartItems.reduce(
+                      (a, c) => a + c.price * c.quantity,
+                      0
+                    )}{" "}
+                    ariary
+                  </h3>
+                  <div className="d-grid">
+                    <Link to="/shipping">
+                      <Button
+                        type="button"
+                        variant="outline-success"
+                        disabled={cartItems.length === 0}
+                      >
+                        Procede au payement.
+                      </Button>
+                    </Link>
+                  </div>
+                </ListGroup.Item>
               </ListGroup>
-              <ListGroup.Item>
-                <div className="d-grid">
-                  <Link to="/shipping">
-                    <Button
-                      type="button"
-                      variant="outline-success"
-                      disabled={cartItems.length === 0}
-                    >
-                      Procede au payement.
-                    </Button>
-                  </Link>
-                </div>
-              </ListGroup.Item>
             </Card.Body>
           </Card>
         </Col>

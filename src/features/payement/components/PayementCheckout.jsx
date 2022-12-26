@@ -62,7 +62,15 @@ export default function PayementCheckout() {
             onChange={(e) => setPayementMethod(e.target.value)}
           ></Form.Check>
           <Button onClick={onSubmitHandler} variant="warning">
-            <Link to="/placeorder">accepter</Link>
+            <Link
+              to="/placeorder"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              accepter
+            </Link>
           </Button>
         </Form>
       </div>

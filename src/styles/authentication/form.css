@@ -4,7 +4,6 @@
     align-items: center;
     justify-items: start;
     justify-content: center;
-
     color: rgb(255, 255, 255);
     margin-top: 50px;
 }
@@ -19,6 +18,7 @@
     color: black;
     border-radius: 1%;
     font-size: 20px;
+    width: 50%;
 }
 
 .login-form h3,
@@ -47,19 +47,27 @@
 
 
 .dropzone {
-    height: 256px;
-    width: 256px;
-    margin: 1rem;
-    padding: 1rem;
-    border: 2px dashed rgb(245, 244, 244);
+    height: 100px;
+    width: 13rem;
+
+    border: 2px dashed rgb(44, 44, 44);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    color: black;
 }
 
+
 .active {
-    border: 2px solid rgb(180, 68, 68);
+    border-bottom: 2px solid rgb(180, 68, 68);
+}
+
+.dashboard .vl {
+    margin-top: 150%;
+    margin-left: 25px;
+    border-left: 1px solid rgb(255, 255, 255);
+    height: 75%;
 }

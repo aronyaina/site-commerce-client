@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { ACTIONAUTH } from "../reducers/authReducer";
-import userFetcher from "../../../lib/apiFetcher";
+
 import axios from "axios";
 export const useLogin = () => {
   const [error, setError] = useState(null);

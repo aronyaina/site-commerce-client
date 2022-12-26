@@ -1,5 +1,5 @@
 import React from "react";
-import Helmet from "../../components/layout/general/Helmet";
+
 import WelcomeCard from "../../components/layout/home/WelcomeCard";
 import PromotionCard from "../../components/layout/home/PromotionCard";
 import promImage1 from "../../assets/image/nike-orange2.jpg";
@@ -8,10 +8,11 @@ import ServiceComponents from "../../components/layout/shopping/serviceComponent
 import BestOfContainer from "../../components/layout/home/BestOfComponent";
 import AboutComponent from "../../components/layout/home/AboutComponent";
 import HeaderComponent from "../../components/layout/general/HeaderTitle";
+
 export default function Home() {
   return (
     <div>
-      <Helmet title={"ACCEUIL"} />
+      <HeaderComponent title="ACCEUIL" />
       <WelcomeCard />
       <HeaderComponent title="PROMOTION" />
       <PromotionCard

@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from "react";
-
+import { Col, Row } from "react-bootstrap";
 // COMPONENTS
 import LoadingBox from "../../../components/layout/general/LoadingBox";
 import { ProductDetails } from "./ProductDetail";
@@ -11,6 +11,7 @@ import loadingReducer from "../reducers/loadingReducer";
 import { ACTIONLOAD } from "../reducers/loadingReducer";
 import { ACTIONPRODUCT } from "../../stocking/reducers/productReducer";
 import axios from "axios";
+import GridComp from "../../../components/layout/general/Grid";
 
 export const ProductCard = () => {
   const { user } = useAuthContext();
@@ -58,7 +59,6 @@ export const ProductCard = () => {
           loadDispatch({ type: ACTIONLOAD.FETCH_SUCCESS, payload: data });
         })
         .catch((error) => {
-          console.log("Error fetching product ", error);
           loadDispatch({
             type: ACTIONLOAD.FETCH_FAILURE,
             payload: error.message,
@@ -75,13 +75,15 @@ export const ProductCard = () => {
           <LoadingBox />
         </div>
       ) : (
-        <div className="productCard">
-          {products &&
-            products.map((product) => (
-              <div key={product._id}>
-                <ProductDetails product={product} />
-              </div>
-            ))}
+        <div className="productCard ">
+          <GridComp>
+            {products &&
+              products.map((product) => (
+                <div key={product._id} className="productContainer ">
+                  <ProductDetails product={product} />
+                </div>
+              ))}
+          </GridComp>
         </div>
       )}
     </div>

@@ -12,7 +12,6 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, surname, password, email);
     signup(name, surname, password, email);
   };
 

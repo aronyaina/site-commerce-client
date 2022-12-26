@@ -1,11 +1,11 @@
-import { Button } from "react-bootstrap";
-
-import { React, useState, useCallback } from "react";
+import { Button, Col, Row, Container, Card } from "react-bootstrap";
+import { React, useState, useCallback, useEffect } from "react";
 import { useProductContext } from "../hooks/useProductContext";
 import { useAuthContext } from "../../authentication/hooks/useAuthContext";
 import { ACTIONPRODUCT } from "../reducers/productReducer";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
+import MessageBox from "../../../components/layout/general/MessageBox";
 
 export default function ProductForm() {
   //==================== STATE DECLARATION====================//
@@ -15,6 +15,7 @@ export default function ProductForm() {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [productImage, setImageProduct] = useState("");
+  const [isImageActive, setImageActive] = useState(false);
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -23,29 +24,28 @@ export default function ProductForm() {
   const { user } = useAuthContext();
   const [emptyField, setEmptyField] = useState([]);
 
+  const onDrop = useCallback(async (acceptedFiles) => {
+    setImageProduct(acceptedFiles[0]);
+  });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accepts: "image/*",
+    multiple: false,
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
-      console.log("Vous devrez vous connecter");
       setError("Vous devrez vous connecter");
       return;
     }
     //==================== VARIABLE DECLARATION====================//
-    const product = {
-      name,
-      description,
-      price,
-      quantity,
-      productImage,
-    };
-
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
     formData.append("price", price);
     formData.append("quantity", quantity);
     formData.append("productImage", productImage);
-    console.log(formData);
 
     //==================== POST DATA WITH AXIOS EXTERIOR====================//
 
@@ -72,7 +72,6 @@ export default function ProductForm() {
         setSuccess(true);
         setError(null);
         setEmptyField([]);
-        console.log(response.data);
         dispatch({
           type: ACTIONPRODUCT.CREATE_PRODUCT,
           payload: data,
@@ -82,7 +81,6 @@ export default function ProductForm() {
         setSuccess(false);
         setError(error.response.data.error);
         setEmptyField(error.response.data.emptyField);
-        console.log(error.response.data.emptyField);
       });
   };
 
@@ -101,118 +99,109 @@ export default function ProductForm() {
       case "quantity":
         setQuantity(e.target.value);
         break;
-      case "image":
-        setImageProduct(e.target.files[0]);
-        break;
       default:
         break;
     }
   };
-
-  const onDrop = useCallback(async (acceptedFiles) => {
-    console.log("accepted files", acceptedFiles[0]);
-
-    setImageProduct(acceptedFiles[0]);
-  });
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accepts: "image/*",
-    multiple: false,
-  });
+  useEffect(() => {
+    if (productImage !== "") {
+      setImageActive(true);
+    } else {
+      setImageActive(false);
+    }
+  }, [isImageActive, productImage]);
   return (
     <form className="create" encType="multipart/form-data">
-      <h3> Ajouter un nouveau produit </h3>
-      {/* <div className="form-groupe">
-        <label htmlFor="file">Choississez l'image du produit</label>
-        <input
-          type="file"
-          filename="productImage"
-          className="form-control-file"
-          value={undefined}
-          name="image"
-          onChange={onHandleChange}
-          placeholder="L'image du produit"
-        />
-      </div> */}
-      <div
-        {...getRootProps()}
-        className={`dropzone ${isDragActive ? "active" : ""}`}
-      >
-        <input
-          {...getInputProps()}
-          type="file"
-          filename="productImage"
-          className="form-control-file"
-          value={undefined}
-          name="image"
-          onChange={onHandleChange}
-          placeholder="L'image du produit"
-        />
-        Inserer une image
-      </div>
-      <input
-        type="text"
-        value={name}
-        name="name"
-        className={emptyField.includes("name") ? "error" : ""}
-        onChange={onHandleChange}
-        placeholder={
-          emptyField.includes("name")
-            ? "Veuiller saisir le nom du produit"
-            : "Nom"
-        }
-      />{" "}
-      <br />
-      <input
-        type="text"
-        name="description"
-        value={description}
-        className={emptyField.includes("title") ? "error" : ""}
-        onChange={onHandleChange}
-        placeholder="Description"
-      />{" "}
-      <br />
-      <input
-        value={price}
-        type="number"
-        name="price"
-        className={emptyField.includes("price") ? "error" : ""}
-        placeholder={
-          emptyField.includes("name")
-            ? "Veuiller saisir le prix du produit"
-            : "Prix"
-        }
-        onChange={onHandleChange}
-      />{" "}
-      <br />
-      <input
-        value={quantity}
-        name="quantity"
-        className={emptyField.includes("quantity") ? "error" : ""}
-        placeholder={
-          emptyField.includes("name")
-            ? "Veuiller saisir la quantite du produit"
-            : "Stock"
-        }
-        type="number"
-        onChange={onHandleChange}
-      />{" "}
-      <br />
-      <Button variant="outline-success" onClick={handleSubmit}>
-        {" "}
-        Ajouter
-      </Button>{" "}
-      {success && (
-        <div className="success">
-          Inserted successfully <br />
-        </div>
-      )}{" "}
-      {error && (
-        <div className="error">
-          {" "}
-          {error} <br />
-        </div>
-      )}{" "}
+      <Card style={{ width: "15rem" }}>
+        <Card.Body>
+          <Card.Text>
+            {!isImageActive ? (
+              <div
+                {...getRootProps()}
+                className={`dropzone ${isDragActive ? "active" : ""}`}
+              >
+                <input
+                  {...getInputProps()}
+                  type="file"
+                  filename="productImage"
+                  className={
+                    emptyField.includes("productImage")
+                      ? "form-control-file error"
+                      : "form-control-file "
+                  }
+                  value={undefined}
+                  name="image"
+                  onChange={onHandleChange}
+                  placeholder={
+                    emptyField.includes("productImage")
+                      ? "Veuiller saisir le nom du produit"
+                      : "Image"
+                  }
+                />
+                Inserer une image
+              </div>
+            ) : (
+              <MessageBox variant={"success"}>
+                Image inserte avec succes
+              </MessageBox>
+            )}
+            <input
+              type="text"
+              value={name}
+              name="name"
+              className={emptyField.includes("name") ? "error" : ""}
+              onChange={onHandleChange}
+              placeholder={
+                emptyField.includes("name")
+                  ? "Veuiller saisir le nom du produit"
+                  : "Nom"
+              }
+            />{" "}
+            <input
+              type="text"
+              name="description"
+              value={description}
+              className={emptyField.includes("title") ? "error" : ""}
+              onChange={onHandleChange}
+              placeholder="Description"
+            />{" "}
+            <input
+              value={price}
+              type="number"
+              name="price"
+              className={emptyField.includes("price") ? "error" : ""}
+              placeholder={
+                emptyField.includes("name")
+                  ? "Veuiller saisir le prix du produit"
+                  : "Prix"
+              }
+              onChange={onHandleChange}
+            />{" "}
+            <input
+              value={quantity}
+              name="quantity"
+              className={emptyField.includes("quantity") ? "error" : ""}
+              placeholder={
+                emptyField.includes("name")
+                  ? "Veuiller saisir la quantite du produit"
+                  : "Stock"
+              }
+              type="number"
+              onChange={onHandleChange}
+            />{" "}
+          </Card.Text>
+          <Button variant="outline-success" onClick={handleSubmit}>
+            {" "}
+            Ajouter
+          </Button>{" "}
+          {success && (
+            <MessageBox variant="success">
+              Inserted successfully <br />
+            </MessageBox>
+          )}
+          {error && <MessageBox> {error}</MessageBox>}{" "}
+        </Card.Body>
+      </Card>
     </form>
   );
 }

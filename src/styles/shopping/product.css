@@ -6,18 +6,10 @@
 }
 
 .productCard {
-    display: flex;
-    align-items: center;
-    justify-items: center;
+    justify-content: space-between;
 
-    justify-content: space-around;
 }
 
-.divBuy {
-    background: rgb(255, 255, 255);
-    width: 500px;
-    height: 256px;
-}
 
 .payementCheckout {
     color: aliceblue;
@@ -32,4 +24,9 @@
     margin-bottom: 0px;
     padding: 0;
     height: 50px;
+}
+
+.createProduct {
+    height: 100%;
+    width: 100%;
 }

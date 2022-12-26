@@ -3,8 +3,7 @@ import axios from "axios";
 import { Buffer } from "buffer";
 import DeleteButton from "../../../components/admin/deleteButton";
 import { useAuthContext } from "../../authentication/hooks/useAuthContext";
-
-import { Row, Col, Container } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 export const ProductDetails = ({ product }) => {
   const year = product.createdAt.slice(0, 10);
@@ -41,32 +40,24 @@ export const ProductDetails = ({ product }) => {
   }, []);
 
   return (
-    <div className="product-details">
-      <div key={product._id}>
-        <Col xs={12} md={8} lg={4}>
-          <Container className="articleCard">
-            <img
-              src={`data:image/png;base64,${imgUrl}`}
-              alt=""
-              className="productImage"
-            />
-
-            <div className="productItem">
-              <h1>{product.name}</h1>
-              <h3>{product.price} Ar </h3>
-              <br />
-              <strong> Description: </strong> {product.description} <br />
-              <strong>Restant: </strong> {product.quantity} <br />
-              {year}
-              <br />
-              {hour + time}
-            </div>
-            <div className="delete-or-buy">
-              <DeleteButton id={product._id} product={product} />
-            </div>
-          </Container>
-        </Col>
-      </div>{" "}
-    </div>
+    <Card key={product._id} style={{ width: "15rem" }}>
+      <Card.Img
+        variant="top"
+        src={`data:image/png;base64,${imgUrl}`}
+        style={{ height: "18rem" }}
+      />
+      <Card.Body>
+        <Card.Title>{product.name}</Card.Title>
+        <Card.Title>{product.price} Ar</Card.Title>
+        <Card.Text>
+          <strong> Description: </strong> {product.description} <br />
+          <strong>Restant: </strong> {product.quantity} <br />
+          {year}
+          <br />
+          {hour + time}
+        </Card.Text>
+        <DeleteButton id={product._id} product={product} />
+      </Card.Body>
+    </Card>
   );
 };
