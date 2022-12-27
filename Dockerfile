@@ -1,7 +1,7 @@
 # Project base
 FROM node:18 AS Production_server
 
-ENV NODE_ENV=production_server
+ENV NODE_ENV=production_client
 
 # Creation de dossier
 WORKDIR /usr/src/commercial-app/server

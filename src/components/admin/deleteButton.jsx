@@ -6,12 +6,13 @@ import { Button } from "react-bootstrap";
 import { ACTIONPRODUCT } from "../../features/stocking/reducers/productReducer";
 import React, { useState, useEffect } from "react";
 import BuyButton from "../layout/shopping/buyButton";
+import FormProduct from "../layout/general/FormProduct";
 import axios from "axios";
 
 export default function deleteButton({ id, product }) {
   const { productCarts, addCart, removeCart } = useCartContext();
   //==================== VARIABLE DECLARATION ====================//
-
+  const [isVisible, setVisibility] = useState(visible);
   const [error, setError] = useState(null);
   const { dispatch } = useProductContext();
   const { user } = useAuthContext();
@@ -65,29 +66,9 @@ export default function deleteButton({ id, product }) {
 
   const onModHandleClick = async (e) => {
     e.preventDefault();
-
-    if (!user) {
-      setError("Vous devrier vous connecter !");
-      return;
-    }
-    const config = {
-      url: `/api/product/${id}`,
-      header: {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      },
-    };
-    const productMod = axios
-      .get(config.url, config.header)
-      .then((response) => {
-        const productMod = response.data;
-        return productMod;
-      })
-      .catch((error) => {
-        setError(error);
-      });
+    setVisibility((value) => {
+      !value;
+    });
   };
   //==================== CHEKING ROLE====================//
   useEffect(() => {
@@ -121,6 +102,7 @@ export default function deleteButton({ id, product }) {
             </span>{" "}
           </Button>
           {error && <div className="error"> {error} </div>}{" "}
+          <FormProduct id={id} product={product} visible={isVisible} />
         </div>
       )}
     </div>
