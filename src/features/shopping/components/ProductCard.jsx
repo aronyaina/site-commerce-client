@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from "react";
-import { Col, Row } from "react-bootstrap";
+
 // COMPONENTS
 import LoadingBox from "../../../components/layout/general/LoadingBox";
 import { ProductDetails } from "./ProductDetail";
@@ -15,7 +15,7 @@ import GridComp from "../../../components/layout/general/Grid";
 
 export const ProductCard = () => {
   const { user } = useAuthContext();
-  const { products, dispatch } = useProductContext();
+  const { oneProduct, products, dispatch } = useProductContext();
   const [{ loading, error }, loadDispatch] = useReducer(loadingReducer, {
     productsLoads: [],
     loading: true,
@@ -46,6 +46,7 @@ export const ProductCard = () => {
         },
       };
     }
+
     const requestProduct = async function () {
       await axios
         .get(config.url, config.header)
@@ -66,7 +67,7 @@ export const ProductCard = () => {
         });
     };
     requestProduct();
-  }, [dispatch]);
+  }, [dispatch, oneProduct]);
 
   return (
     <div>

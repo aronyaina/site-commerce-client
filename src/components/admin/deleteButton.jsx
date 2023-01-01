@@ -6,13 +6,14 @@ import { Button } from "react-bootstrap";
 import { ACTIONPRODUCT } from "../../features/stocking/reducers/productReducer";
 import React, { useState, useEffect } from "react";
 import BuyButton from "../layout/shopping/buyButton";
-import FormProduct from "../layout/general/FormProduct";
+
 import axios from "axios";
 
 export default function deleteButton({ id, product }) {
   const { productCarts, addCart, removeCart } = useCartContext();
+
   //==================== VARIABLE DECLARATION ====================//
-  const [isVisible, setVisibility] = useState(visible);
+
   const [error, setError] = useState(null);
   const { dispatch } = useProductContext();
   const { user } = useAuthContext();
@@ -20,7 +21,7 @@ export default function deleteButton({ id, product }) {
   const [isAdmin, setAdmin] = useState(false);
 
   //==================== DELETE DATA WITH AXIOS EXTERIOR====================//
-  const handleClick = async (e) => {
+  const delHandleClick = async (e) => {
     e.preventDefault();
     if (!user) {
       setError("Vous devrier vous connecter !");
@@ -64,10 +65,11 @@ export default function deleteButton({ id, product }) {
     });
   };
 
-  const onModHandleClick = async (e) => {
+  const modHandleClick = async (e) => {
     e.preventDefault();
-    setVisibility((value) => {
-      !value;
+    dispatch({
+      type: ACTIONPRODUCT.SET_ONE_PRODUCT,
+      payload: product,
     });
   };
   //==================== CHEKING ROLE====================//
@@ -85,7 +87,7 @@ export default function deleteButton({ id, product }) {
       }
     };
     checkRoles();
-  }, [user, isUser, isAdmin]);
+  }, [user, isUser, isAdmin, dispatch]);
 
   return (
     <div className="buttonDouble">
@@ -94,15 +96,12 @@ export default function deleteButton({ id, product }) {
       ) : (
         <div className="modify-button">
           <Button variant="outline-danger" className="deleteButton">
-            <span onClick={handleClick}>Delete </span>{" "}
+            <span onClick={delHandleClick}>Delete </span>{" "}
           </Button>
-          <Button variant="outline-info">
-            <span onClick={onModHandleClick} className="modButton">
-              Modifier{" "}
-            </span>{" "}
+          <Button variant="outline-info" className="modButton">
+            <span onClick={modHandleClick}>Modifier </span>{" "}
           </Button>
           {error && <div className="error"> {error} </div>}{" "}
-          <FormProduct id={id} product={product} visible={isVisible} />
         </div>
       )}
     </div>

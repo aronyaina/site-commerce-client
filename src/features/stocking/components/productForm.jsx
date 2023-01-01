@@ -15,18 +15,22 @@ export default function ProductForm() {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [productImage, setImageProduct] = useState("");
+
+  const [id, setId] = useState("");
   const [isImageActive, setImageActive] = useState(false);
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [isUpdated, setUpdated] = useState(false);
+  const { oneProduct, dispatch } = useProductContext();
 
-  const { dispatch } = useProductContext();
   const { user } = useAuthContext();
   const [emptyField, setEmptyField] = useState([]);
 
   const onDrop = useCallback(async (acceptedFiles) => {
     setImageProduct(acceptedFiles[0]);
   });
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accepts: "image/*",
@@ -59,6 +63,7 @@ export default function ProductForm() {
         },
       },
     };
+
     // POSTING DATA
     axios
       .post(config.url, config.formData, config.header)
@@ -103,13 +108,61 @@ export default function ProductForm() {
         break;
     }
   };
+
+  const modClickHandle = (e) => {
+    e.preventDefault();
+    const updateData = {
+      name: name,
+      description: description,
+      price: price,
+      quantity: quantity,
+    };
+    const config1 = {
+      url: `/api/product/${id}`,
+      updateData,
+      header: {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      },
+    };
+    axios
+      .patch(config1.url, config1.updateData, config1.header)
+      .then((response) => {
+        setImageProduct("");
+        setName("");
+        setDescription("");
+        setPrice("");
+        setQuantity("");
+        setUpdated(true);
+        setError(null);
+        setEmptyField([]);
+        dispatch({
+          type: ACTIONPRODUCT.DEL_ONE_PRODUCT,
+        });
+      })
+      .catch((error) => {
+        setError(error.response.data.error);
+        setEmptyField(error.response.data.emptyField);
+      });
+  };
+
   useEffect(() => {
+    if (oneProduct == "" || oneProduct == undefined) {
+    } else {
+      setName(oneProduct.name);
+      setDescription(oneProduct.description);
+      setPrice(oneProduct.price);
+      setQuantity(oneProduct.quantity);
+      setId(oneProduct._id);
+    }
+
     if (productImage !== "") {
       setImageActive(true);
     } else {
       setImageActive(false);
     }
-  }, [isImageActive, productImage]);
+  }, [isImageActive, productImage, oneProduct]);
   return (
     <form className="create" encType="multipart/form-data">
       <Card style={{ width: "15rem" }}>
@@ -124,11 +177,7 @@ export default function ProductForm() {
                   {...getInputProps()}
                   type="file"
                   filename="productImage"
-                  className={
-                    emptyField.includes("productImage")
-                      ? "form-control-file error"
-                      : "form-control-file "
-                  }
+                  className="form-control-file"
                   value={undefined}
                   name="image"
                   onChange={onHandleChange}
@@ -194,9 +243,18 @@ export default function ProductForm() {
             {" "}
             Ajouter
           </Button>{" "}
+          <Button variant="outline-success" onClick={modClickHandle}>
+            {" "}
+            Modifier
+          </Button>{" "}
           {success && (
             <MessageBox variant="success">
-              Inserted successfully <br />
+              Inserer avec succes !<br />
+            </MessageBox>
+          )}
+          {isUpdated && (
+            <MessageBox variant="success">
+              Mise a jour reussi !<br />
             </MessageBox>
           )}
           {error && <MessageBox> {error}</MessageBox>}{" "}

@@ -2,13 +2,12 @@ import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { Buffer } from "buffer";
 import DeleteButton from "../../../components/admin/deleteButton";
-import { useAuthContext } from "../../authentication/hooks/useAuthContext";
+
 import { Card } from "react-bootstrap";
 
 export const ProductDetails = ({ product }) => {
-  const year = product.createdAt.slice(0, 10);
-
   //==================== SET TIME ====================//
+  const year = product.createdAt.slice(0, 10);
   const hourConverter = () => {
     if (parseInt(product.createdAt.slice(11, 12)) === 0) {
       return parseInt(product.createdAt.slice(12, 13)) + 3;
@@ -16,10 +15,11 @@ export const ProductDetails = ({ product }) => {
       return parseInt(product.createdAt.slice(11, 13)) + 3;
     }
   };
-  const { user } = useAuthContext();
+
   const hour = hourConverter();
   const time = product.createdAt.slice(13, 19);
   const [imgUrl, setImage] = useState("");
+
   //==================== RENDER DATA ====================//
   const config = {
     url: `api/upload/${product.image}`,
@@ -37,7 +37,7 @@ export const ProductDetails = ({ product }) => {
       .catch((err) => {
         throw err;
       });
-  }, []);
+  }, [product]);
 
   return (
     <Card key={product._id} style={{ width: "15rem" }}>
@@ -56,6 +56,7 @@ export const ProductDetails = ({ product }) => {
           <br />
           {hour + time}
         </Card.Text>
+
         <DeleteButton id={product._id} product={product} />
       </Card.Body>
     </Card>
