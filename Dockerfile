@@ -1,10 +1,11 @@
 # Project base
-FROM node:18 AS Production_server
+FROM node:18 AS production_client
 
-ENV NODE_ENV=production_client
+# Variables d'environnement dans docker 
+ENV REACT_ENV=production_client
 
 # Creation de dossier
-WORKDIR /usr/src/commercial-app/server
+WORKDIR /usr/src/commercial-app/client
 
 # Copy des package requis
 COPY package*.json ./
@@ -16,6 +17,6 @@ RUN npm ci --only=production
 COPY . .
 
 #Ouverture des ports
-EXPOSE 3000
+EXPOSE 5173
 
 CMD ["npm","start"]

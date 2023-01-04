@@ -13,7 +13,7 @@ const productReducer = (state, action) => {
         products: action.payload,
       };
 
-    case ACTIONPRODUCT.CREATE_PRODUCT:
+    case ACTIONPRODUCT.CREATE_PRODUCT:5
       return {
         products: [action.payload, ...state.products],
       };
