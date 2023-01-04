@@ -8,6 +8,7 @@ import { useCartContext } from "../../shopping/hooks/useCartContext";
 import { useAuthContext } from "../../authentication/hooks/useAuthContext";
 import LoadingBox from "../../../components/layout/general/LoadingBox";
 import { Row, Col, Card, Button, ListGroup } from "react-bootstrap";
+import TemporaryMessage from "../../../components/layout/general/TemporaryMessage";
 
 import loadingReducer, {
   ACTIONLOAD,
@@ -48,6 +49,7 @@ function Placeorder() {
     header: {
       headers: {
         "Content-Type": "application/json",
+        "content-type": "application/json;charset=utf-8",
         Authorization: `Bearer ${user.token}`,
       },
     },
@@ -66,44 +68,13 @@ function Placeorder() {
       })
       .catch((error) => {
         const err = JSON.stringify(error.response.data.error);
+        
         dispatch({
           type: ACTIONLOAD.FETCH_FAILURE,
           payload: err,
         });
-        console.log(err);
+        
       });
-
-    // const updateQuantity = await (() => {
-    //   cart.cartItems.map((cartItem) => {
-    //     const config1 = {
-    //       url: `/api/product/${cart.cartItems._id}`,
-    //       data: {
-    //         name: cartItem.name,
-    //         description: cartItem.description,
-    //         price: cartItem.price,
-    //         quantity: cartItem.quantity,
-    //       },
-    //       header: {
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //           "content-type": "application/json;charset=utf-8",
-    //           Authorization: `Bearer ${user.token}`,
-    //         },
-    //       },
-    //     };
-
-    //     axios
-    //       .patch(config1.url, config1.data, config1.header)
-    //       .then((response) => {
-    //         console.log("success");
-    //       })
-    //       .catch((error) => {
-    //         dispatch({ type: ACTIONLOAD.FETCH_FAILURE, payload: error });
-    //       });
-    //   });
-    // });
-
-    // updateQuantity();
   };
 
   useEffect(() => {
@@ -221,26 +192,26 @@ function Placeorder() {
                   <Button
                     type="button"
                     onClick={placeOrderHandler}
-                    disabled={cart.cartItems.length === 0}
+                    disabled={cart.cartItems.length = 0}
                   >
                     Valider la commande.
                   </Button>
-                  {loading ? (
+                </div>
+                {loading ? (
                     <LoadingBox />
                   ) : error ? (
-                    <MessageBox variant="danger">{error}</MessageBox>
+                    <TemporaryMessage variant="danger">{error}</TemporaryMessage>
                   ) : (
                     <></>
                   )}
 
                   {isValid ? (
-                    <MessageBox variant="success">
+                    <TemporaryMessage variant="success">
                       Commande prise en compte.
-                    </MessageBox>
+                    </TemporaryMessage>
                   ) : (
                     <></>
                   )}
-                </div>
               </ListGroup>
             </Card.Body>
           </Card>

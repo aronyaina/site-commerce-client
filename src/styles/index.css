@@ -35,8 +35,6 @@ body {
 
 
 
-
-
 input {
     padding: 10px;
     margin-top: 10px;
@@ -110,7 +108,15 @@ form.signup {
 .link-to {
     text-decoration: none;
     color: black;
-    margin-right: 5px;
+    margin-right: 10px;
+    margin-top: 1%;
+}
+
+.link-to-nav {
+    text-decoration: none;
+    color: white;
+    margin-right: 10px;
+    margin-top: 1%;
 }
 
 .productContainer {
@@ -121,4 +127,5 @@ form.signup {
 
 .NavbarHead {
     z-index: 3;
+    font-size: 20px;
 }

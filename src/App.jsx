@@ -13,7 +13,7 @@ import Cart from "./pages/users/Cart";
 import Shipping from "./pages/users/Shipping";
 import Payement from "./pages/users/Payement";
 import Order from "./pages/users/Order";
-
+import AboutComponent from "./components/layout/home/AboutComponent";
 // Components
 import Navbar from "./components/layout/general/NavbarHead";
 
@@ -69,6 +69,8 @@ function App() {
             />{" "}
           </Routes>{" "}
         </div>{" "}
+        <AboutComponent />
+        
       </BrowserRouter>{" "}
     </div>
   );

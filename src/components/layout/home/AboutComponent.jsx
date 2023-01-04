@@ -1,18 +1,22 @@
 import React from "react";
 import HeaderComponent from "../general/HeaderTitle";
+import { UilAirplay } from "@iconscout/react-unicons";
+import { UilInstagram } from "@iconscout/react-unicons";
+import { UilEnvelopes } from "@iconscout/react-unicons";
+import { UilPhone } from "@iconscout/react-unicons";
 import { Container } from "react-bootstrap";
 function AboutComponent() {
   return (
-    <div className="aboutComponents" id="about">
+    <footer className="aboutComponents" id="about">
       <HeaderComponent title="A PROPOS DE NOUS" />
       <Container className="aboutContainer">
         <div className="contact">
           <h3>Contact</h3>
           <div className="icons">
-            <i className="uil uil-airplay"></i>
-            <i className="uil uil-instagram-alt"></i>
-            <i className="uil uil-envelope-alt"></i>
-            <i className="uil uil-phone"></i>
+            <UilAirplay />
+            <UilInstagram />
+            <UilEnvelopes />
+            <UilPhone />
           </div>
         </div>
         <div className="parcours">
@@ -25,7 +29,13 @@ function AboutComponent() {
           </h6>
         </div>
       </Container>
-    </div>
+      <div
+        className="text-center p-3"
+        style={{ color: "rgba(255, 255, 255, 0.4)" }}
+      >
+        &copy; {new Date().getFullYear()} Copyright .{" "}
+      </div>
+    </footer>
   );
 }
 

@@ -1,16 +1,14 @@
 import Container from "react-bootstrap/Container";
 import { UilSignInAlt } from "@iconscout/react-unicons";
 import { UilArrowToRight } from "@iconscout/react-unicons";
-import { UilHome } from "@iconscout/react-unicons";
-import { UilShoppingBag } from "@iconscout/react-unicons";
-import { UilShoppingCart } from "@iconscout/react-unicons";
+
 
 import Navbar from "react-bootstrap/Navbar";
-import Offcanvas from "react-bootstrap/Offcanvas";
+
 import { Nav } from "react-bootstrap";
 import { NavDropdown } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import { Button, Badge } from "react-bootstrap";
+
+import { Badge } from "react-bootstrap";
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -22,9 +20,12 @@ const NavbarHead = () => {
   const { cart } = state;
   const { logout } = useLogout();
   const { user } = useAuthContext();
+  
 
   const [access, setAccess] = useState(true);
+
   useEffect(() => {
+  
     if (user !== null) {
       if (user.roles === "user") {
         setAccess(false);
@@ -32,7 +33,7 @@ const NavbarHead = () => {
     } else {
       setAccess(false);
     }
-  }, [user, access, setAccess]);
+  }, [user, access]);
 
   const handleClick = () => {
     logout();
@@ -44,19 +45,27 @@ const NavbarHead = () => {
         <>
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-              <Navbar.Brand href="/">MI SHOP</Navbar.Brand>
+              <Navbar.Brand href="/" className="fs-3">
+                MI SHOP
+              </Navbar.Brand>
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
-                  <Nav.Link href="/cart">
-                    PANIER{" "}
-                    {cart.cartItems.length > 0 && (
-                      <Badge pill bg="danger">
-                        {cart.cartItems.length}
-                      </Badge>
-                    )}
-                  </Nav.Link>
-                  <Nav.Link href="/buying">ACHETER</Nav.Link>
+                  <Nav>
+                    <Link to="/cart" className="link-to-nav">
+                      PANIER{" "}
+                      {cart.cartItems.length > 0 && (
+                        <Badge pill bg="danger">
+                          {cart.cartItems.length}
+                        </Badge>
+                      )}
+                    </Link>
+                  </Nav>
+                  <Nav>
+                    <Link to="buying" className="link-to-nav">
+                      ACHETER
+                    </Link>
+                  </Nav>
                 </Nav>
                 <Nav>
                   <NavDropdown title="COMPTE" id="collasible-nav-dropdown">
@@ -66,7 +75,7 @@ const NavbarHead = () => {
                       </Link>
                       <UilArrowToRight />
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="/signup">
+                    <NavDropdown.Item>
                       <Link to="/signup" className="link-to">
                         S'INSCRIRE
                       </Link>
@@ -86,15 +95,21 @@ const NavbarHead = () => {
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
-                  <Nav.Link href="/cart">
-                    PANIER
-                    {cart.cartItems.length > 0 && (
-                      <Badge pill bg="danger">
-                        {cart.cartItems.length}
-                      </Badge>
-                    )}
-                  </Nav.Link>
-                  <Nav.Link href="/buying">ACHETER</Nav.Link>
+                  <Nav className="mt-0.5">
+                    <Link to="/cart" className="link-to-nav">
+                      PANIER{" "}
+                      {cart.cartItems.length > 0 && (
+                        <Badge pill bg="danger">
+                          {cart.cartItems.length}
+                        </Badge>
+                      )}
+                    </Link>
+                  </Nav>
+                  <Nav className="mt-0.5">
+                    <Link to="buying" className="link-to-nav">
+                      ACHETER
+                    </Link>
+                  </Nav>
                 </Nav>
                 <Nav>
                   <NavDropdown title={user.email} id="collasible-nav-dropdown">

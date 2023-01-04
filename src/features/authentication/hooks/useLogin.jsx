@@ -7,6 +7,7 @@ export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(null);
   const { dispatch } = useAuthContext();
+  
 
   const login = async (email, password) => {
     setLoading(true);
@@ -47,6 +48,7 @@ export const useLogin = () => {
         })
         .catch((error) => {
           setLoading(false);
+        
           setError(error.response.data.error);
         });
     };

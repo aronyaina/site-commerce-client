@@ -6,6 +6,7 @@ import { ACTIONPRODUCT } from "../reducers/productReducer";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import MessageBox from "../../../components/layout/general/MessageBox";
+import TemporaryMessage from "../../../components/layout/general/TemporaryMessage";
 
 export default function ProductForm() {
   //==================== STATE DECLARATION====================//
@@ -183,7 +184,7 @@ export default function ProductForm() {
                   onChange={onHandleChange}
                   placeholder={
                     emptyField.includes("productImage")
-                      ? "Veuiller saisir le nom du produit"
+                      ? "Veuiller saisir l'image du produit"
                       : "Image"
                   }
                 />
@@ -248,16 +249,16 @@ export default function ProductForm() {
             Modifier
           </Button>{" "}
           {success && (
-            <MessageBox variant="success">
+            <TemporaryMessage variant="success">
               Inserer avec succes !<br />
-            </MessageBox>
+            </TemporaryMessage>
           )}
           {isUpdated && (
-            <MessageBox variant="success">
+            <TemporaryMessage variant="success">
               Mise a jour reussi !<br />
-            </MessageBox>
+            </TemporaryMessage>
           )}
-          {error && <MessageBox> {error}</MessageBox>}{" "}
+          {error && <TemporaryMessage> {error}</TemporaryMessage>}{" "}
         </Card.Body>
       </Card>
     </form>

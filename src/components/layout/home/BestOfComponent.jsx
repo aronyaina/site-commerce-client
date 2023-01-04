@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 // COMPONENT
 import BestOfCard from "./BestOfCard";
 import HeaderComponent from "../general/HeaderTitle";
+import GridComp from "../general/Grid";
 // ASSET
 import imageVetement from "../../../assets/image/vetement1.jpg";
 import imageComputer from "../../../assets/image/ordinateur1.jpg";
@@ -15,7 +16,8 @@ function BestOfContainer() {
       <HeaderComponent title="NOS BEST OF" />
 
       <Container className="bestContainer">
-        <BestOfCard
+      <GridComp division={3}>
+      <BestOfCard
           img={imageVetement}
           title={"VETEMENTS"}
           texte={"SPORT , PLAGE ,TOUS DIFFERENT"}
@@ -30,6 +32,8 @@ function BestOfContainer() {
           title={"INTERIEUR"}
           texte={"TABLE , CHAISE , LIT"}
         />
+      </GridComp>
+        
       </Container>
     </div>
   );

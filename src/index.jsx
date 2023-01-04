@@ -1,9 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
-import "./styles/authentication/form.css";
-import "./styles/home/general.css";
 
-import "./styles/shopping/product.css";
-import "./styles/shopping/articleCard.css";
+import "./styles/home/general.css";
 
 import "./styles/index.css";
 import "./styles/loading.css";

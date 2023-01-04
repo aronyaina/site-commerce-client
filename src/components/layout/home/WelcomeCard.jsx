@@ -1,36 +1,38 @@
 import React from "react";
 import imageShop from "../../../assets/image/shop.png";
+
 import { Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import GridComp from "../general/Grid";
 function WelcomeCard() {
   return (
-    <div className="welcomeCart">
-      <Container className="containerCart">
-        <div className="cubicDiv">
-          <img src={imageShop} alt="shopNow" className="imageShop" />
-          <div className="cube"></div>
-        </div>
-
-        <div className="vl"></div>
+    <Container className="containerCart">
+      <GridComp division={2}>
         <div className="TextContent">
           <h2>BIENVENUE.</h2>
           <hr />
           <p>
             LE MEILLEUR SITE POUR ACHETER
             <br /> TOUT VOS PRODUIT. <br />
-            <span>TROUVEZ.CHOISISSEZ.ACHETER.</span>
+            TROUVEZ ET ACHETER.
           </p>
-          <Button variant="outline-secondary">
+          <Button variant="outline-secondary" className="button1">
             <i className="uil uil-shopping-bag"></i>
-            <Link to="/buying">ACHETER ICI</Link>
+            <Link to="/buying" className="link-to-welcome">ACHETER ICI</Link>
           </Button>
           <Button variant="outline-secondary" className="button2">
             <i className="uil uil-sign-in-alt"></i>
-            <Link to="/login">SE CONNECTER</Link>
+            <Link to="/login" className="link-to-welcome">SE CONNECTER</Link>
           </Button>
         </div>
-      </Container>
-    </div>
+        
+        <div className="cubicDiv" >
+          <img src={imageShop} alt="shopNow" className="imageShop" />
+          <div className="cube"></div>
+        </div>
+        {/* <div className="vl"></div> */}
+      </GridComp>
+    </Container>
   );
 }
 
