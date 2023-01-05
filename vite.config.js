@@ -22,7 +22,7 @@ export default defineConfig({
       // Server configuration
       "/api": {
         // "http://node-server:5000"
-        target:  "http://localhost:5000",
+        target:  "http://node-server:5000",
         changeOrigin: true,
         secure: false,
         ws: true,
