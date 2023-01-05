@@ -55,16 +55,19 @@ function Placeorder() {
     },
   };
 
-  const placeOrderHandler = async (e) => {
-    e.preventDefault();
-
+  const placeOrderHandler = async () => {
     dispatch({ type: ACTIONLOAD.FETCH_REQUEST });
     axios
       .post(config.url, config.data, config.header)
       .then((response) => {
+        // console.log("response of requete:",response);
+        // const parse = JSON.parse(response);
+        // console.log("Response converted:",parse);
+
         dispatch({ type: ACTIONLOAD.FETCH_SUCCESS });
         cartDispatch({ type: ACTIONCART.DEL_SHIPPING_ADDRESS_AND_CART });
         setValidation(true);
+        navigate("/success")
       })
       .catch((error) => {
         const err = JSON.stringify(error.response.data.error);
@@ -81,6 +84,7 @@ function Placeorder() {
     if (!cart.payementMethod) {
       navigate("/payement");
     }
+    
   }, [cart, navigate]);
 
   return (
@@ -197,9 +201,7 @@ function Placeorder() {
                     Valider la commande.
                   </Button>
                 </div>
-                {loading ? (
-                    <LoadingBox />
-                  ) : error ? (
+                  {error ? (
                     <TemporaryMessage variant="danger">{error}</TemporaryMessage>
                   ) : (
                     <></>

@@ -16,6 +16,7 @@ import Order from "./pages/users/Order";
 import AboutComponent from "./components/layout/home/AboutComponent";
 // Components
 import Navbar from "./components/layout/general/NavbarHead";
+import SuccessShipping from "./pages/users/SuccessShipping";
 
 function App() {
   const { user } = useAuthContext();
@@ -66,6 +67,10 @@ function App() {
             <Route
               path="/login"
               element={!user ? <Login /> : <Navigate to="/dashboard" />}
+            />{" "}
+            <Route
+              path="/success"
+              element={<SuccessShipping/>}
             />{" "}
           </Routes>{" "}
         </div>{" "}

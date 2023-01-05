@@ -10,6 +10,7 @@
     justify-content: center;
     color: rgb(255, 255, 255);
     margin-top: 50px;
+    margin-bottom: 10%;
 }
 
 .login-form,
@@ -43,6 +44,7 @@
 
 .create {
     color: aliceblue;
+    margin-bottom: 10%;
 }
 
 .formShipping {
@@ -191,7 +193,7 @@
     color: aliceblue;
     text-align: center;
 
-
+    padding-bottom: 10%;
 }
 
 
@@ -341,7 +343,7 @@
 
 .temporaryMess {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 10%;
 }
 
 /* RESPONSIVE LARGE */
@@ -776,4 +778,16 @@
 
 .mdpInput {
     margin-bottom: 10px;
+}
+
+.SuccessShipping {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    padding: 20px;
+    background: rgb(68, 68, 68);
+    color: #fff
 }

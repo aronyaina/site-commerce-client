@@ -21,12 +21,13 @@ export default function ProductForm() {
   const [isImageActive, setImageActive] = useState(false);
 
   const [error, setError] = useState(null);
+  
   const [success, setSuccess] = useState(false);
   const [isUpdated, setUpdated] = useState(false);
   const { oneProduct, dispatch } = useProductContext();
 
   const { user } = useAuthContext();
-  const [emptyField, setEmptyField] = useState([]);
+  
 
   const onDrop = useCallback(async (acceptedFiles) => {
     setImageProduct(acceptedFiles[0]);
@@ -77,7 +78,7 @@ export default function ProductForm() {
         setQuantity("");
         setSuccess(true);
         setError(null);
-        setEmptyField([]);
+       
         dispatch({
           type: ACTIONPRODUCT.CREATE_PRODUCT,
           payload: data,
@@ -86,7 +87,7 @@ export default function ProductForm() {
       .catch((error) => {
         setSuccess(false);
         setError(error.response.data.error);
-        setEmptyField(error.response.data.emptyField);
+        
       });
   };
 
@@ -137,14 +138,14 @@ export default function ProductForm() {
         setQuantity("");
         setUpdated(true);
         setError(null);
-        setEmptyField([]);
+     
         dispatch({
           type: ACTIONPRODUCT.DEL_ONE_PRODUCT,
         });
       })
       .catch((error) => {
         setError(error.response.data.error);
-        setEmptyField(error.response.data.emptyField);
+        
       });
   };
 
@@ -182,36 +183,30 @@ export default function ProductForm() {
                   value={undefined}
                   name="image"
                   onChange={onHandleChange}
-                  placeholder={
-                    emptyField.includes("productImage")
-                      ? "Veuiller saisir l'image du produit"
-                      : "Image"
-                  }
+                
                 />
                 Inserer une image
               </div>
             ) : (
-              <MessageBox variant={"success"}>
+              <TemporaryMessage variant={"success"} title="Insertion reussie .">
                 Image inserte avec succes
-              </MessageBox>
+              </TemporaryMessage>
             )}
             <input
               type="text"
               value={name}
               name="name"
-              className={emptyField.includes("name") ? "error" : ""}
+           
               onChange={onHandleChange}
               placeholder={
-                emptyField.includes("name")
-                  ? "Veuiller saisir le nom du produit"
-                  : "Nom"
+                "Nom"
               }
             />{" "}
             <input
               type="text"
               name="description"
               value={description}
-              className={emptyField.includes("title") ? "error" : ""}
+         
               onChange={onHandleChange}
               placeholder="Description"
             />{" "}
@@ -219,22 +214,18 @@ export default function ProductForm() {
               value={price}
               type="number"
               name="price"
-              className={emptyField.includes("price") ? "error" : ""}
+          
               placeholder={
-                emptyField.includes("name")
-                  ? "Veuiller saisir le prix du produit"
-                  : "Prix"
+                "Prix"
               }
               onChange={onHandleChange}
             />{" "}
             <input
               value={quantity}
               name="quantity"
-              className={emptyField.includes("quantity") ? "error" : ""}
+        
               placeholder={
-                emptyField.includes("name")
-                  ? "Veuiller saisir la quantite du produit"
-                  : "Stock"
+                "Stock"
               }
               type="number"
               onChange={onHandleChange}

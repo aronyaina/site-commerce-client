@@ -6,7 +6,7 @@ import { useCartContext } from "../../shopping/hooks/useCartContext";
 import { Link, useNavigate } from "react-router-dom";
 import { ACTIONCART } from "../../shopping/reducers/cartReducer";
 import HeaderComponent from "../../../components/layout/general/HeaderTitle";
-
+import MessageBox from "../../../components/layout/general/MessageBox";
 export default function PayementCheckout() {
   const { state, dispatch } = useCartContext();
   const navigate = useNavigate();
@@ -36,9 +36,10 @@ export default function PayementCheckout() {
       <HeaderComponent title={"PAYEMENT"} />
       <CheckoutSteps step1 step2 step3 />
 
-      <div className="container small-container">
+      <div className="container small-container ">
+      <MessageBox title="" variant="success">Choississez le moyen de payement qui vous convient.</MessageBox>
         <Card body >
-          <Form>
+          <Form className="mb-4">
             <Form.Check
               type="radio"
               id="mvola"
