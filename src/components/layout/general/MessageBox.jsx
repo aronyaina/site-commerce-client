@@ -1,5 +1,10 @@
+// import react
 import React from "react";
+
+// import bootstrap 
 import { Alert } from "react-bootstrap";
+
+// create components message box
 function MessageBox(props) {
   return (
     <div className="MessageBox">

@@ -1,6 +1,11 @@
+// Import react
 import React from "react";
+// Bootstrap
 import { Container } from "react-bootstrap";
+// Components
 import GridComp from "../general/Grid";
+
+// Components
 function PromotionCard({ title, texte1, texte2, img, order }) {
   return order === 1 ? (
     <div className="promotionCart">

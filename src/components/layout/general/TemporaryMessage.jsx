@@ -1,7 +1,11 @@
-import React from "react";
+// React 
+import React ,{ useState }  from "react";
 
+// Toast bootstrap
 import Toast from 'react-bootstrap/Toast';
-import { useState } from "react";
+
+
+// Components
 function TemporaryMessage(props) {
 const [show, setShow] = useState(props.showed);
   return (

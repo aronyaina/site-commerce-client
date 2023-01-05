@@ -19,6 +19,7 @@ export default defineConfig({
     strictPort:true,
     port:5173,
     proxy: {
+      // Server configuration
       "/api": {
         // "http://node-server:5000"
         target:  "http://localhost:5000",

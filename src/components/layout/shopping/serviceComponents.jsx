@@ -1,9 +1,14 @@
+// React
 import React from "react";
+
+// Bootstrap
 import { Container } from "react-bootstrap";
 import Image1 from "../../../assets/image/service1.jpg";
 import Image2 from "../../../assets/image/service3.jpg";
+// Personal components
 import HeaderComponent from "../general/HeaderTitle";
 import GridComp from "../general/Grid";
+// Components
 function ServiceComponents() {
   return (
     <div className="ServiceComponents" id="service">

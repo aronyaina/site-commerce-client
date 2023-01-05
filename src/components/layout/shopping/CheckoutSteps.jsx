@@ -1,5 +1,8 @@
+// React
 import React from "react";
+// Bootstrap
 import { Row, Col } from "react-bootstrap";
+// Components
 export default function checkoutSteps({ step1, step2, step3, step4 }) {
   return (
     <Row className="checkout-steps">

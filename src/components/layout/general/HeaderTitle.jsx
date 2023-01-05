@@ -1,5 +1,7 @@
+// import react
 import React from "react";
 
+// Header component
 function HeaderComponent({ title }) {
   return (
     <div className="HeaderComponent">

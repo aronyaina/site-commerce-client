@@ -1,12 +1,15 @@
+// React
 import { useState } from "react";
+import { Link } from "react-router-dom";
+// UI KIT
+import { Container ,Button} from "react-bootstrap";
 import { UilEye } from "@iconscout/react-unicons";
 import { UilEyeSlash } from "@iconscout/react-unicons";
-import { Link } from "react-router-dom";
-import { Container ,Button} from "react-bootstrap";
-import { useLogin } from "../../features/authentication/hooks/useLogin";
 
+import { useLogin } from "../../features/authentication/hooks/useLogin";
 import TemporaryMessage from "../../components/layout/general/TemporaryMessage";
 
+// Components
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

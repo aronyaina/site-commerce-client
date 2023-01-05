@@ -1,6 +1,5 @@
 import { useProductContext } from "../../features/stocking/hooks/useProductContext";
 import { useAuthContext } from "../../features/authentication/hooks/useAuthContext";
-import { useCartContext } from "../../features/shopping/hooks/useCartContext";
 import { Button } from "react-bootstrap";
 
 import { ACTIONPRODUCT } from "../../features/stocking/reducers/productReducer";
@@ -10,8 +9,6 @@ import BuyButton from "../layout/shopping/buyButton";
 import axios from "axios";
 
 export default function deleteButton({ id, product }) {
-  const { productCarts, addCart, removeCart } = useCartContext();
-
   //==================== VARIABLE DECLARATION ====================//
 
   const [error, setError] = useState(null);

@@ -10,6 +10,7 @@ import imageVetement from "../../../assets/image/vetement1.jpg";
 import imageComputer from "../../../assets/image/ordinateur1.jpg";
 import imageChaise from "../../../assets/image/chaise1.jpg";
 
+// Best of Container
 function BestOfContainer() {
   return (
     <div className="bestOfComponents">

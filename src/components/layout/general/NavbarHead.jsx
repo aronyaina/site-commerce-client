@@ -1,21 +1,25 @@
-import Container from "react-bootstrap/Container";
+// React import
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+// Bootstrap
+import { Nav,Badge ,NavDropdown,Container,Navbar} from "react-bootstrap";
+
+// Icons
 import { UilSignInAlt } from "@iconscout/react-unicons";
 import { UilArrowToRight } from "@iconscout/react-unicons";
 
-
-import Navbar from "react-bootstrap/Navbar";
-
-import { Nav } from "react-bootstrap";
-import { NavDropdown } from "react-bootstrap";
-
-import { Badge } from "react-bootstrap";
-
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// Components
 import { useCartContext } from "../../../features/shopping/hooks/useCartContext";
 import { useLogout } from "../../../features/authentication/hooks/useLogout";
 import { useAuthContext } from "../../../features/authentication/hooks/useAuthContext";
+
+
+
+
+// Components nav bar
 const NavbarHead = () => {
+  // Tout les hooks utiliser
   const { state } = useCartContext();
   const { cart } = state;
   const { logout } = useLogout();
@@ -23,7 +27,7 @@ const NavbarHead = () => {
   
 
   const [access, setAccess] = useState(true);
-
+// Use effect verifie l'acces des utilisateurs
   useEffect(() => {
   
     if (user !== null) {
@@ -35,10 +39,12 @@ const NavbarHead = () => {
     }
   }, [user, access]);
 
-  const handleClick = () => {
+  // Click  pour se deconnecter
+  const handleDisconnect = () => {
     logout();
   };
 
+  // Return components
   return (
     <header className="NavbarHead">
       {!user ? (
@@ -114,7 +120,7 @@ const NavbarHead = () => {
                 <Nav>
                   <NavDropdown title={user.email} id="collasible-nav-dropdown">
                     <NavDropdown.Item className="text-danger">
-                      <span onClick={handleClick}>SE DECONNECTER</span>
+                      <span onClick={handleDisconnect}>SE DECONNECTER</span>
                     </NavDropdown.Item>
 
                     {access ? (

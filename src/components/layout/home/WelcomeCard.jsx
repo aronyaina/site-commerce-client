@@ -1,8 +1,12 @@
+// REACT
 import React from "react";
-import imageShop from "../../../assets/image/shop.png";
-
-import { Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+// Bootstrap
+import imageShop from "../../../assets/image/shop.png";
+import { Container, Button } from "react-bootstrap";
+
+// Components
 import GridComp from "../general/Grid";
 function WelcomeCard() {
   return (

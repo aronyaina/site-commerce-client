@@ -1,7 +1,10 @@
+// Bootstrap
+import { Col, Row, Container } from "react-bootstrap";
+// Personnal components
 import { ProductCard } from "../../features/shopping/components/ProductCard";
 import ProductForm from "../../features/stocking/components/productForm";
-import { Col, Row, Container } from "react-bootstrap";
 import HeaderComponent from "../../components/layout/general/HeaderTitle";
+
 const Dashboard = () => {
   return (
     <div className="Dashboard">

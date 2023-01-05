@@ -1,13 +1,15 @@
+// Hooks
 import { useState } from "react";
 import { useSignup } from "../../features/authentication/hooks/useSignup";
 
+// UI KIT
 import { UilEye } from "@iconscout/react-unicons";
 import { UilEyeSlash } from "@iconscout/react-unicons";
 import {Button} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
-
+// Components
 const Signup = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");

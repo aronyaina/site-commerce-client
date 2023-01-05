@@ -1,14 +1,16 @@
+// React
 import React from "react";
 
+// Personal componenets
 import WelcomeCard from "../../components/layout/home/WelcomeCard";
 import PromotionCard from "../../components/layout/home/PromotionCard";
 import promImage1 from "../../assets/image/nike-orange2.jpg";
 import promImage2 from "../../assets/image/ordinateur4.jpg";
 import ServiceComponents from "../../components/layout/shopping/serviceComponents";
 import BestOfContainer from "../../components/layout/home/BestOfComponent";
-import Footer from "../../components/layout/home/AboutComponent";
 import HeaderComponent from "../../components/layout/general/HeaderTitle";
 
+// Components
 export default function Home() {
   return (
     <>

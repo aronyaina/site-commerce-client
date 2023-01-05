@@ -1,5 +1,7 @@
+// React
 import React from "react";
 
+// Components
 function BestOfCard({ img, title, texte }) {
   return (
     <div className="BestOfCard">

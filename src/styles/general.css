@@ -2,6 +2,135 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
 
+/* layout */
+:root {
+    --primary: #1aac83;
+    --error: #e7195a;
+}
+
+body {
+    background: #0D2229;
+    margin: 0;
+    font-family: "Poppins";
+
+    /* Hide scrollbars */
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+
+.pages {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+
+
+input {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button {
+    background: var(--primary);
+    border: 0;
+    color: #fff;
+    padding: 10px;
+    font-family: "Poppins";
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+div.error {
+    padding: 10px;
+    background: #ffefef;
+    border: 1px solid var(--error);
+    color: var(--error);
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+input.error {
+
+    border: 1px solid var(--error);
+}
+
+
+/* auth forms */
+form.signup {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 4px;
+}
+
+
+
+
+
+.emailSpan {
+    padding-left: 5px;
+    padding-top: 8px;
+}
+
+
+
+
+
+.checkout-steps>div {
+    width: 50%;
+    align-items: center;
+    border-bottom: 0.2rem solid #a0a0a0;
+    color: #f1f1f1;
+    margin-bottom: 50px;
+}
+
+.checkout-steps>div.active {
+    border-bottom: 0.2rem solid #e7195a;
+    color: #00eeff
+}
+
+.link-to {
+    text-decoration: none;
+    color: black;
+    margin-right: 10px;
+    margin-top: 1%;
+}
+
+.link-to-nav {
+    text-decoration: none;
+    color: white;
+    margin-right: 10px;
+    margin-top: 1%;
+}
+
+.productContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.NavbarHead {
+    z-index: 3;
+    font-size: 20px;
+}
+
 .login,
 .signup {
     display: flex;
@@ -738,7 +867,7 @@
 
 .productCard {
     justify-content: space-between;
-
+    margin-bottom: 10%;
 }
 
 
@@ -790,4 +919,94 @@
     padding: 20px;
     background: rgb(68, 68, 68);
     color: #fff
+}
+
+.sk-cube-grid {
+    width: 256px;
+    height: 256px;
+    margin: 100px auto;
+}
+
+.sk-cube-grid .sk-cube {
+    width: 33%;
+    height: 33%;
+    background-color: rgb(255, 255, 255);
+    float: left;
+    -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+    animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+
+.sk-cube-grid .sk-cube1 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+.sk-cube-grid .sk-cube2 {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+
+.sk-cube-grid .sk-cube3 {
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+}
+
+.sk-cube-grid .sk-cube4 {
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s;
+}
+
+.sk-cube-grid .sk-cube5 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+.sk-cube-grid .sk-cube6 {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+
+.sk-cube-grid .sk-cube7 {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+}
+
+.sk-cube-grid .sk-cube8 {
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s;
+}
+
+.sk-cube-grid .sk-cube9 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+
+    0%,
+    70%,
+    100% {
+        -webkit-transform: scale3D(1, 1, 1);
+        transform: scale3D(1, 1, 1);
+    }
+
+    35% {
+        -webkit-transform: scale3D(0, 0, 1);
+        transform: scale3D(0, 0, 1);
+    }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+
+    0%,
+    70%,
+    100% {
+        -webkit-transform: scale3D(1, 1, 1);
+        transform: scale3D(1, 1, 1);
+    }
+
+    35% {
+        -webkit-transform: scale3D(0, 0, 1);
+        transform: scale3D(0, 0, 1);
+    }
 }

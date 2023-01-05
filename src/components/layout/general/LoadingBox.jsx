@@ -1,5 +1,7 @@
+// import react
 import React from "react";
 
+// loading box component
 export default function loadingBox() {
   return (
     <div className="sk-cube-grid">

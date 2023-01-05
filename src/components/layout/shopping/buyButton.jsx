@@ -1,8 +1,11 @@
-import axios from "axios";
+// UI REACT
 import React from "react";
 import { useState } from "react";
 import { useCartContext } from "../../../features/shopping/hooks/useCartContext";
 import { ACTIONCART } from "../../../features/shopping/reducers/cartReducer";
+// Request axios
+import axios from "axios";
+// react bootstrap
 import { Button } from "react-bootstrap";
 import MessageBox from "../general/MessageBox";
 

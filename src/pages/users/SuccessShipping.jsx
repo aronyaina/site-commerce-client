@@ -1,5 +1,7 @@
+// REACT
 import React from 'react'
 
+// PERSONNAL COMPONENTS
 function SuccessShipping() {
     return (
         <div className='SuccessShipping'>

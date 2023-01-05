@@ -1,9 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 
-import "./styles/home/general.css";
-
-import "./styles/index.css";
-import "./styles/loading.css";
+import "./styles/general.css";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
