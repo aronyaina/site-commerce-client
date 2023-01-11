@@ -77,7 +77,7 @@ export const ProductCard = () => {
         </div>
       ) : (
         <div className="productCard ">
-          <GridComp>
+          <GridComp division={4}>
             {products &&
               products.map((product) => (
                 <div key={product._id} className="productContainer ">
