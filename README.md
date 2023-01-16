@@ -70,3 +70,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Folder structure
+Here we have three folder :
+    nodes modules , all framework used
+    le public , all public ressource with client access
+    src , the source for all reactjs code
+
+Then we have subfolder for src
+    assets , all ressource used in the client side like image
+    components , all reusable components with two categories: admin et users
+
+Finally we have all functionnality for each features , we have subfolder for:
+    chaque fonctionnalite contient alors leurs propres components , context , hooks , reducers
+
